@@ -12,7 +12,7 @@ jobs:
       - name: Node inst
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: '16'
 
       - name: npm vers 🏗️
         run: |
@@ -24,11 +24,6 @@ jobs:
           npm install --legacy-peer-deps -ws
       - name: Install Packages front 🧳
         working-directory: ./packages/frontend
-        run: |
-          npm install --legacy-peer-deps
-
-      - name: Install Packages back 🧳
-        working-directory: ./packages/backend
         run: |
           npm install --legacy-peer-deps
 
@@ -47,18 +42,4 @@ jobs:
         run: |
           npm run build
 
-      - name: Deploy to Prod 🚀
-        if: ${{ github.ref == 'refs/heads/dev' }}
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
 
-      - name: Deploy to Stage 🚀
-        if: ${{ github.ref != 'refs/heads/dev' }}
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME_STAGE}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}

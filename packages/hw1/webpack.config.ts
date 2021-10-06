@@ -64,8 +64,9 @@ const webpackConfig = (
         loader: 'babel-loader',
         options: {
           presets: [
-            ['@babel/preset-env', { targets: 'defaults' }],
             '@babel/preset-react',
+            '@babel/preset-env',
+            '@babel/preset-typescript',
           ],
         },
         exclude: /dist/,
