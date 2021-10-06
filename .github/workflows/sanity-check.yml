@@ -1,0 +1,64 @@
+name: Build
+
+on: [pull_request, push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Node inst
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: npm vers 🏗️
+        run: |
+          npm --version
+
+      - name: Install Packages 🧳
+        run: |
+          npm install --legacy-peer-deps
+          npm install --legacy-peer-deps -ws
+      - name: Install Packages front 🧳
+        working-directory: ./packages/frontend
+        run: |
+          npm install --legacy-peer-deps
+
+      - name: Install Packages back 🧳
+        working-directory: ./packages/backend
+        run: |
+          npm install --legacy-peer-deps
+
+      - name: Lint check
+        run: |
+          npm run lint
+
+      - name: Run  Jest  T-E-S-T
+        run: |
+          npm run test --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2.1.0
+
+      - name: webpack  build
+        run: |
+          npm run build
+
+      - name: Deploy to Prod 🚀
+        if: ${{ github.ref == 'refs/heads/dev' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+
+      - name: Deploy to Stage 🚀
+        if: ${{ github.ref != 'refs/heads/dev' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_STAGE}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
