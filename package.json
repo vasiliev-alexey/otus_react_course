@@ -61,6 +61,7 @@
     "lint-staged": "lint-staged",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
-    "build:calc": "npm run build:prod --workspace hw-1"
+    "build:calc": "npm run build:prod --workspace hw-1",
+    "test": "jest --coverage"
   }
 }
