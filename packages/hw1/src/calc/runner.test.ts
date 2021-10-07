@@ -6,7 +6,7 @@ describe('Runner simple cases', () => {
     ['2 * 32', 64],
     ['2 + 32', 34],
     ['2 ^ 2', 4],
-    ['16 ** 2', 4],
+    ['16 **', 4],
   ])('test runner for %s must be %i', (a, expected) => {
     expect(runner(a)).toEqual(expected);
   });
