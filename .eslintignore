@@ -5,4 +5,4 @@ webpack.config.ts
 
 /jest
 
-
+**/dist/

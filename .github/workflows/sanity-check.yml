@@ -49,5 +49,3 @@ jobs:
           FOLDER: dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
-
-
