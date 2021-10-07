@@ -11,11 +11,9 @@ const question = (): Promise<void> =>
   new Promise((resolve) => {
     rl.question('> ', (answer: string) => {
       const result = runner(answer);
-
       if (result) {
-        console.log(`Result: ${result}`);
+        console.log('> ', '\x1b[44m', `${result}`, '\x1b[0m');
       }
-
       resolve();
     });
   });
@@ -26,4 +24,6 @@ async function app(): Promise<null> {
   }
 }
 
-app();
+app().then(() => {
+  console.log('finished');
+});
