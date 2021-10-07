@@ -18,7 +18,8 @@
 
   "scripts": {
     "test": "jest --coverage",
-    "dev": "webpack serve  --port 5000 --mode=development"
+    "dev": "webpack serve  --port 5000 --mode=development",
+    "build:prod": "webpack --mode production"
   },
   "keywords": [
     "jest",

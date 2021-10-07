@@ -50,7 +50,12 @@ const webpackConfig = (
     ],
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(
+      __dirname,
+      arg.mode === 'production' ? '../../dist/' : '',
+      'dist'
+    ),
+
     filename: 'index.js',
   },
 

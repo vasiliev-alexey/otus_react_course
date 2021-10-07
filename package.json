@@ -64,6 +64,7 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "lint": "eslint . && prettier --check .",
-    "lint:fix": "eslint . --fix && prettier --write ."
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "build:calc": "npm run build:prod --workspace hw-1"
   }
 }

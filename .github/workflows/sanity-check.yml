@@ -1,6 +1,12 @@
 name: Build
 
-on: [pull_request, push]
+on:
+  push:
+    branches:
+      - hw1
+  pull_request:
+    branches:
+      - hw1
 
 jobs:
   lint:
@@ -21,11 +27,7 @@ jobs:
       - name: Install Packages 🧳
         run: |
           npm install --legacy-peer-deps
-          npm install --legacy-peer-deps -ws
-      - name: Install Packages front 🧳
-        working-directory: ./packages/frontend
-        run: |
-          npm install --legacy-peer-deps
+          npm install --legacy-peer-deps --workspaces
 
       - name: Lint check
         run: |
@@ -35,11 +37,17 @@ jobs:
         run: |
           npm run test --coverage
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.1.0
-
       - name: webpack  build
         run: |
-          npm run build
+          npm run build:calc
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: dist # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+
 
 
