@@ -31,7 +31,7 @@ class App extends Component {
           height: '100vh',
         }}
       >
-        <Terminal commandPassThrough={this.handler} outputColor={'red'} />
+        <Terminal commandPassThrough={this.handler} outputColor="red" />
       </div>
     );
   }
