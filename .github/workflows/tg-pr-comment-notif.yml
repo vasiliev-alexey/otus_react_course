@@ -14,7 +14,7 @@ jobs:
           to: ${{ secrets.TG_TO }}
           token: ${{ secrets.TG_TOKEN }}
           message: |
-            The ${{ github.repository }} PR commnets.
-             ${{ github.event.comment.body }}.
+            The ${{ github.repository }} PR commnets:
              ${{ github.event.pull_request.number }} -  ${{ github.event.pull_request.title }}.
-             commented by   ${{ github.event.pull_request.user.login }}
+             ${{ github.event.comment.body }}.
+             Commented by:   ${{ github.actor }}
