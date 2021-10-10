@@ -6,8 +6,9 @@ on:
       - hw1
   pull_request:
     branches:
-      - hw1
-
+      - master
+    paths:
+      - 'package/hw1/**'
 jobs:
   lint:
     runs-on: ubuntu-20.04
