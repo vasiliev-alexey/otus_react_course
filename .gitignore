@@ -1,0 +1,17 @@
+.idea/
+.vscode/
+node_modules/
+
+.eslintcache
+doc/Заметки.md
+**/coverage
+
+/dist
+
+.env
+
+*.tgz
+
+/deploy_dir
+
+dist/

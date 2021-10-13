@@ -1,0 +1,20 @@
+name: Telegram notify action
+
+on:
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  send-telegram-notification:
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: 'Send telegram notification'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_TOKEN }}
+          message: |
+            The ${{ github.repository }} PR commnets:
+             ${{ github.event.pull_request.number }} -  ${{ github.event.pull_request.title }}.
+             ${{ github.event.comment.body }}.
+             Commented by:   ${{ github.actor }}
