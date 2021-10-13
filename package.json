@@ -62,6 +62,7 @@
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "build:calc": "npm run build:prod --workspace hw-1",
+    "build:ghp": "npm run build:prod --workspaces",
     "test": "jest --coverage",
     "calc": "ts-node packages/hw1/src/calc/index.ts "
   }

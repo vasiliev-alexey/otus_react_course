@@ -40,7 +40,7 @@ jobs:
 
       - name: webpack  build
         run: |
-          npm run build:calc
+          npm run build:ghp
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
