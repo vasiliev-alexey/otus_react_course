@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - hw1
+      - hw*
   pull_request:
     branches:
       - master
