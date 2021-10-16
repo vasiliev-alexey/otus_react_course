@@ -1,0 +1,31 @@
+* {
+  padding: 0px;
+}
+
+.frame {
+  border-radius: 10%;
+  background-color: dodgerblue;
+  width: 40vh;
+  height: 70vh;
+  //  padding: 10px;
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.playground-table {
+  font-size: 0;
+  border-spacing: 0px;
+}
+
+.cell {
+  margin: 0px;
+  display: inline;
+  width: 15px;
+  padding: 0px;
+  height: 15px;
+  border: 1px solid silver;
+  display: inline-block;
+  background-color: gray;
+}
