@@ -15,14 +15,8 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
-const getTsConfigName = (mode: string) => {
-  console.log(
-    'ssssssssss',
-    mode === 'production' ? 'tsconfig.prod.json' : 'tsconfig.dev.json'
-  );
-  return mode === 'production' ? 'tsconfig.prod.json' : 'tsconfig.dev.json';
-};
-
+const getTsConfigName = (mode: string) =>
+  mode === 'production' ? 'tsconfig.prod.json' : 'tsconfig.dev.json';
 const webpackConfig = (
   env: {
     production: boolean;
