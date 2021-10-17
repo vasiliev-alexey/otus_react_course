@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import Playfield from '../components/playfield/Playfield';
+import PlayField from '../components/gamescreen/PlayField';
 
 export default {
-  component: Playfield,
+  component: PlayField,
   title: 'Playfield table',
 };
-const Template: Story = (args) => <Playfield {...args} />;
+const Template: Story = (args) => <PlayField {...args} />;
 
 export const PlayfieldComponent = Template.bind({});

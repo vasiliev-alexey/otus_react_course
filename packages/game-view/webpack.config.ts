@@ -87,6 +87,12 @@ const webpackConfig = (
         ],
         // include: [path.resolve(__dirname, '../public')],
       },
+
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+
+        type: 'asset/resource',
+      },
     ],
   },
 

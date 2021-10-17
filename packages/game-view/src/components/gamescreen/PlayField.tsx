@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Playfield: React.FC = () => {
+const PlayField: React.FC = () => {
   const cols = [...Array(10)].map(() => {
     return 0;
   });
@@ -21,4 +21,4 @@ const Playfield: React.FC = () => {
   );
 };
 
-export default Playfield;
+export default PlayField;
