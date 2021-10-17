@@ -1,8 +1,6 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import RotationPanel from '../components/actionPanel/RotationPanel';
-import GameScreen from '../components/gamescreen/GameScreen';
 import ControlPanel from '../components/actionPanel/ControlPanel';
 
 export default {

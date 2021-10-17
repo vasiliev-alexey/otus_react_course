@@ -17,7 +17,6 @@
   flex-direction: column;
 }
 
-
 .playground-table {
   font-size: 0;
   padding: 15px 15px 15px 20px;
@@ -34,7 +33,7 @@
 
 .cell {
   margin: 0px;
- padding: 0px;
+  padding: 0px;
   width: 15px;
   //padding-top: 0px;
   height: 15px;
@@ -43,12 +42,9 @@
   border: 0.1px solid silver;
   display: inline-table;
   background-color: gray;
-
-
 }
 
-
-.cellRed  {
+.cellRed {
   background-color: red;
 }
 
@@ -67,4 +63,3 @@ tr {
   //height: 10rem;
   background: #d6e2ee;
 }
-
