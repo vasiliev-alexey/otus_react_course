@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
+const gitRevisionPlugin = new GitRevisionPlugin();
+
 import 'webpack-dev-server';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import * as webpack from 'webpack';
@@ -97,22 +100,30 @@ const webpackConfig = (
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: '../assets/tetris.png',
-    }),
+    gitRevisionPlugin,
+
     new Dotenv({
       safe: true,
       path: path.resolve(__dirname, '.env'),
     }),
     new webpack.DefinePlugin({
+      VERSION: JSON.stringify(gitRevisionPlugin.version()),
+      COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
+      BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
+      LASTCOMMITDATETIME: JSON.stringify(
+        gitRevisionPlugin.lastcommitdatetime()
+      ),
+
       'process.env.PRODUCTION': env.production || !env.development,
       'process.env.NAME': JSON.stringify(require('../../package.json').name),
       'process.env.VERSION': JSON.stringify(
         require('../../package.json').version
       ),
     }),
-
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: '../assets/images/tetris.png',
+    }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         files: './src/**/*.{ts,tsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
