@@ -1,23 +1,29 @@
 import React from 'react';
 
-const ScoreBoard: React.FC = () => {
-  const cols = [...Array(4)].map(() => {
-    return 0;
-  });
-  const rows = [...Array(4)].map(() => {
-    return 0;
-  });
+type ScoreBoardProps = {
+  gamefield: number[][];
+};
 
+const ScoreBoard: React.FC<ScoreBoardProps> = ({ gamefield }) => {
   return (
     <div>
       <table className="next-piece-table">
-        {rows.map((r, rInd) => (
-          <tr key={rInd}>
-            {cols.map((e, i) => (
-              <td className="cell" key={rInd * 10 + i}></td>
-            ))}
-          </tr>
-        ))}
+        <tbody>
+          {gamefield.map((row, rInd) => (
+            <tr key={rInd}>
+              {console.log(row)}
+              {row.map((col, i) => (
+                <td
+                  className={'cell' + (rInd === i ? ' cellRed' : '')}
+                  key={rInd * 10 + i}
+                >
+                  {console.log(col)}
+                  {col}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       </table>
 
       <p>score: 10000</p>

@@ -5,10 +5,8 @@ import { Story } from '@storybook/react';
 
 export default {
   component: Frame,
-  title: 'Frame',
+  title: 'Тетрис',
 };
 const Template: Story = (args) => <Frame {...args} />;
 
-export const FrameComponent = Template.bind({});
-
-//viewerComp.args = {};
+export const TetrisDemoGameSimulator = Template.bind({});

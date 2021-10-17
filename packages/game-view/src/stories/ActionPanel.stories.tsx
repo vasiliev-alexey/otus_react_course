@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import RotationPanel from '../components/actionPanel/RotationPanel';
+
+import ActionPanel from '../components/actionPanel/ActionPanel';
 
 export default {
-  component: RotationPanel,
-  title: 'панель  вращения',
+  component: ActionPanel,
+  title: 'Панель  управляющих элементов',
 };
 
-export const SimpleUse: Story = (args) => <RotationPanel {...args} />;
+export const SimpleUse: Story = (args) => <ActionPanel {...args} />;

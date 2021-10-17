@@ -1,19 +1,24 @@
 import React from 'react';
 
-const PlayField: React.FC = () => {
-  const cols = [...Array(10)].map(() => {
-    return 0;
-  });
-  const rows = [...Array(20)].map(() => {
-    return 0;
-  });
+type ScoreBoardProps = {
+  gamefield: number[][];
+};
 
+const PlayField: React.FC<ScoreBoardProps> = ({ gamefield }) => {
   return (
     <table className="playground-table">
-      {rows.map((r, rInd) => (
+      {gamefield.map((row, rInd) => (
         <tr key={rInd}>
-          {cols.map((e, i) => (
-            <td className="cell" key={rInd * 10 + i}></td>
+          {row.map((e, i) => (
+            <td
+              className={
+                'cell' +
+                ((rInd + i - 3) % ((rInd + 7 + i) % 17) ? ' ' : ' cellRed')
+              }
+              key={rInd * 10 + i}
+            >
+              {0}
+            </td>
           ))}
         </tr>
       ))}

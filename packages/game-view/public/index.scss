@@ -1,8 +1,9 @@
-@import '~normalize.css/normalize.css';
-@import 'fonts';
-@import 'contsants';
-@import 'custom';
-@import 'frame';
-@import 'rotation';
-@import 'gamepanel';
-@import 'actionpanel';
+@import '../../../node_modules/normalize.css/normalize.css';
+@import 'css/fonts';
+@import 'css/contsants';
+@import 'css/custom';
+@import 'css/frame';
+@import 'css/rotation';
+@import 'css/gamepanel';
+@import 'css/actionpanel';
+@import "css/titlebar";

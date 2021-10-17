@@ -12,7 +12,8 @@
     "build:calc": "npm run build:prod --workspace hw-1",
     "build:ghp": "npm run build:prod --workspaces",
     "test": "jest --coverage",
-    "calc": "ts-node packages/hw1/src/calc/index.ts "
+    "calc": "ts-node packages/hw1/src/calc/index.ts",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
@@ -56,6 +57,7 @@
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
+    "stylelint-config-prettier": "^9.0.3",
     "ts-jest": "^27.0.5",
     "ts-loader": "8.3.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",

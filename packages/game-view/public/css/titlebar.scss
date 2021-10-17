@@ -1,0 +1,27 @@
+@use 'contsants';
+
+.titleBar {
+  border-radius: 10%;
+  background-color: contsants.$base-color;
+  width: 21rem;
+  height: 5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  user-select: none;
+}
+
+.tetrisFont {
+  font-family: 'Tetris2-VP0w';
+  font-size: 3rem;
+  color: red;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  font-weight: bold;
+
+  letter-spacing: 1.5rem;
+}

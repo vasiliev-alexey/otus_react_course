@@ -1,3 +1,4 @@
+@use 'contsants';
 .gamePanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -5,8 +6,6 @@
   display: flex;
   border-radius: 10%;
   flex-direction: row;
-  // margin: 5px;
-  //align-content: center;
-  //height: 10rem;
   justify-content: space-around;
+  background: contsants.$base-color;
 }
