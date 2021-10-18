@@ -8,4 +8,7 @@ export default {
   title: 'Панель с управлением игровым симулятором',
 };
 
-export const GameControlPanel: Story = (args) => <GamePanel {...args} />;
+export const GameControlPanel: Story = (args) => (
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  <GamePanel togglePause={() => {}} {...args} />
+);

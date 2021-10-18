@@ -31,7 +31,7 @@ export default {
   title: 'Игровое поле',
 };
 const Template: Story = (args) => (
-  <PlayField gamefield={initGameField} {...args} />
+  <PlayField playField={initGameField} {...args} />
 );
 
 export const PlayFieldComponent = Template.bind({});

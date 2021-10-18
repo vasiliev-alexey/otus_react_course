@@ -1,9 +1,18 @@
 import React from 'react';
 
-const GamePanel: React.FC = () => {
+type GamePanelPropsType = {
+  togglePause: () => void;
+};
+
+const GamePanel: React.FC<GamePanelPropsType> = ({ togglePause }) => {
   return (
     <div className="gamePanel">
-      <button className="circleButton transparentBac smBtn">pause🟡</button>
+      <button
+        className="circleButton transparentBac smBtn"
+        onClick={togglePause}
+      >
+        pause🟡
+      </button>
       <button className="circleButton transparentBac smBtn">music🟡</button>
       <button className="circleButton transparentBac smBtn ">reset🟡</button>
     </div>

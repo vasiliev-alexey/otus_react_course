@@ -11,13 +11,11 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ gamefield }) => {
         <tbody>
           {gamefield.map((row, rInd) => (
             <tr key={rInd}>
-              {console.log(row)}
               {row.map((col, i) => (
                 <td
                   className={'cell' + (rInd === i ? ' cellRed' : '')}
                   key={rInd * 10 + i}
                 >
-                  {console.log(col)}
                   {col}
                 </td>
               ))}

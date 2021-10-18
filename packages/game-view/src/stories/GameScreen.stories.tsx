@@ -8,4 +8,6 @@ export default {
   title: 'Экран с фигурами и статистикой',
 };
 
-export const GameScreenDemo: Story = (args) => <GameScreen {...args} />;
+export const GameScreenDemo: Story = (args) => (
+  <GameScreen isPause={false} {...args} />
+);

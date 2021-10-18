@@ -9,4 +9,7 @@ export default {
   title: 'Панель  управляющих элементов',
 };
 
-export const SimpleUse: Story = (args) => <ActionPanel {...args} />;
+export const SimpleUse: Story = (args) => (
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  <ActionPanel togglePause={() => {}} {...args} />
+);
