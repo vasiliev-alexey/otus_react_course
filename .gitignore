@@ -7,6 +7,8 @@ doc/Заметки.md
 **/coverage
 
 /dist
+/**/dist
+/**/storybook-static
 
 .env
 
@@ -14,5 +16,6 @@ doc/Заметки.md
 
 /deploy_dir
 
-dist/
-storybook-static
+**/.loki/current
+**/.loki/difference
+

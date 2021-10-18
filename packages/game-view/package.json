@@ -10,7 +10,7 @@
     "postbuild:prod": "build-storybook -o ../../dist/storybooks --quiet",
     "storybook": "start-storybook -p 6006",
     "loki-test": "loki --requireReference --reactUri file:./dist ",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o ./dist --quiet"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
@@ -35,7 +35,7 @@
     "@types/node": "^16.11.0",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.9",
-    "babel-loader": "^8.2.2"
+    "loki": "^0.28.1"
   },
   "keywords": [
     "jest",

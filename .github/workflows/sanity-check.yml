@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Checkout LFS objects
+        run: git lfs checkout
 
       - name: Node inst
         uses: actions/setup-node@v2
@@ -37,6 +41,15 @@ jobs:
       - name: Run  Jest  T-E-S-T
         run: |
           npm run test --coverage
+
+      - name: build story book for test
+        working-directory: ./packages/game-view
+        run: npm run build-storybook
+
+      - name: run loki test
+        working-directory: ./packages/game-view
+        run: |
+          npm run loki-test
 
       - name: webpack  build
         run: |

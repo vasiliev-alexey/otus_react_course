@@ -11,3 +11,7 @@ export default {
 export const GameScreenDemo: Story = (args) => (
   <GameScreen isPause={false} {...args} />
 );
+
+export const GameScreenDemoWithPause: Story = (args) => (
+  <GameScreen isPause={true} {...args} />
+);
