@@ -1,13 +1,11 @@
 import React from 'react';
 import ControlPanel from './ControlPanel';
 import RotationPanel from './RotationPanel';
-import GamePanel from './GamePanel';
+import GamePanel, { GamePanelProps } from './GamePanel';
 
-type ActionPanelPropsType = {
-  togglePause: () => void;
-};
+export type ActionPanelProps = GamePanelProps;
 
-const ActionPanel: React.FC<ActionPanelPropsType> = ({ togglePause }) => {
+const ActionPanel: React.FC<ActionPanelProps> = ({ togglePause }) => {
   return (
     <div className="actionPanel">
       <GamePanel togglePause={togglePause} />

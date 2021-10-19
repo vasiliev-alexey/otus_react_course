@@ -5,7 +5,7 @@ $sm-size: 1rem;
 
 .rotationPanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
-  //width: 9rem;
+
   width: 50%;
   height: 5rem;
   display: flex;
@@ -14,7 +14,7 @@ $sm-size: 1rem;
   margin: 5px;
 
   align-items: center;
-  //height: 10rem;
+
   justify-content: space-around;
   background: contsants.$base-color;
 }
@@ -22,19 +22,11 @@ $sm-size: 1rem;
 .circleButton {
   display: inline-block;
   border: none;
-  //margin: 40px;
 
-  //  background: url(http://subtlepatterns.com/patterns/extra_clean_paper.png);
   cursor: pointer;
   border-radius: 50%;
   box-shadow: none;
   user-select: none;
-  //background-color: red;
-
-  //box-shadow: 0 3px 20px rgba(0,0,0,.25),
-  //inset 0 2px 0 green,
-  //0 2px 0 rgba(0,0,0,.1),
-  //inset 0 0 20px green;
 }
 
 .lgBtn {

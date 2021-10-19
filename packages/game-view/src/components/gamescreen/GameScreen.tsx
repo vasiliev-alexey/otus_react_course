@@ -33,11 +33,11 @@ const initGameField = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-type GameScreenPropsType = {
+export interface GameScreenProps {
   isPause: boolean;
-};
+}
 
-const GameScreen: React.FC<GameScreenPropsType> = ({ isPause }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ isPause }) => {
   const [nextPieces] = useState(initNextPieceFields);
 
   return (

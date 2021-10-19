@@ -1,10 +1,10 @@
 import React from 'react';
 
-type GamePanelPropsType = {
+export interface GamePanelProps {
   togglePause: () => void;
-};
+}
 
-const GamePanel: React.FC<GamePanelPropsType> = ({ togglePause }) => {
+const GamePanel: React.FC<GamePanelProps> = ({ togglePause }) => {
   return (
     <div className="gamePanel">
       <button

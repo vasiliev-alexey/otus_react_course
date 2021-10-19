@@ -1,15 +1,11 @@
 @use 'contsants';
 
-* {
-  padding: 0px;
-}
-
 .frame {
   border-radius: 7%;
   background-color: contsants.$base-color;
   width: 24rem;
   height: 45rem;
-  //  padding: 10px;
+
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
   justify-content: center;
   display: flex;
@@ -35,10 +31,9 @@
   margin: 0px;
   padding: 0px;
   width: 15px;
-  //padding-top: 0px;
+
   height: 15px;
-  //padding: -1px;
-  //margin: 0px;
+
   border: 0.1px solid silver;
   display: inline-table;
   background-color: gray;
@@ -60,7 +55,7 @@ tr {
   border-radius: 10%;
   flex-direction: row;
   margin: 10px;
-  //height: 10rem;
+
   background: #d6e2ee;
 }
 
