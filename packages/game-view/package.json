@@ -10,6 +10,7 @@
     "postbuild:prod": "build-storybook -o ../../dist/storybooks --quiet",
     "storybook": "start-storybook -p 6006",
     "loki-test": "loki --requireReference --reactUri file:./dist ",
+    "loki-upd-ref": "loki update --requireReference --reactUri file:./dist ",
     "build-storybook": "build-storybook -o ./dist --quiet"
   },
   "dependencies": {
