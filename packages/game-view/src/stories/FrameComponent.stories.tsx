@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Frame from '../components/frame/frame';
+import Frame from '../components/frame/Frame';
 import { Story } from '@storybook/react';
 
 export default {

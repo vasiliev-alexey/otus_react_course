@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix && prettier --write .",
     "build:calc": "npm run build:prod --workspace hw-1",
     "build:ghp": "npm run build:prod --workspaces",
-    "test": "jest --coverage",
+    "test": "npm run test --workspaces --if-present",
     "calc": "ts-node packages/hw1/src/calc/index.ts",
     "stylelint-check": "stylelint-config-prettier-check"
   },

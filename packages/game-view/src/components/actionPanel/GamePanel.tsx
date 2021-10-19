@@ -8,6 +8,7 @@ const GamePanel: React.FC<GamePanelPropsType> = ({ togglePause }) => {
   return (
     <div className="gamePanel">
       <button
+        data-testid="GamePanel-pause-btb"
         className="circleButton transparentBac smBtn"
         onClick={togglePause}
       >
