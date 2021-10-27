@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
-const gitRevisionPlugin = new GitRevisionPlugin();
-
+import { GitRevisionPlugin } from 'git-revision-webpack-plugin';
 import 'webpack-dev-server';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import * as webpack from 'webpack';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+
+import * as path from 'path';
+
+const gitRevisionPlugin = new GitRevisionPlugin();
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -30,8 +30,6 @@ const webpackConfig = (
   }
 ): Configuration => ({
   entry: './src/index.tsx',
-  // ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
-  // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/27570
   devServer: {
     historyApiFallback: true,
     hot: true,

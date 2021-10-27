@@ -42,8 +42,9 @@ const GameScreen: React.FC<GameScreenProps> = ({ isPause }) => {
 
   return (
     <div className="gameScreen">
-      {isPause && <PauseLabel />}
-      {!isPause && (
+      {isPause ? (
+        <PauseLabel />
+      ) : (
         <>
           <PlayField playField={initGameField} />
           <ScoreBoard gamefield={nextPieces} />

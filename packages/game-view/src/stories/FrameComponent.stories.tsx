@@ -7,6 +7,4 @@ export default {
   component: Frame,
   title: 'Тетрис',
 };
-const Template: Story = (args) => <Frame {...args} />;
-
-export const TetrisDemoGameSimulator = Template.bind({});
+export const FrameUse: Story = (args) => <Frame {...args} />;
