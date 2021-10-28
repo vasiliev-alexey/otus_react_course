@@ -1,7 +1,7 @@
 module.exports = {
   stories: [
-    '../src/stories/FrameComponent.stories.tsx', // default page
-    '../src/**/*.stories.@(tsx)',
+    '../src/components/Frame.stories.tsx', // default page
+    '../src/components/**/*.stories.@(tsx)',
   ],
   addons: [
     '@storybook/addon-links',

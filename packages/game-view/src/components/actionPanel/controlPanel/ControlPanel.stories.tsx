@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import ControlPanel from '../components/actionPanel/ControlPanel';
+import ControlPanel from './ControlPanel';
 
 export default {
   component: ControlPanel,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import GameScreen from '../components/gamescreen/GameScreen';
+import GameScreen from './GameScreen';
 
 export default {
   component: GameScreen,

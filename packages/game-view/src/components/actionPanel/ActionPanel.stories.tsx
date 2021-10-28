@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 
-import ActionPanel from '../components/actionPanel/ActionPanel';
+import ActionPanel from './ActionPanel';
 
 export default {
   component: ActionPanel,

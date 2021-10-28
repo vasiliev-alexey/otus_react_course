@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PlayField from './PlayField';
+import PlayField from './playField/PlayField';
 import ScoreBoard from './ScoreBoard';
-import PauseLabel from './PauseLabel';
+import PauseLabel from './pauseLabel/PauseLabel';
 
 const initNextPieceFields = [
   [0, 0, 0, 0],

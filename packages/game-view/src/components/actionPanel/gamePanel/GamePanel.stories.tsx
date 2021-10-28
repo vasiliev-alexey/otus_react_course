@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import GamePanel from '../components/actionPanel/GamePanel';
+import GamePanel from './GamePanel';
 
 export default {
   component: GamePanel,

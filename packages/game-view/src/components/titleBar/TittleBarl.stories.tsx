@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import TitleBar from '../components/titleBar/TitleBar';
+import TitleBar from './TitleBar';
 
 export default {
   component: TitleBar,

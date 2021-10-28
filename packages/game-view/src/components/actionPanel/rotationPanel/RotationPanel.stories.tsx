@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import RotationPanel from '../components/actionPanel/RotationPanel';
+import RotationPanel from './RotationPanel';
 
 export default {
   component: RotationPanel,

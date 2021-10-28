@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Story } from '@storybook/react';
-import PlayField from '../components/gamescreen/PlayField';
+import PlayField from './PlayField';
 
 const initGameField = [
   [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],

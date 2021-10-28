@@ -1,4 +1,4 @@
-@use 'contsants';
+@use 'public/css/contsants';
 
 .frame {
   border-radius: 7%;
@@ -13,14 +13,6 @@
   flex-direction: column;
 }
 
-.playground-table {
-  font-size: 0;
-  padding: 15px 15px 15px 20px;
-
-  border-spacing: -1px;
-  height: 100%;
-  line-height: 0;
-}
 .next-piece-table {
   font-size: 0;
   padding: 15px 15px 15px 20px;
