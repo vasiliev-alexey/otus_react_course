@@ -4,12 +4,12 @@ const TitleBar: React.FC = () => {
   return (
     <div className="titleBar">
       <p className="tetrisFont">
-        <span style={{ color: 'blue' }}>T</span>
-        <span style={{ color: 'red' }}>E</span>
-        <span style={{ color: 'green' }}>T</span>
-        <span style={{ color: 'white' }}>R</span>
-        <span style={{ color: 'red' }}>I</span>
-        <span style={{ color: 'yellow' }}>S</span>
+        <span className="colorT1">T</span>
+        <span className="colorE">E</span>
+        <span className="colorT2">T</span>
+        <span className="colorR">R</span>
+        <span className="colorI">I</span>
+        <span className="colorS">S</span>
       </p>
     </div>
   );
