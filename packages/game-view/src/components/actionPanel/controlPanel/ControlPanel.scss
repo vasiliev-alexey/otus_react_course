@@ -1,17 +1,50 @@
 @use '../../../../public/css/contsants';
 
-.rotationPanel {
+.controlPanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
 
   width: 50%;
+
   height: 5rem;
-  display: flex;
+  max-height: 100px;
+  //display: flex;
   border-radius: 10%;
-  flex-direction: row;
+  //flex-direction: row;
   margin: 5px;
 
-  align-items: center;
+  // align-items: center;
 
-  justify-content: space-around;
+  //justify-content: space-around;
   background: contsants.$base-color;
+
+  display: grid;
+  //grid-template-rows: auto;
+  //grid-template-areas: ". . x . ." ". имя top имя3 . "  ". left  имя4 right . "  ". имя6  down . ."  "none . . . .";
+  grid-template-areas: '. top .' ' left . right' '. down  .';
+  grid-template-rows: auto 1rem auto;
+  grid-template-columns: auto 1rem auto;
+
+  //padding: 10px ;
+}
+
+.rightBtn {
+  grid-area: right;
+  justify-self: center;
+  align-self: center;
+  margin-right: 1rem;
+}
+
+.topBtn {
+  grid-area: top;
+  justify-self: flex-start;
+}
+
+.leftBtn {
+  grid-area: left;
+  justify-self: flex-end;
+  align-self: center;
+}
+
+.downBtn {
+  grid-area: down;
 }

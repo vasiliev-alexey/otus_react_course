@@ -41,6 +41,7 @@ const webpackConfig = (
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+
     //TODO waiting on https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/61
     //@ts-ignore
     plugins: [
@@ -88,6 +89,8 @@ const webpackConfig = (
         ],
         // include: [path.resolve(__dirname, '../public')],
       },
+
+      { test: /\.mp3$/, loader: 'file-loader' },
 
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

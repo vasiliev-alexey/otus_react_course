@@ -3,6 +3,28 @@ $lg-size: 4rem;
 $md-size: 2rem;
 $sm-size: 1rem;
 
+.rotationPanel {
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
+
+  width: 50%;
+
+  height: 5rem;
+  max-height: 100px;
+  //display: flex;
+  border-radius: 10%;
+  //flex-direction: row;
+  margin: 5px;
+
+  align-items: center;
+
+  justify-content: space-around;
+  background: contsants.$base-color;
+
+  display: flex;
+
+  //padding: 10px ;
+}
+
 .circleButton {
   display: inline-block;
   border: none;
