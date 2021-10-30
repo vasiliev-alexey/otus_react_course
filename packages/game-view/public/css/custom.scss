@@ -1,0 +1,15 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-image: url('https://image.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header,
+footer {
+  height: 5vh;
+  background-color: #0074d9;
+}

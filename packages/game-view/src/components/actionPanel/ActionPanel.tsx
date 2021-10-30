@@ -11,8 +11,8 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ togglePause }) => {
       <GamePanel togglePause={togglePause} />
 
       <div className="gameControls">
-        <ControlPanel />
         <RotationPanel />
+        <ControlPanel />
       </div>
     </div>
   );

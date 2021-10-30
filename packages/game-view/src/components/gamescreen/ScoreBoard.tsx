@@ -28,6 +28,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ gamefield }) => {
       <p>level: 10000</p>
       <p>lines: 10000</p>
       <p>time: 00:55</p>
+      <p>sound: {true ? '🔇' : '🔊'}</p>
     </div>
   );
 };

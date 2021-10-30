@@ -90,7 +90,11 @@ const webpackConfig = (
         // include: [path.resolve(__dirname, '../public')],
       },
 
-      { test: /\.mp3$/, loader: 'file-loader' },
+      { test: /\.(mp3)$/, loader: 'file-loader' },
+      {
+        test: /\.(jpg)$/,
+        loader: 'url-loader',
+      },
 
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PlayField from './playField/PlayField';
 import ScoreBoard from './ScoreBoard';
-import PauseLabel from './pauseLabel/PauseLabel';
+import GameOver from './gamover/GameOver';
 
 const initNextPieceFields = [
   [0, 0, 0, 0],
@@ -43,7 +43,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ isPause }) => {
   return (
     <div className="gameScreen">
       {isPause ? (
-        <PauseLabel />
+        <GameOver />
       ) : (
         <>
           <PlayField playField={initGameField} />

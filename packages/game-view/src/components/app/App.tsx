@@ -3,7 +3,17 @@ import Frame from '../frame/Frame';
 
 class App extends Component {
   render(): React.ReactElement {
-    return <Frame />;
+    return (
+      <>
+        <header>
+          <div> toolbar</div>
+        </header>
+        <main>
+          <Frame />
+        </main>
+        <footer>license</footer>
+      </>
+    );
   }
 }
 
