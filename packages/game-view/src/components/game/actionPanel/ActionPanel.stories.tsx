@@ -3,7 +3,7 @@ const storyTitle = 'Панель  управляющих элементов';
 import { Story } from '@storybook/react';
 
 import ActionPanel from './ActionPanel';
-import { GAME_ROOT_ACTION_PANEL } from '../../../../.storybook/storyStructure';
+import { GAME_ROOT_ACTION_PANEL } from '../../storyStructure';
 
 export default {
   component: ActionPanel,

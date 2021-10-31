@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import GameOver from './GameOver';
-import { GAME_ROOT } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../../storyStructure';
 
 const storyTitle = 'Игра закончена';
 

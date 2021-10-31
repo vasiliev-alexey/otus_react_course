@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import GameScreen from './GameScreen';
-import { GAME_ROOT } from '../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../storyStructure';
 
 const storyTitle = 'Экран с фигурами и статистикой';
 

@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-      - 'package/hw1/**'
+      - 'package/calc/**'
 jobs:
   lint:
     runs-on: ubuntu-20.04

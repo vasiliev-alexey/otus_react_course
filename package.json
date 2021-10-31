@@ -10,12 +10,14 @@
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "build:calc": "npm run build:prod --workspace hw-1",
+    "build:pack": "tsc --build tsconfig.build.json",
     "build:ghp": "npm run build:prod --workspaces",
     "test": "npm run test --workspaces --if-present",
-    "calc": "ts-node packages/hw1/src/calc/index.ts",
+    "calc": "ts-node packages/calc/src/calc/index.ts",
     "stylelint-check": "stylelint-config-prettier-check"
   },
   "devDependencies": {
+    "lerna": "4.0.0",
     "@babel/core": "^7.14.8",
     "@babel/eslint-parser": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.14.5",

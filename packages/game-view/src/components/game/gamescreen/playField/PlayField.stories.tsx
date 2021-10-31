@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import PlayField from './PlayField';
-import { GAME_ROOT } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../../storyStructure';
 
 const initGameField = [
   [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],

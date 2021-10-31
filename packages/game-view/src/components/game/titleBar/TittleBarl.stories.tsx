@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import TitleBar from './TitleBar';
-import { GAME_ROOT } from '../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../storyStructure';
 
 const storyTitle = 'Заголовок Tetris';
 export default {

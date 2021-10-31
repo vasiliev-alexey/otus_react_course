@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import GamePanel from './GamePanel';
-import { GAME_ROOT_ACTION_PANEL } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT_ACTION_PANEL } from '../../../storyStructure';
 const storyTitle = 'Панель';
 
 export const GameControlPanel: Story = (args) => (
