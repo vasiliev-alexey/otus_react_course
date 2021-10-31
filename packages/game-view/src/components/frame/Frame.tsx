@@ -6,8 +6,8 @@ import TitleBar from '../titleBar/TitleBar';
 import ActionPanel from '../actionPanel/ActionPanel';
 
 const handleKeyPress: React.KeyboardEventHandler = (event) => {
-  console.log('enter press here! ');
   if (event.key === 'Enter') {
+    // eslint-disable-next-line no-console
     console.log('enter press here! ');
   }
 };
@@ -18,7 +18,6 @@ const Frame: React.FC = () => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
-        console.log('Enter/pause');
       }
     };
     window.addEventListener('keydown', handleEsc);

@@ -3,9 +3,10 @@
 .frame {
   border-radius: 7%;
   background-color: contsants.$base-color;
-  width: 24rem;
-  height: 45rem;
-
+  width: 90rem;
+  height: 75%;
+  min-width: 400px;
+  max-width: 400px;
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
   justify-content: center;
   display: flex;
@@ -37,18 +38,6 @@
 
 tr {
   line-height: 0px;
-}
-
-.gameScreen {
-  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
-  width: 21rem;
-  height: 25rem;
-  display: flex;
-  border-radius: 10%;
-  flex-direction: row;
-  margin: 10px;
-
-  background: #d6e2ee;
 }
 
 .pauseBox {

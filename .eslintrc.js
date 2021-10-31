@@ -29,7 +29,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-console': 'off',
+    'no-console': 'warn',
     'max-len': [
       'error',
       {

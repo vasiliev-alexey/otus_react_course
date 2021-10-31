@@ -92,7 +92,7 @@ const webpackConfig = (
 
       { test: /\.(mp3)$/, loader: 'file-loader' },
       {
-        test: /\.(jpg)$/,
+        test: /\.(jpg|svg|png)$/,
         loader: 'url-loader',
       },
 

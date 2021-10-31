@@ -2,6 +2,7 @@
 @import './css/custom';
 @import 'css/fonts';
 @import 'css/contsants';
+
 @import '../src/components/frame/Frame';
 @import '../src/components/gamescreen/playField/PlayField.scss';
 @import './src/components/actionPanel/controlPanel/ControlPanel';
@@ -10,3 +11,7 @@
 @import '../src/components/actionPanel/ActionPanel';
 @import '../src/components/titleBar/TitleBar';
 @import '../src/components/gamescreen/pauseLabel/pauseLabel';
+@import '../src/components/gamescreen/GameScreen.scss';
+@import '../src/components/header/Header.scss';
+
+@import '../src/components/footer/Footer.scss';

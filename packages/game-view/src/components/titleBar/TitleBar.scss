@@ -1,10 +1,16 @@
 @use '../../../public/css/contsants';
 
+.sound-block {
+  font-size: 0.5rem;
+  letter-spacing: 0.75rem;
+  user-select: none;
+}
+
 .titleBar {
   border-radius: 10%;
   background-color: contsants.$base-color;
   width: 21rem;
-  height: 5rem;
+  height: 10%;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
@@ -23,7 +29,6 @@
   color: red;
   margin-block-start: 0px;
   margin-block-end: 0px;
-
   letter-spacing: 1.3rem;
 }
 

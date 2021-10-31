@@ -1,8 +1,8 @@
 @use 'public/css/contsants';
 
 $lg-size: 4.75rem;
-$md-size: 2rem;
-$sm-size: 1rem;
+$md-size: 3rem;
+$sm-size: 3rem;
 
 .lgBtn {
   width: $lg-size;
@@ -20,7 +20,7 @@ $sm-size: 1rem;
 .gamePanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 4rem;
+  height: 30%;
   display: flex;
   border-radius: 10%;
   flex-direction: row;

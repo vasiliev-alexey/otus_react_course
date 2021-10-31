@@ -5,12 +5,13 @@
 
   width: 50%;
 
-  height: 5rem;
-  max-height: 100px;
+  height: 90%;
+  //max-height: 100px;
   //display: flex;
   border-radius: 10%;
   //flex-direction: row;
   margin: 5px;
+  padding: 3px;
 
   align-items: center;
 
@@ -32,8 +33,10 @@
   user-select: none;
 }
 
-.redBack {
-  background-color: red;
+.btnBackColor {
+  background-color: contsants.$button-color;
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6),
+    inset 0 0px 10px rgba(0, 0, 0, 0.05);
 }
 
 .transparentBac {

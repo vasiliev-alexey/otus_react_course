@@ -12,6 +12,7 @@ const question = (): Promise<void> =>
     rl.question('> ', (answer: string) => {
       const result = runner(answer);
       if (result) {
+        // eslint-disable-next-line no-console
         console.log('> ', '\x1b[44m', `${result}`, '\x1b[0m');
       }
       resolve();
@@ -25,5 +26,6 @@ async function app(): Promise<void> {
 }
 
 app().then(() => {
+  // eslint-disable-next-line no-console
   console.log('finished');
 });
