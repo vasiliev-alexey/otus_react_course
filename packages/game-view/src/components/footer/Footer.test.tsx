@@ -1,5 +1,3 @@
-//TODO
-
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -12,7 +10,6 @@ describe('Test Footer component', () => {
 
   test('Frame must be render in page', () => {
     render(<Footer />);
-
     'GAMETRIS'
       .split('')
       .forEach((l) =>

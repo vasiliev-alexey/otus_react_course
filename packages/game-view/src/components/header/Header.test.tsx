@@ -3,16 +3,22 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
 
-//ToDo
-window.HTMLMediaElement.prototype.play = () => {
-  /* do nothing */
-  return Promise.resolve();
-};
-window.HTMLMediaElement.prototype.pause = () => {
-  /* do nothing */
-};
-
 describe('Test header component', () => {
+  let playBackup: () => Promise<void>;
+  let pauseBackup: () => void;
+
+  beforeAll(() => {
+    playBackup = window.HTMLMediaElement.prototype.play;
+    pauseBackup = window.HTMLMediaElement.prototype.pause;
+
+    window.HTMLMediaElement.prototype.play = jest.fn();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+  });
+  afterAll(() => {
+    window.HTMLMediaElement.prototype.play = playBackup;
+    window.HTMLMediaElement.prototype.pause = pauseBackup;
+  });
+
   test('Header component is a function', () => {
     expect(Header).toBeInstanceOf(Object);
   });
