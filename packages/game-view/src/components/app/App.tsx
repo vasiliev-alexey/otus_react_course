@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Frame from '../frame/Frame';
+import Game from '../game/Game';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 
@@ -9,7 +9,7 @@ class App extends Component {
       <>
         <Header />
         <main>
-          <Frame />
+          <Game />
         </main>
         <Footer />
       </>

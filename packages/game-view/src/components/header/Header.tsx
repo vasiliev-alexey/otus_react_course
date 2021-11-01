@@ -10,6 +10,8 @@ const Header: React.FC = () => {
 
   const audioMain = useMemo(() => {
     const audioWork = new Audio(audio);
+    //github.com/oblador/loki/issues/250
+    audioWork.preload = 'none';
     audioWork.addEventListener(
       'ended',
       function () {
