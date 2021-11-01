@@ -64,6 +64,12 @@ jobs:
           FOLDER: dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
+      - name: Dump steps context
+        if: ${{ failure() }}
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+
       - name: 'Send telegram notification'
         if: ${{ always() }}
         uses: appleboy/telegram-action@master
@@ -75,3 +81,4 @@ jobs:
             wf: ${{github.workflow}}
             event: ${{github.event.name}}
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
+            ${{ (job.status != 'success' && $STEPS_CONTEXT )}}
