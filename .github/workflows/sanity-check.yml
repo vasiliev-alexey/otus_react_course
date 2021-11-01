@@ -81,4 +81,4 @@ jobs:
             wf: ${{github.workflow}}
             event: ${{github.event.name}}
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
-            ${{ (job.status != 'success' && $STEPS_CONTEXT )}}
+            ${{ (job.status != 'success' && '$STEPS_CONTEXT' )}}
