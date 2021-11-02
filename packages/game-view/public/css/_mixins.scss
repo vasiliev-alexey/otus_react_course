@@ -1,0 +1,22 @@
+@mixin pads {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin phones {
+  @media screen and (max-width: 350px) {
+    @content;
+  }
+}
+
+@mixin reader {
+  @media screen and (max-width: 420px) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media only screen and (max-width: 300px) {
+    @content;
+  }
+}

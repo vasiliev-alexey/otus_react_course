@@ -13,3 +13,15 @@ footer {
   height: 5vh;
   background-color: #0074d9;
 }
+
+tr {
+  //  border-bottom: none;
+  // border-top: none;
+  display: table-row;
+  vertical-align: center;
+  // border-collapse: collapse;
+}
+
+table {
+  border-collapse: collapse;
+}

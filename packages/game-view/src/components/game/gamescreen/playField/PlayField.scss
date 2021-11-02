@@ -1,8 +1,37 @@
 .playground-table {
   font-size: 0;
-  padding: 15px 15px 15px 20px;
+  margin: 10px 10px 10px 20px;
 
-  //border-spacing: -1px;
-  height: 100%;
+  height: 95%;
   line-height: 0;
+  width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1/2;
+}
+
+.cell {
+  margin: 0px;
+  padding: 0px;
+  min-width: 20px;
+  min-height: 20px;
+
+  width: 15px;
+  height: 15px;
+
+  @include pads {
+    width: 15px;
+    height: 15px;
+  }
+  @include small {
+    width: 15px;
+    height: 15px;
+  }
+
+  border: 0.01px solid rgba(0, 0, 255, 0.25);
+
+  background-color: gray;
+}
+
+.cellRed {
+  background-color: red;
 }
