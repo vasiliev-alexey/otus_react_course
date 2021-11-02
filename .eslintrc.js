@@ -4,7 +4,7 @@ module.exports = {
     'jest/globals': true,
   },
   parser: '@typescript-eslint/parser',
-  //  plugins: ["@typescript-eslint", "jest", "eslint-plugin-import"],
+
   plugins: [
     '@typescript-eslint',
     'react',

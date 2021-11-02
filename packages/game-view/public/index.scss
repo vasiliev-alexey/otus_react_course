@@ -1,0 +1,11 @@
+@import '../../../node_modules/normalize.css/normalize.css';
+@import 'css/fonts';
+@import 'css/contsants';
+@import '../src/components/frame/Frame';
+@import '../src/components/gamescreen/playField/PlayField.scss';
+@import './src/components/actionPanel/controlPanel/ControlPanel';
+@import '../src/components/actionPanel/rotationPanel/RotationPanel';
+@import '../src/components/actionPanel/gamePanel/GamePanel';
+@import '../src/components/actionPanel/ActionPanel';
+@import '../src/components/titleBar/TitleBar';
+@import '../src/components/gamescreen/pauseLabel/pauseLabel';

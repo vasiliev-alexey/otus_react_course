@@ -6,3 +6,6 @@ webpack.config.ts
 /jest
 
 **/dist/
+
+
+**/storybook-static/

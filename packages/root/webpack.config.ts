@@ -68,7 +68,7 @@ const webpackConfig = (
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: '../assets/owl.png',
+      favicon: '../assets/images/owl.png',
     }),
     new Dotenv({
       safe: true,
