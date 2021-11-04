@@ -1,0 +1,28 @@
+.siteFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1.2rem;
+  font-size: 1.5rem;
+}
+
+.labelColorWhite {
+  color: white;
+}
+.labelColorRed {
+  color: red;
+}
+.labelColorGreen {
+  color: green;
+}
+.labelColorOrange {
+  color: orangered;
+}
+
+.Footer-Label__left {
+  padding-right: 10px;
+}
+
+.Footer-Label__right {
+  padding-left: 10px;
+}

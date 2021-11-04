@@ -1,4 +1,6 @@
 module.exports = {
+  diffingEngine: 'looks-same',
+  chromeTolerance: 5,
   configurations: {
     'chrome.laptop': {
       target: 'chrome.docker',

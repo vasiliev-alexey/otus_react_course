@@ -1,11 +1,18 @@
 @import '../../../node_modules/normalize.css/normalize.css';
+@import './css/custom';
 @import 'css/fonts';
 @import 'css/contsants';
-@import '../src/components/frame/Frame';
-@import '../src/components/gamescreen/playField/PlayField.scss';
-@import './src/components/actionPanel/controlPanel/ControlPanel';
-@import '../src/components/actionPanel/rotationPanel/RotationPanel';
-@import '../src/components/actionPanel/gamePanel/GamePanel';
-@import '../src/components/actionPanel/ActionPanel';
-@import '../src/components/titleBar/TitleBar';
-@import '../src/components/gamescreen/pauseLabel/pauseLabel';
+
+@import '../src/components/game/Game';
+@import '../src/components/game/gamescreen/scoreBoard/ScoreBoard.scss';
+@import '../src/components/game/gamescreen/playField/PlayField.scss';
+@import '../src/components/game/actionPanel/controlPanel/ControlPanel';
+@import '../src/components/game/actionPanel/rotationPanel/RotationPanel';
+@import '../src/components/game/actionPanel/gamePanel/GamePanel';
+@import '../src/components/game/actionPanel/ActionPanel';
+@import '../src/components/game/titleBar/TitleBar';
+@import '../src/components/game/gamescreen/pauseLabel/pauseLabel';
+@import '../src/components/game/gamescreen/GameScreen.scss';
+@import '../src/components/header/Header.scss';
+
+@import '../src/components/footer/Footer.scss';

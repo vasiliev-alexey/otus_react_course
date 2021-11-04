@@ -41,7 +41,7 @@ const webpackConfig = (
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-    //TODO waiting on https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/61
+
     //@ts-ignore
     plugins: [
       new TsconfigPathsPlugin({
@@ -87,6 +87,12 @@ const webpackConfig = (
           'sass-loader',
         ],
         // include: [path.resolve(__dirname, '../public')],
+      },
+
+      { test: /\.(mp3)$/, loader: 'file-loader' },
+      {
+        test: /\.(jpg|svg|png)$/,
+        loader: 'url-loader',
       },
 
       {

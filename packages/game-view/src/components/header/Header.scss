@@ -1,0 +1,24 @@
+.octoCatLogo {
+  height: 32px;
+  width: 32px;
+  background: transparent;
+  margin: 10px;
+  padding: 10px;
+}
+
+.siteHeader {
+  display: flex;
+  justify-content: end;
+  min-height: 50px;
+}
+
+.Footer-Toolbar {
+  align-self: center;
+  margin-left: auto;
+}
+
+.Footer-Greeting {
+  align-self: center;
+  margin-left: 20%;
+  letter-spacing: 1.2rem;
+}

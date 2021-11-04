@@ -1,0 +1,19 @@
+.actionPanel {
+  border-radius: 5%;
+  background-color: transparent;
+  width: 21rem;
+  height: 22%;
+
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  padding: 3px;
+}
+
+.gameControls {
+  height: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
