@@ -58,10 +58,13 @@ describe('Down click test suit ', () => {
 
   test('20 clicks down expect piece in bottom', () => {
     const initialRows = game.getState().playfield.slice(0, 2);
+    printField(game.getState().playfield);
     for (let i = 0; i < 20; i++) {
       game.movePieceDown();
       if (game.getState().isGameOver) break;
     }
+    printField(game.getState().playfield.slice(18, 20));
+    printField(initialRows);
     expect(game.getState().playfield.slice(18, 20)).toEqual(initialRows);
   });
 });
@@ -92,8 +95,6 @@ describe('Test rotate piece', () => {
   });
 
   test(' test rotatePiece action', () => {
-    printField(game.getState().playfield);
-
     let p = game.getState().playfield;
 
     while (p[0][4] && p[0][5] && p[1][4] && p[1][5]) {
@@ -106,10 +107,10 @@ describe('Test rotate piece', () => {
 
     const oldPosition = game.getState().playfield.slice(1, 5);
 
-    printField(oldPosition);
+    // printField(oldPosition);
 
     game.rotatePiece();
-    printField(game.getState().playfield.slice(1, 5));
+    // printField(game.getState().playfield.slice(1, 5));
 
     expect(game.getState().playfield.slice(1, 5)).not.toEqual(oldPosition);
   });
