@@ -62,14 +62,13 @@ class Game extends React.Component<unknown, GameState> {
     }, 1000);
   }
 
-  componentWillUnmount(): void {
-    super.componentWillUnmount();
+  componentWillUnmount = (): void => {
     window.removeEventListener('keydown', this.handleEsc);
 
     if (this.intervalHolder) {
       window.clearInterval(this.intervalHolder);
     }
-  }
+  };
 
   render(): JSX.Element {
     return (
@@ -80,9 +79,9 @@ class Game extends React.Component<unknown, GameState> {
 
           <ActionPanel
             togglePause={() => {
-              this.setState((state) =>
-                this.setState({ isPause: !state.isPause })
-              );
+              this.setState((state) => {
+                return { ...state, isPause: !state.isPause };
+              });
             }}
           />
         </div>
