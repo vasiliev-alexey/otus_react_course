@@ -1,47 +1,94 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../../public/index.scss';
-
-import GameScreen from './gamescreen/GameScreen';
+import { default as GameEngine } from '@tetris/game-engine/dist/src/GameEngine';
+import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
 import TitleBar from './titleBar/TitleBar';
 import ActionPanel from './actionPanel/ActionPanel';
 
-const handleKeyPress: React.KeyboardEventHandler = (event) => {
-  if (event.key === 'Enter') {
-    // eslint-disable-next-line no-console
-    console.log('enter press here! ');
+interface GameState extends GameScreenProps, GameScreenProps {
+  isPause: boolean;
+}
+
+class Game extends React.Component<unknown, GameState> {
+  #gameEngine: GameEngine;
+
+  private intervalHolder: number;
+
+  private handleEsc = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      this.#gameEngine.movePieceDown();
+    } else if (event.key === 'ArrowRight') {
+      this.#gameEngine.movePieceRight();
+    } else if (event.key === 'ArrowLeft') {
+      this.#gameEngine.movePieceLeft();
+    } else if (event.code === 'Space') {
+      this.#gameEngine.rotatePiece();
+    } else if (event.key === 'ArrowDown') {
+      this.#gameEngine.movePieceDown();
+    } else {
+      return;
+    }
+
+    this.setState({ playfield: this.#gameEngine.getState().playfield });
+  };
+
+  constructor(props: Readonly<unknown> | unknown) {
+    super(props);
+
+    this.state = {
+      isPause: false,
+      playfield: [],
+      nextPiece: [],
+    };
   }
-};
 
-const Game: React.FC = () => {
-  const [isPause, setPause] = useState(false);
+  componentDidMount(): void {
+    this.#gameEngine = new GameEngine();
+    window.addEventListener('keydown', this.handleEsc);
 
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
+    this.intervalHolder = window.setInterval(() => {
+      this.#gameEngine.movePieceDown();
 
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
+      const { playfield, nextPiece, lines, score, level } =
+        this.#gameEngine.getState();
 
-  return (
-    <>
-      <div className="frame" onKeyPress={handleKeyPress}>
-        <TitleBar />
-        <GameScreen isPause={isPause} />
-        <ActionPanel
-          togglePause={() => {
-            setPause((val) => {
-              return !val;
-            });
-          }}
-        />
-      </div>
-    </>
-  );
-};
+      this.setState({
+        playfield,
+        nextPiece: nextPiece.blocks,
+        lines,
+        score,
+        level,
+      });
+    }, 1000);
+  }
+
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    window.removeEventListener('keydown', this.handleEsc);
+
+    if (this.intervalHolder) {
+      window.clearInterval(this.intervalHolder);
+    }
+  }
+
+  render(): JSX.Element {
+    return (
+      <>
+        <div className="frame">
+          <TitleBar />
+          <GameScreen {...this.state} />
+
+          <ActionPanel
+            togglePause={() => {
+              this.setState((state) =>
+                this.setState({ isPause: !state.isPause })
+              );
+            }}
+          />
+        </div>
+      </>
+    );
+  }
+}
 
 export default Game;

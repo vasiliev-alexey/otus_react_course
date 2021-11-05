@@ -12,7 +12,7 @@ export default {
 };
 
 export const TitleBarStory: Story = (args) => (
-  <div className="frame">
+  <div style={{ width: '300px' }} className="frame">
     <TitleBar {...args} />
   </div>
 );

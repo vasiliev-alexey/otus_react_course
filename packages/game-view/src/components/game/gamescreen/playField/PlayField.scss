@@ -10,6 +10,7 @@
 }
 
 .cell {
+  font-size: 1rem;
   margin: 0px;
   padding: 0px;
   min-width: 20px;
@@ -32,6 +33,32 @@
   background-color: gray;
 }
 
-.cellRed {
+.cell0 {
+  background-color: lightgray;
+}
+
+.cell1 {
   background-color: red;
+}
+
+.cell2 {
+  background-color: orangered;
+}
+
+.cell3 {
+  background-color: yellow;
+}
+
+.cell4 {
+  background-color: green;
+}
+.cell5 {
+  background-color: lightskyblue;
+}
+
+.cell6 {
+  background-color: blue;
+}
+.cell7 {
+  background-color: purple;
 }

@@ -11,4 +11,8 @@ export default {
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
 
-export const GameOverScreenDemo: Story = (args) => <GameOver {...args} />;
+export const GameOverScreenDemo: Story = (args) => (
+  <div className="w300">
+    <GameOver {...args} />
+  </div>
+);

@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "tetris game engine",
   "scripts": {
-    "compile": "tsc"
+    "compile": "tsc",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

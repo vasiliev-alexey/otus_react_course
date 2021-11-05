@@ -32,8 +32,10 @@ export default {
   component: PlayField,
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
-const Template: Story = (args) => (
-  <PlayField playField={initGameField} {...args} />
+export const PlayFieldComponent: Story = (args) => (
+  <div style={{ width: '300px' }}>
+    <PlayField playField={initGameField} {...args} />
+  </div>
 );
 
-export const PlayFieldComponent = Template.bind({});
+// export const PlayFieldComponent = (Template);

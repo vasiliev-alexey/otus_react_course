@@ -11,6 +11,7 @@ export default {
 };
 
 export const SimpleUse: Story = (args) => (
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  <ActionPanel togglePause={() => {}} {...args} />
+  <div style={{ width: '600px' }}>
+    <ActionPanel togglePause={null} {...args} />
+  </div>
 );

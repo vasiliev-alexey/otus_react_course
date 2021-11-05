@@ -11,4 +11,8 @@ export default {
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
 
-export const GameOverScreenDemo: Story = (args) => <PauseLabel {...args} />;
+export const GameOverScreenDemo: Story = (args) => (
+  <div className="w300">
+    <PauseLabel {...args} />
+  </div>
+);

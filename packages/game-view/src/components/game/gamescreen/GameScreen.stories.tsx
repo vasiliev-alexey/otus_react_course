@@ -12,9 +12,27 @@ export default {
 };
 
 export const GameScreenDemo: Story = (args) => (
-  <GameScreen isPause={false} {...args} />
+  <div className="w300">
+    <GameScreen
+      isPause={false}
+      playfield={[]}
+      score={0}
+      lines={0}
+      nextPiece={[]}
+      {...args}
+    />
+  </div>
 );
 
 export const GameScreenDemoWithPause: Story = (args) => (
-  <GameScreen isPause={true} {...args} />
+  <div className="w300">
+    <GameScreen
+      isPause={true}
+      playfield={null}
+      score={0}
+      lines={0}
+      nextPiece={[]}
+      {...args}
+    />
+  </div>
 );
