@@ -19,3 +19,4 @@ doc/Заметки.md
 **/.loki/current
 **/.loki/difference
 
+/packages/game-engine/lib/

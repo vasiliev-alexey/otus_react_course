@@ -1,16 +1,21 @@
 {
   "name": "@tetris/game-engine",
-  "main": "dist/GameEngine.js",
+  "main": "lib/src/index.js",
+  "types": "lib/src/GameEngine.d.ts",
   "version": "1.0.0",
   "description": "tetris game engine",
   "scripts": {
     "compile": "tsc",
     "test": "jest"
   },
+  "files": [
+    "lib/**/*",
+    "*.js",
+    "*.d.ts"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "types": "dist/src/GameEngine.d.ts",
   "dependencies": {},
   "devDependencies": {
     "typescript": "4.4.4",

@@ -1,4 +1,4 @@
-import Game, { PlayFieldType } from './GameEngine';
+import { Game, PlayFieldType } from './GameEngine';
 
 describe('Game Engine is a Class', () => {
   test('game engine is a class', () => {

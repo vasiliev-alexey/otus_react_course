@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix && prettier --write .",
     "build:calc": "npm run build:prod --workspace hw-1",
     "build:pack": "tsc --build tsconfig.build.json",
-    "build:ghp": "npm run build:prod --workspaces",
+    "build:ghp": "npm run build:prod --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "calc": "ts-node packages/calc/src/calc/index.ts",
     "stylelint-check": "stylelint-config-prettier-check"

@@ -14,8 +14,9 @@
     "moduleResolution": "node",
     "downlevelIteration": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
+    "outDir": "./lib",
     "composite": true
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["node_modules", "src/**/*.test.ts", "tsconfig.*"]
 }

@@ -19,7 +19,7 @@ export interface GameState {
   isGameOver: boolean;
 }
 
-export default class Game {
+export class Game {
   #score = 0;
   #topOut = false;
   #lines = 0;

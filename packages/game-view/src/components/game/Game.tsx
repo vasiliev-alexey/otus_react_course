@@ -1,9 +1,10 @@
 import React from 'react';
 import '../../../public/index.scss';
-import { default as GameEngine } from '@tetris/game-engine/dist/src/GameEngine';
+import { Game as GameEngine } from '@tetris/game-engine';
 import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
 import TitleBar from './titleBar/TitleBar';
 import ActionPanel from './actionPanel/ActionPanel';
+import ErrorBoundary from '../utils/ErrorBoundary';
 
 interface GameState extends GameScreenProps, GameScreenProps {
   isPause: boolean;
@@ -14,7 +15,7 @@ class Game extends React.Component<unknown, GameState> {
 
   private intervalHolder: number;
 
-  private handleEsc = (event: KeyboardEvent) => {
+  private handleKeyPress = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
       this.#gameEngine.movePieceDown();
     } else if (event.key === 'ArrowRight') {
@@ -44,7 +45,7 @@ class Game extends React.Component<unknown, GameState> {
 
   componentDidMount(): void {
     this.#gameEngine = new GameEngine();
-    window.addEventListener('keydown', this.handleEsc);
+    window.addEventListener('keydown', this.handleKeyPress);
 
     this.intervalHolder = window.setInterval(() => {
       this.#gameEngine.movePieceDown();
@@ -63,7 +64,7 @@ class Game extends React.Component<unknown, GameState> {
   }
 
   componentWillUnmount = (): void => {
-    window.removeEventListener('keydown', this.handleEsc);
+    window.removeEventListener('keydown', this.handleKeyPress);
 
     if (this.intervalHolder) {
       window.clearInterval(this.intervalHolder);
@@ -75,8 +76,9 @@ class Game extends React.Component<unknown, GameState> {
       <>
         <div className="frame">
           <TitleBar />
-          <GameScreen {...this.state} />
-
+          <ErrorBoundary>
+            <GameScreen {...this.state} />
+          </ErrorBoundary>
           <ActionPanel
             togglePause={() => {
               this.setState((state) => {
