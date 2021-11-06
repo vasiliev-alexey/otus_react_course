@@ -11,7 +11,7 @@ on:
     paths:
       - 'package/calc/**'
 jobs:
-  lint:
+  lint_and_deploy:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -31,6 +31,9 @@ jobs:
           npm --version
 
       - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
+        id: Npm-install
+        env:
+          HUSKY_SKIP_INSTALL: 1
         run: |
           npm install --legacy-peer-deps
           npm install --legacy-peer-deps --workspaces
@@ -40,10 +43,12 @@ jobs:
           tsc --build tsconfig.build.json
 
       - name: Lint check
+        id: LinterS
         run: |
           npm run lint
 
       - name: Run  Jest  T-E-S-T
+        id: Jest-Test
         run: |
           npm run test --coverage
 
@@ -52,15 +57,18 @@ jobs:
         run: npm run build-storybook
 
       - name: run loki test
+        id: loki_test
         working-directory: ./packages/game-view
         run: |
           npm run loki-test
 
       - name: webpack  build
+        id: Build
         run: |
           npm run build:ghp
 
       - name: Deploy 🚀
+        id: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -85,4 +93,8 @@ jobs:
             wf: ${{github.workflow}}
             event: ${{github.event.name}}
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
-            ${{ (job.status != 'success' && '$STEPS_CONTEXT' )}}
+            ${{ steps.loki_test.outcome == 'failure' &&  'LOKI ⛔' )}}
+            ${{ steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔' )}}
+            ${{ steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔' )}}
+            ${{ steps.Npm-install.outcome == 'failure' &&  'NPM ⛔' )}}
+            ${{ steps.Build.outcome == 'failure' &&  'Build ⛔' )}}
