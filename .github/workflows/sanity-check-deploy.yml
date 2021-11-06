@@ -96,5 +96,5 @@ jobs:
             ${{ steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ' }} || ''
             ${{ steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ' }} || ''
             ${{ steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ' }} || ''
-            ${{ steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' }} || ''
+            ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' )}}
             ${{ steps.Build.outcome == 'failure' &&  'Build ⛔ ' }} || ''
