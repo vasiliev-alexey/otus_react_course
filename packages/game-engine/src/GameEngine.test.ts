@@ -56,16 +56,46 @@ describe('Down click test suit ', () => {
     expect(game.getState().isGameOver).toBeTruthy();
   });
 
-  test('20 clicks down expect piece in bottom', () => {
-    const initialRows = game.getState().playfield.slice(0, 2);
-    printField(game.getState().playfield);
-    for (let i = 0; i < 20; i++) {
+  test.each([
+    [1],
+    [2],
+    [3],
+    [4],
+    [5],
+    [6],
+    [7],
+    [8],
+    [9],
+    [10],
+    [11],
+    [12],
+    [13],
+    [14],
+    [15],
+    [16],
+    [17],
+    [18],
+    [19],
+    [20],
+  ])('20 clicks down expect piece in bottom test N %i', () => {
+    let initialRows = game.getState().playfield.slice(0, 2);
+
+    let sliceCnt = 0;
+
+    if (initialRows[0][3] && initialRows[0][6]) {
+      initialRows = initialRows.slice(0, 1);
+      sliceCnt = 1;
+    }
+
+    for (let i = 0; i < 22; i++) {
       game.movePieceDown();
       if (game.getState().isGameOver) break;
     }
-    printField(game.getState().playfield.slice(18, 20));
-    printField(initialRows);
-    expect(game.getState().playfield.slice(18, 20)).toEqual(initialRows);
+    //  printField(game.getState().playfield.slice(18+sliceCnt, 20));
+    //  printField(initialRows);
+    expect(game.getState().playfield.slice(18 + sliceCnt, 20)).toEqual(
+      initialRows
+    );
   });
 });
 
