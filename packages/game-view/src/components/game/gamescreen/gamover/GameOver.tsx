@@ -2,7 +2,7 @@ import React from 'react';
 
 const GameOver: React.FC = () => {
   return (
-    <div data-testid="Pause-Label" className="tetrisFont">
+    <div data-testid="Pause-Label" className="tetrisFont pauseLabel">
       <div>
         <span>G</span>
         <span>A</span>

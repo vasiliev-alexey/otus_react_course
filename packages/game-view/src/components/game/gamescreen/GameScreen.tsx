@@ -2,14 +2,16 @@ import React from 'react';
 import PlayField from './playField/PlayField';
 import ScoreBoard from './scoreBoard/ScoreBoard';
 import GameOver from './gamover/GameOver';
+import PauseLabel from './pauseLabel/PauseLabel';
 
 export interface GameScreenProps {
-  isPause: boolean;
+  isPause?: boolean;
   playfield: number[][];
   nextPiece: number[][];
   lines?: number;
   score?: number;
   level?: number;
+  isGameOver?: boolean;
 }
 
 const GameScreen: React.FC<GameScreenProps> = ({
@@ -18,19 +20,24 @@ const GameScreen: React.FC<GameScreenProps> = ({
   nextPiece,
   lines,
   score,
+  isGameOver,
+  level,
 }) => {
   //const [nextPieces] = useState(initNextPieceFields);
 
   return (
     <div className="gameScreen">
-      {isPause ? (
-        <GameOver />
-      ) : (
-        <>
-          <PlayField playField={playfield} />
-          <ScoreBoard nextPieceBlock={nextPiece} lines={lines} score={score} />
-        </>
-      )}
+      <>
+        <PlayField playField={playfield} />
+        <ScoreBoard
+          nextPieceBlock={nextPiece}
+          lines={lines}
+          score={score}
+          level={level}
+        />
+      </>
+      {isGameOver && <GameOver />}
+      {(!isGameOver && isPause && <PauseLabel />) || <p></p>}
     </div>
   );
 };

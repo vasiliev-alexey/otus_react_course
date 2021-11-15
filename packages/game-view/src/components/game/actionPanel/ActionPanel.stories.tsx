@@ -3,15 +3,23 @@ const storyTitle = 'Панель  управляющих элементов';
 import { Story } from '@storybook/react';
 
 import ActionPanel from './ActionPanel';
-import { GAME_ROOT_ACTION_PANEL } from '../../storyStructure';
+import { dummyAction, GAME_ROOT_ACTION_PANEL } from '../../storyStructure';
 
 export default {
   component: ActionPanel,
   title: `${GAME_ROOT_ACTION_PANEL}/${storyTitle}`,
 };
 
-export const SimpleUse: Story = (args) => (
+export const SimpleUse: Story = () => (
   <div style={{ width: '600px' }}>
-    <ActionPanel togglePause={null} {...args} />
+    <ActionPanel
+      togglePause={dummyAction}
+      right={dummyAction}
+      isPause={false}
+      reset={dummyAction}
+      left={dummyAction}
+      down={dummyAction}
+      rotate={dummyAction}
+    />
   </div>
 );

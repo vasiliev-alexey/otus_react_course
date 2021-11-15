@@ -1,9 +1,15 @@
 import React from 'react';
 
-const RotationPanel: React.FC = () => {
+export interface RotationPanelProps {
+  rotate: () => void;
+}
+
+const RotationPanel: React.FC<RotationPanelProps> = ({ rotate }) => {
   return (
     <div className="rotationPanel">
-      <button className="circleButton btnBackColor lgBtn">↩</button>
+      <button className="circleButton btnBackColor lgBtn" onClick={rotate}>
+        ↩
+      </button>
     </div>
   );
 };
