@@ -12,9 +12,7 @@ type ScoreBoardProps = {
 function arraysAreIdentical(arrOne: number[][], arrTwo: number[][]): boolean {
   return (
     arrOne.length === arrTwo.length &&
-    arrOne.every(function (value, index) {
-      return value === arrTwo[index];
-    })
+    arrOne.every((value, index) => value === arrTwo[index])
   );
 }
 

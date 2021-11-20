@@ -20,8 +20,17 @@ const GamePanel: React.FC<GamePanelProps> = ({
       >
         {(isPause != undefined && !isPause ? 'pause' : 'start') + '🟡'}
       </button>
-      <button className="circleButton transparentBac smBtn">sound🟡</button>
-      <button onClick={reset} className="circleButton transparentBac mdBtn ">
+      <button
+        className="circleButton transparentBac smBtn"
+        data-testid="GamePanel-sound-btb"
+      >
+        sound🟡
+      </button>
+      <button
+        onClick={reset}
+        className="circleButton transparentBac mdBtn "
+        data-testid="GamePanel-reset-btb"
+      >
         reset🟡
       </button>
     </div>
