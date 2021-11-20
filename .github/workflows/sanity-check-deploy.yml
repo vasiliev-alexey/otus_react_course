@@ -93,4 +93,4 @@ jobs:
             wf: ${{github.workflow}}
             event: ${{github.event.name}}
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
-            ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} || '' ${{ (steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} || '' ${{ (steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ') || '' }} ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' )}}  ${{ steps.Build.outcome == 'failure' &&  'Build ⛔ ' }} || ''
+            ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} ${{ (steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} ${{ (steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ') || '' }} ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' ) || ''}} ${{ (steps.Build.outcome == 'failure' &&  'Build ⛔ ') || '' }}
