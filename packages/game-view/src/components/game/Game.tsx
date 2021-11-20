@@ -47,13 +47,14 @@ class Game extends React.Component<unknown, GameState> {
     }
   };
 
+  state: GameState = {
+    playfield: [],
+    nextPiece: [],
+  };
+
   constructor(props: Readonly<unknown> | unknown) {
     super(props);
     this.#gameEngine = new GameEngine();
-    this.state = {
-      playfield: [],
-      nextPiece: [],
-    };
   }
 
   #syncEngineAndView = (isInit = false): void => {
