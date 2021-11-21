@@ -3,7 +3,7 @@ const storyTitle = 'Панель  управляющих элементов';
 import { Story } from '@storybook/react';
 
 import ActionPanel from './ActionPanel';
-import { GAME_ROOT_ACTION_PANEL } from '../../../../.storybook/storyStructure';
+import { GAME_ROOT_ACTION_PANEL } from '../../storyStructure';
 
 export default {
   component: ActionPanel,
@@ -11,6 +11,7 @@ export default {
 };
 
 export const SimpleUse: Story = (args) => (
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  <ActionPanel togglePause={() => {}} {...args} />
+  <div style={{ width: '600px' }}>
+    <ActionPanel togglePause={null} {...args} />
+  </div>
 );

@@ -12,7 +12,7 @@ const GamePanel: React.FC<GamePanelProps> = ({ togglePause }) => {
         className="circleButton transparentBac mdBtn"
         onClick={togglePause}
       >
-        pause🟡
+        start/pause🟡
       </button>
       <button className="circleButton transparentBac smBtn">sound🟡</button>
       <button className="circleButton transparentBac mdBtn ">reset🟡</button>

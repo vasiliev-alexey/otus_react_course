@@ -6,20 +6,12 @@
   width: 50%;
 
   height: 90%;
-  //max-height: 100px;
-  //display: flex;
   border-radius: 10%;
-  //flex-direction: row;
   margin: 5px;
 
-  // align-items: center;
-
-  //justify-content: space-around;
   background: contsants.$base-color;
 
   display: grid;
-  //grid-template-rows: auto;
-  //grid-template-areas: ". . x . ." ". имя top имя3 . "  ". left  имя4 right . "  ". имя6  down . ."  "none . . . .";
   grid-template-areas: '. top .' ' left . right' '. down  .';
   grid-template-rows: auto 1rem auto;
   grid-template-columns: auto 1rem auto;
@@ -30,9 +22,9 @@
 
 .rightBtn {
   grid-area: right;
-  justify-self: end;
+  justify-self: start;
   align-self: center;
-  margin-left: 1.2rem;
+  margin-left: 2rem;
 }
 
 .topBtn {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Game from './Game';
-import { GAME_ROOT } from '../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../storyStructure';
 import { Story } from '@storybook/react';
 
 const storyTitle = 'Главный';

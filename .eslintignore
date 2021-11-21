@@ -7,5 +7,6 @@ webpack.config.ts
 
 **/dist/
 
+packages/game-engine/lib/*
 
 **/storybook-static/

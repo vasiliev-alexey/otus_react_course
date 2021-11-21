@@ -3,7 +3,7 @@ import React from 'react';
 import { Story } from '@storybook/react';
 
 import Footer from './Footer';
-import { SITE_ROOT } from '../../../.storybook/storyStructure';
+import { SITE_ROOT } from '../storyStructure';
 
 const storyTitle = 'Подвал сайта';
 export default {

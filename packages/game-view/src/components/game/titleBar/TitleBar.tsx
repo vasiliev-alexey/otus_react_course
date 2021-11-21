@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const TitleBar: React.FC = () => {
   return (
@@ -18,4 +18,4 @@ const TitleBar: React.FC = () => {
   );
 };
 
-export default TitleBar;
+export default memo(TitleBar);

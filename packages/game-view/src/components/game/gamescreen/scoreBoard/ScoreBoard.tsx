@@ -1,36 +1,88 @@
 import React from 'react';
+import { getColor } from '../utils';
+import audio from '../../../../../../assets/sounds/clear.mp3';
 
 type ScoreBoardProps = {
-  gamefield: number[][];
+  nextPieceBlock: number[][];
+  lines?: number;
+  score?: number;
+  level?: number;
 };
 
-const ScoreBoard: React.FC<ScoreBoardProps> = ({ gamefield }) => {
+function arraysAreIdentical(arrOne: number[][], arrTwo: number[][]): boolean {
   return (
-    <div>
-      <table className="next-piece-table">
-        <tbody>
-          {gamefield.map((row, rInd) => (
-            <tr key={rInd}>
-              {row.map((col, i) => (
-                <td
-                  className={'cell' + (rInd === i ? ' cellRed' : '')}
-                  key={rInd * 10 + i}
-                >
-                  {col}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <p>score: 10000</p>
-      <p>level: 10000</p>
-      <p>lines: 10000</p>
-      <p>time: 00:55</p>
-      <p>sound: {true ? '🔇' : '🔊'}</p>
-    </div>
+    arrOne.length === arrTwo.length &&
+    arrOne.every(function (value, index) {
+      return value === arrTwo[index];
+    })
   );
-};
+}
+
+class ScoreBoard extends React.Component<ScoreBoardProps> {
+  #audioWork: HTMLAudioElement;
+
+  componentDidMount(): void {
+    this.#audioWork = new Audio(audio);
+  }
+
+  shouldComponentUpdate(nextProps: Readonly<ScoreBoardProps>): boolean {
+    return (
+      !arraysAreIdentical(
+        nextProps.nextPieceBlock,
+        this.props.nextPieceBlock
+      ) ||
+      nextProps.score != this.props.score ||
+      nextProps.lines != this.props.lines
+    );
+  }
+
+  async componentDidUpdate(
+    prevProps: Readonly<ScoreBoardProps>
+  ): Promise<void> {
+    if (prevProps.lines != this.props.lines) {
+      await this.#audioWork.play();
+    }
+  }
+  render(): React.ReactElement {
+    const initTrs = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ];
+
+    const { nextPieceBlock, lines, score, level } = this.props;
+    nextPieceBlock.map((r, ind) =>
+      r.map((c, cInd) => {
+        initTrs[ind][cInd] = c;
+      })
+    );
+
+    return (
+      <div>
+        <table className="next-piece-table">
+          <tbody>
+            {initTrs.map((row, rInd) => (
+              <tr key={rInd}>
+                {row.map((col, i) => (
+                  <td
+                    className={'cell ' + getColor(col)}
+                    key={rInd * 10 + i}
+                  ></td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <p>score: {score}</p>
+        <p>level: {level}</p>
+        <p>lines: {lines}</p>
+        {/*<p>time: 00:55</p>*/}
+        <p>sound: {true ? '🔇' : '🔊'}</p>
+      </div>
+    );
+  }
+}
 
 export default ScoreBoard;

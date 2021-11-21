@@ -1,4 +1,5 @@
 @use '../../../../../public/css/contsants';
+//@import '../../../../../public/css/mixins';
 
 $lg-size: 4.75rem;
 $md-size: 3rem;
@@ -8,10 +9,12 @@ $sm-size: 3rem;
   width: $lg-size;
   height: $lg-size;
 }
+
 .mdBtn {
   width: $md-size;
   height: $md-size;
 }
+
 .smBtn {
   width: $sm-size;
   height: $sm-size;
@@ -26,7 +29,18 @@ $sm-size: 3rem;
   flex-direction: row;
   justify-content: space-around;
   background: contsants.$base-color;
+
+  @include small {
+    //visibility: hidden;
+    background: red;
+  }
+
+  @include pads {
+    //visibility: hidden;
+    background: contsants.$base-color;
+  }
 }
+
 .yellowBackground {
   background-color: rgba(222, 222, 24);
 }

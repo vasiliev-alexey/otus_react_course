@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import ScoreBoard from './ScoreBoard';
-import { GAME_ROOT } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../../storyStructure';
 
 const storyTitle = 'Счет с игрой';
 
@@ -18,5 +18,7 @@ export default {
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
 export const ScoreBoardInitial: Story = (args) => (
-  <ScoreBoard gamefield={initGameField} {...args} />
+  <div className="w300">
+    <ScoreBoard nextPieceBlock={initGameField} lines={0} score={0} {...args} />
+  </div>
 );

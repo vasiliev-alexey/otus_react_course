@@ -1,4 +1,5 @@
 import React from 'react';
+import { getColor } from '../utils';
 
 type ScoreBoardProps = {
   playField: number[][];
@@ -11,15 +12,7 @@ const PlayField: React.FC<ScoreBoardProps> = ({ playField }) => {
         {playField.map((row, rInd) => (
           <tr key={rInd}>
             {row.map((col, i) => (
-              <td
-                className={
-                  'cell' +
-                  ((rInd + i - 3) % ((rInd + 7 + i) % 17) ? ' ' : ' cellRed')
-                }
-                key={rInd * 10 + i}
-              >
-                {0}
-              </td>
+              <td className={'cell ' + getColor(col)} key={rInd * 10 + i}></td>
             ))}
           </tr>
         ))}

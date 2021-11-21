@@ -1,44 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PlayField from './playField/PlayField';
 import ScoreBoard from './scoreBoard/ScoreBoard';
 import GameOver from './gamover/GameOver';
 
-const initNextPieceFields = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-];
-
-const initGameField = [
-  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
 export interface GameScreenProps {
   isPause: boolean;
+  playfield: number[][];
+  nextPiece: number[][];
+  lines?: number;
+  score?: number;
+  level?: number;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ isPause }) => {
-  const [nextPieces] = useState(initNextPieceFields);
+const GameScreen: React.FC<GameScreenProps> = ({
+  isPause,
+  playfield,
+  nextPiece,
+  lines,
+  score,
+}) => {
+  //const [nextPieces] = useState(initNextPieceFields);
 
   return (
     <div className="gameScreen">
@@ -46,8 +27,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ isPause }) => {
         <GameOver />
       ) : (
         <>
-          <PlayField playField={initGameField} />
-          <ScoreBoard gamefield={nextPieces} />
+          <PlayField playField={playfield} />
+          <ScoreBoard nextPieceBlock={nextPiece} lines={lines} score={score} />
         </>
       )}
     </div>

@@ -2,7 +2,7 @@
 @import './css/custom';
 @import 'css/fonts';
 @import 'css/contsants';
-
+@import './css/mixins';
 @import '../src/components/game/Game';
 @import '../src/components/game/gamescreen/scoreBoard/ScoreBoard.scss';
 @import '../src/components/game/gamescreen/playField/PlayField.scss';

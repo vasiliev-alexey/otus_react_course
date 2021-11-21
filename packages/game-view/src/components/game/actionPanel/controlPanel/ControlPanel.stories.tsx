@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import ControlPanel from './ControlPanel';
-import { GAME_ROOT_ACTION_PANEL } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT_ACTION_PANEL } from '../../../storyStructure';
 const storyTitle = 'Экран c управляющими элементами игры';
 export default {
   component: ControlPanel,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import PlayField from './PlayField';
-import { GAME_ROOT } from '../../../../../.storybook/storyStructure';
+import { GAME_ROOT } from '../../../storyStructure';
 
 const initGameField = [
   [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -32,8 +32,10 @@ export default {
   component: PlayField,
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
-const Template: Story = (args) => (
-  <PlayField playField={initGameField} {...args} />
+export const PlayFieldComponent: Story = (args) => (
+  <div style={{ width: '300px' }}>
+    <PlayField playField={initGameField} {...args} />
+  </div>
 );
 
-export const PlayFieldComponent = Template.bind({});
+// export const PlayFieldComponent = (Template);
