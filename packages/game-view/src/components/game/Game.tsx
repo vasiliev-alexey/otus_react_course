@@ -16,7 +16,7 @@ interface GameState extends GameScreenProps {
 }
 
 class Game extends React.Component<unknown, GameState> {
-  #gameEngine: GameEngine;
+  #gameEngine: GameEngine = new GameEngine();
   #rotateAudio: HTMLAudioElement;
   #rotateError: HTMLAudioElement;
   #pause: HTMLAudioElement;
@@ -51,11 +51,6 @@ class Game extends React.Component<unknown, GameState> {
     playfield: [],
     nextPiece: [],
   };
-
-  constructor(props: Readonly<unknown> | unknown) {
-    super(props);
-    this.#gameEngine = new GameEngine();
-  }
 
   #syncEngineAndView = (isInit = false): void => {
     const { playfield, nextPiece, lines, score, level, isGameOver } =
