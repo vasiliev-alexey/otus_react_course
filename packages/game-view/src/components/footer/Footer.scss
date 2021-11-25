@@ -13,16 +13,26 @@
   color: red;
 }
 .labelColorGreen {
-  color: green;
+  color: #52e752;
 }
 .labelColorOrange {
   color: orangered;
 }
 
+.labelColorBlue {
+  color: #0429a2;
+}
+.labelColorYellow {
+  color: #eed860;
+}
+
+
 .Footer-Label__left {
   padding-right: 10px;
+  font-weight: bold;
 }
 
 .Footer-Label__right {
   padding-left: 10px;
+  font-weight: bold;
 }

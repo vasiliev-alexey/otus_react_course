@@ -37,15 +37,9 @@ const Header: React.FC = () => {
 
   return (
     <header className="siteHeader">
-      {/*<div className="Footer-Greeting">*/}
-      {/*  <h1>Чемпионат по Online Тетрису</h1>*/}
-      {/*</div>*/}
-
-      <div className="sign">
+      <div className="sign" data-testid="welcome-label">
         <span className="fast-flicker">online </span>
-        {/*<div style={{ margin: '10px' }}></div>*/}
-        <span className="flicker"> tetris </span>{' '}
-        {/*<div style={{ margin: '10px' }}></div>*/}
+        <span className="flicker"> tetris </span>
         <span className="fast-flicker"> championship</span>
       </div>
 
