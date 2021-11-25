@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 describe('Test Footer component', () => {
   test('Footer component is a function', () => {
-    expect(Footer).toBeInstanceOf(Function);
+    expect(Footer).toBeInstanceOf(Object);
   });
 
   test('Frame must be render in page', () => {
