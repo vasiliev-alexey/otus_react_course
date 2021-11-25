@@ -2,8 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run lint-staged &&
-npm run test &&
-cd ../packages/game-view && npm run loki-test
+npm run test
 
 
 
