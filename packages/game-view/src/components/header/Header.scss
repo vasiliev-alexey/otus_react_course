@@ -92,8 +92,6 @@ $colorFontHigh: #f60528;
   animation: shine 2s forwards, blink 10s 1s infinite;
 }
 
-
-
 @keyframes shine {
   0% {
     color: #186b23ff;
@@ -107,7 +105,6 @@ $colorFontHigh: #f60528;
   }
 }
 
-
 @keyframes shine_red {
   0% {
     color: #186b23ff;
@@ -116,11 +113,10 @@ $colorFontHigh: #f60528;
   100% {
     color: #ffe6ff;
     text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #f5052a,
-    -0.2rem 0.1rem 1rem rgba(236, 16, 165, 0.73), 0.2rem 0.1rem 1rem #f5052a,
-    0 -0.5rem 2rem rgba(236, 16, 165, 0.73), 0 0.5rem 3rem #f5052a;
+      -0.2rem 0.1rem 1rem rgba(236, 16, 165, 0.73), 0.2rem 0.1rem 1rem #f5052a,
+      0 -0.5rem 2rem rgba(236, 16, 165, 0.73), 0 0.5rem 3rem #f5052a;
   }
 }
-
 
 @keyframes flicker {
   from {
