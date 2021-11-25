@@ -8,7 +8,6 @@ import { SITE_ROOT } from '../storyStructure';
 const storyTitle = 'Подвал сайта';
 export default {
   component: Footer,
-
   title: `${SITE_ROOT}/${storyTitle}`,
 };
 

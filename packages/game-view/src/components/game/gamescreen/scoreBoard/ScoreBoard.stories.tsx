@@ -19,6 +19,12 @@ export default {
 };
 export const ScoreBoardInitial: Story = (args) => (
   <div className="w300">
-    <ScoreBoard nextPieceBlock={initGameField} lines={0} score={0} {...args} />
+    <ScoreBoard
+      nextPieceBlock={initGameField}
+      lines={0}
+      score={0}
+      level={0}
+      {...args}
+    />
   </div>
 );

@@ -1,7 +1,7 @@
 const ROWS_COUNT = 20;
 const COLUMNS_COUNT = 10;
 
-interface PieceType {
+export interface PieceType {
   blocks?: number[][];
   x: number;
   y: number;

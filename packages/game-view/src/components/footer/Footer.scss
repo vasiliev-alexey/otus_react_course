@@ -16,7 +16,7 @@
   color: #52e752;
 }
 .labelColorOrange {
-  color: orangered;
+  color: #ef5d28;
 }
 
 .labelColorBlue {
@@ -26,12 +26,15 @@
   color: #eed860;
 }
 
+.Footer-Label__left,
+.Footer-Label__right {
+  font-weight: bold;
+}
+
 .Footer-Label__left {
   padding-right: 10px;
-  font-weight: bold;
 }
 
 .Footer-Label__right {
   padding-left: 10px;
-  font-weight: bold;
 }
