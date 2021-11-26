@@ -1,0 +1,27 @@
+.GameOver-bottom {
+  position: absolute;
+  top: 60%;
+}
+
+.GameOver-top {
+  position: absolute;
+  top: 30%;
+}
+
+.gameOverLabel {
+  position: relative;
+  left: -50%; /* Сдвиг слоя влево */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  user-select: none;
+  font-size: 3rem;
+  font-style: italic;
+  color: #3737da;
+  opacity: 100;
+  z-index: 999;
+  box-sizing: content-box;
+  max-width: 0;
+}
