@@ -2,9 +2,7 @@
 
 .controlPanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
-
   width: 50%;
-
   height: 90%;
   border-radius: 10%;
   margin: 5px;
@@ -16,8 +14,8 @@
   grid-template-rows: auto 1rem auto;
   grid-template-columns: auto 1rem auto;
 
-  //padding: 10px ;
   padding: 3px 13px 3px 3px;
+  font-size: 2rem;
 }
 
 .rightBtn {
