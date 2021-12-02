@@ -9,4 +9,9 @@ export default {
   component: Game,
   title: `${GAME_ROOT}/${storyTitle}`,
 };
-export const GameSimpleUse: Story = (args) => <Game {...args} />;
+
+export const GameSimpleUse: Story = () => (
+  <div className="w300 center">
+    <Game />
+  </div>
+);

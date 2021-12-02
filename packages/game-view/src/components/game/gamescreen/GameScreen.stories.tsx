@@ -11,28 +11,29 @@ export default {
   title: `${GAME_ROOT}/Экран с игрой/${storyTitle}`,
 };
 
-export const GameScreenDemo: Story = (args) => (
+export const GameScreenDemo: Story = () => (
   <div className="w300">
     <GameScreen
+      isGameOver={false}
       isPause={false}
       playfield={[]}
       score={0}
       lines={0}
       nextPiece={[]}
-      {...args}
     />
   </div>
 );
 
-export const GameScreenDemoWithPause: Story = (args) => (
+export const GameScreenDemoWithPause: Story = () => (
   <div className="w300">
     <GameScreen
+      isGameOver={false}
+      level={0}
       isPause={true}
-      playfield={null}
+      playfield={[]}
       score={0}
       lines={0}
       nextPiece={[]}
-      {...args}
     />
   </div>
 );

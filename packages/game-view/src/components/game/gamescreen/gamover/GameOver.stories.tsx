@@ -12,7 +12,7 @@ export default {
 };
 
 export const GameOverScreenDemo: Story = (args) => (
-  <div className="w300">
+  <div className="w300 center">
     <GameOver {...args} />
   </div>
 );

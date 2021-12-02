@@ -13,11 +13,16 @@ export interface GameState {
   level: number;
   lines: number;
   score: number;
-  // hiScore: number;
   nextPiece: PieceType;
   playfield: PlayFieldType;
   isGameOver: boolean;
+  isRotateError: boolean;
 }
+const initPiece: PieceType = {
+  x: 0,
+  y: 0,
+  blocks: [],
+};
 
 export class Game {
   #score = 0;
@@ -28,6 +33,8 @@ export class Game {
   #nextPiece: PieceType;
   #activePiece: PieceType;
   #playfield: PlayFieldType;
+
+  #isRotateError: boolean;
 
   static readonly points: Record<number, number> = {
     1: 40,
@@ -45,32 +52,32 @@ export class Game {
     return Math.floor(this.#lines * 0.1);
   }
 
-  getState(): GameState {
+  getState(init = false): GameState {
     const playfield = this.#createPlayfield();
     const { y: pieceY, x: pieceX, blocks } = this.#activePiece;
+    if (!init) {
+      for (let y = 0; y < this.#playfield.length; y += 1) {
+        playfield[y] = [];
 
-    for (let y = 0; y < this.#playfield.length; y += 1) {
-      playfield[y] = [];
-
-      for (let x = 0; x < this.#playfield[y].length; x += 1) {
-        playfield[y][x] = this.#playfield[y][x];
+        for (let x = 0; x < this.#playfield[y].length; x += 1) {
+          playfield[y][x] = this.#playfield[y][x];
+        }
       }
-    }
 
-    for (let y = 0; y < blocks.length; y += 1) {
-      for (let x = 0; x < blocks[y].length; x += 1) {
-        if (blocks[y][x]) {
-          playfield[pieceY + y][pieceX + x] = blocks[y][x];
+      for (let y = 0; y < blocks.length; y += 1) {
+        for (let x = 0; x < blocks[y].length; x += 1) {
+          if (blocks[y][x]) {
+            playfield[pieceY + y][pieceX + x] = blocks[y][x];
+          }
         }
       }
     }
-
     return {
       level: this.#level,
       lines: this.#lines,
       score: this.#score,
-      //    hiScore: this.hiScore,
-      nextPiece: this.#nextPiece,
+      isRotateError: this.#isRotateError,
+      nextPiece: init ? initPiece : this.#nextPiece,
       playfield,
       isGameOver: this.#topOut,
       //   isSoundOn: this.sound.getSoundState().isSoundOn,
@@ -80,7 +87,6 @@ export class Game {
 
   reset(): void {
     this.#score = 0;
-    // this.hiScore = localStorage.getItem('hiscore') || 0;
     this.#lines = 0;
     this.#topOut = false;
     this.#playfield = this.#createPlayfield();
@@ -174,8 +180,6 @@ export class Game {
     this.#activePiece.x -= 1;
     if (this.#hasCollision()) {
       this.#activePiece.x += 1;
-      // } else {
-      //   this.playSound('whoosh');
     }
   };
 
@@ -183,8 +187,6 @@ export class Game {
     this.#activePiece.x += 1;
     if (this.#hasCollision()) {
       this.#activePiece.x -= 1;
-      // } else {
-      //   this.playSound('whoosh');
     }
   };
 
@@ -204,8 +206,6 @@ export class Game {
 
     if (this.#hasCollision()) {
       this.#topOut = true;
-      //  this.pauseMusic();
-      //   this.playSoundEndGame(this.getState());
     }
   };
 
@@ -239,12 +239,10 @@ export class Game {
         }
       }
     }
-    if (clockwise) {
-      // this.playSound('blockRotate');
-    }
   };
 
   #hasCollision = (): boolean => {
+    this.#isRotateError = false;
     const { y: pieceY, x: pieceX, blocks } = this.#activePiece;
 
     for (let y = 0; y < blocks.length; y += 1) {
@@ -255,6 +253,7 @@ export class Game {
             this.#playfield[pieceY + y][pieceX + x] === undefined ||
             this.#playfield[pieceY + y][pieceX + x])
         ) {
+          this.#isRotateError = true;
           return true;
         }
       }
@@ -272,7 +271,6 @@ export class Game {
         }
       }
     }
-    //  this.playSoundIndepended('fall');
   }
 
   #clearLines(): number {
@@ -308,47 +306,10 @@ export class Game {
       this.#score += Game.points[clearedLines] * (this.#level + 1);
       this.#lines += clearedLines;
     }
-    // if (this.score > this.hiscore) {
-    //   localStorage.setItem('hiscore', this.score);
-    //   this.hiscore = localStorage.getItem('hiscore');
-    // }
   }
 
   #updatePieces(): void {
     this.#activePiece = this.#nextPiece;
     this.#nextPiece = this.#createPiece();
   }
-
-  // playMusic(music = true) {
-  //   if (music) {
-  //     this.sound.getSound().tetrisMain.play();
-  //   }
-  // }
-  // pauseMusic(music = true) {
-  //   if (music) {
-  //     this.sound.getSound().tetrisMain.pause();
-  //   }
-  // }
-
-  // playSound(sound) {
-  //   if (this.sound.getSoundState().isSoundOn && !this.hasCollision()) {
-  //     this.sound.getSound()[sound].play();
-  //   }
-  // }
-
-  // playSoundIndepended(sound) {
-  //   if (this.sound.getSoundState().isSoundOn) {
-  //     this.sound.getSound()[sound].play();
-  //   }
-  // }
-
-  // playSoundEndGame({ score, hiscore }) {
-  //   const { success, gameover } = this.sound.getSound();
-  //
-  //   if (this.sound.getSoundState().isSoundOn && score == hiscore) {
-  //     success.play();
-  //   } else if (this.sound.getSoundState().isSoundOn && score != hiscore) {
-  //     gameover.play();
-  //   }
-  //}
 }

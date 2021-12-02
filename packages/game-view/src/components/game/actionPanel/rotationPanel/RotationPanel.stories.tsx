@@ -10,4 +10,9 @@ export default {
   title: `${GAME_ROOT_ACTION_PANEL}/${storyTitle}`,
 };
 
-export const GameControlPanel: Story = (args) => <RotationPanel {...args} />;
+// eslint-disable-next-line  @typescript-eslint/no-empty-function
+const rotate = () => {};
+
+export const GameControlPanel: Story = (args) => (
+  <RotationPanel rotate={rotate} {...args} />
+);

@@ -1,18 +1,30 @@
 import React from 'react';
-import ControlPanel from './controlPanel/ControlPanel';
-import RotationPanel from './rotationPanel/RotationPanel';
+import ControlPanel, { ControlPanelProps } from './controlPanel/ControlPanel';
+import RotationPanel, {
+  RotationPanelProps,
+} from './rotationPanel/RotationPanel';
 import GamePanel, { GamePanelProps } from './gamePanel/GamePanel';
 
-export type ActionPanelProps = GamePanelProps;
+export type ActionPanelProps = GamePanelProps &
+  ControlPanelProps &
+  RotationPanelProps;
 
-const ActionPanel: React.FC<ActionPanelProps> = ({ togglePause }) => {
+const ActionPanel: React.FC<ActionPanelProps> = ({
+  togglePause,
+  reset,
+  isPause,
+  left,
+  right,
+  down,
+  rotate,
+}) => {
   return (
     <div className="actionPanel">
-      <GamePanel togglePause={togglePause} />
+      <GamePanel togglePause={togglePause} isPause={isPause} reset={reset} />
 
       <div className="gameControls">
-        <ControlPanel />
-        <RotationPanel />
+        <ControlPanel left={left} right={right} down={down} />
+        <RotationPanel rotate={rotate} />
       </div>
     </div>
   );

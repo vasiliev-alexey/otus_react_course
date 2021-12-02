@@ -12,27 +12,22 @@ type ScoreBoardProps = {
 function arraysAreIdentical(arrOne: number[][], arrTwo: number[][]): boolean {
   return (
     arrOne.length === arrTwo.length &&
-    arrOne.every(function (value, index) {
-      return value === arrTwo[index];
-    })
+    arrOne.every((value, index) => value === arrTwo[index])
   );
 }
 
 class ScoreBoard extends React.Component<ScoreBoardProps> {
   #audioWork: HTMLAudioElement;
 
-  componentDidMount(): void {
+  constructor(props: ScoreBoardProps) {
+    super(props);
     this.#audioWork = new Audio(audio);
   }
 
   shouldComponentUpdate(nextProps: Readonly<ScoreBoardProps>): boolean {
     return (
-      !arraysAreIdentical(
-        nextProps.nextPieceBlock,
-        this.props.nextPieceBlock
-      ) ||
-      nextProps.score != this.props.score ||
-      nextProps.lines != this.props.lines
+      nextProps.lines != this.props.lines ||
+      !arraysAreIdentical(nextProps.nextPieceBlock, this.props.nextPieceBlock)
     );
   }
 
@@ -59,7 +54,7 @@ class ScoreBoard extends React.Component<ScoreBoardProps> {
     );
 
     return (
-      <div>
+      <div style={{ marginLeft: '25px' }}>
         <table className="next-piece-table">
           <tbody>
             {initTrs.map((row, rInd) => (

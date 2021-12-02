@@ -5,9 +5,13 @@ import GamePanel from './GamePanel';
 import { GAME_ROOT_ACTION_PANEL } from '../../../storyStructure';
 const storyTitle = 'Панель';
 
-export const GameControlPanel: Story = (args) => (
+const dummyAction = (): void => {
+  return null;
+};
+
+export const GameControlPanel: Story = () => (
   <div style={{ maxWidth: '600px' }}>
-    <GamePanel togglePause={null} {...args} />
+    <GamePanel togglePause={dummyAction} reset={dummyAction} isPause={false} />
   </div>
 );
 export default {

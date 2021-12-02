@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import gitHubLogin from '../../../../assets/images/iconmonstr-github-5.svg';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
@@ -16,27 +16,24 @@ const Header: React.FC = () => {
       'ended',
       function () {
         this.currentTime = 0;
-        this.play();
       },
       false
     );
-    audioWork.play();
     return audioWork;
   }, []);
 
-  const playAudio = () => {
-    if (isAudioOn) {
-      audioMain.play();
-      setIsAudioOn((p) => !p);
-    } else {
-      audioMain.pause();
-      setIsAudioOn((p) => !p);
-    }
-  };
-
-  useLayoutEffect(() => {
-    new Audio(audio).play();
-  }, []);
+  const playAudio = useMemo(() => {
+    return () => {
+      if (isAudioOn) {
+        audioMain.play();
+        setIsAudioOn((p) => !p);
+      } else {
+        audioMain.pause();
+        setIsAudioOn((p) => !p);
+        return null;
+      }
+    };
+  }, [isAudioOn]);
 
   return (
     <header className="siteHeader">
