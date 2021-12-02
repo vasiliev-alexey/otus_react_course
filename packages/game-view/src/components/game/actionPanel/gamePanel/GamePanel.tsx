@@ -13,14 +13,6 @@ const GamePanel: React.FC<GamePanelProps> = ({
 }) => {
   return (
     <div className="gamePanel">
-      {/*<button*/}
-      {/*  data-testid="GamePanel-pause-btb"*/}
-      {/*  className="circleButton transparentBac mdBtn"*/}
-      {/*  onClick={togglePause}*/}
-      {/*>*/}
-      {/*  {(isPause != undefined && !isPause ? 'pause' : 'start') + '🟡'}*/}
-      {/*</button>*/}
-
       <button
         className="circleButton smBtn btnBackColor btnMiddle"
         onClick={togglePause}
@@ -28,14 +20,6 @@ const GamePanel: React.FC<GamePanelProps> = ({
       >
         {isPause != undefined && !isPause ? 'pause' : 'start'}
       </button>
-
-      {/*<button*/}
-      {/*  className="circleButton transparentBac smBtn"*/}
-      {/*  data-testid="GamePanel-sound-btb"*/}
-      {/*>*/}
-      {/*  sound🟡*/}
-      {/*</button>*/}
-
       <button
         className="circleButton smBtn btnBackColor btnMiddle"
         data-testid="GamePanel-sound-btb"
