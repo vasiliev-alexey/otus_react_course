@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
+import { MemoryRouter } from 'react-router';
 
 describe('Test header component', () => {
   let playBackup: () => Promise<void>;
@@ -24,7 +25,11 @@ describe('Test header component', () => {
   });
 
   test('Frame must be render in page', () => {
-    render(<Header />);
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
     const greeting = screen.getByTestId('welcome-label');
     expect(greeting).toBeInTheDocument();
   });

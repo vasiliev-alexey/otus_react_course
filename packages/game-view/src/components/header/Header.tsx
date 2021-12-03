@@ -1,12 +1,16 @@
-import React, { memo, useMemo, useState } from 'react';
-import gitHubLogin from '../../../../assets/images/iconmonstr-github-5.svg';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import gitHubLogin from '../../../../assets/images/login.png';
+import help from '../../../../assets/images/help.png';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
 import musicOff from '../../../../assets/images/mute.png';
 import audio from '../../../../assets/sounds/tetrisMain.mp3';
+import { useNavigate } from 'react-router';
 
 const Header: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState(false);
+
+  const navigate = useNavigate();
 
   const audioMain = useMemo(() => {
     const audioWork = new Audio(audio);
@@ -35,6 +39,9 @@ const Header: React.FC = () => {
     };
   }, [isAudioOn]);
 
+  const login = useCallback(() => navigate('/login'), []);
+  const havigateToHelp = useCallback(() => navigate('/help'), []);
+
   return (
     <header className="siteHeader">
       <div className="sign" data-testid="welcome-label">
@@ -52,9 +59,16 @@ const Header: React.FC = () => {
           onClick={playAudio}
         />
         <img
+          alt="help"
+          className="octoCatLogo"
+          src={help.toString()}
+          onClick={havigateToHelp}
+        />
+        <img
           alt="octocat login"
           className="octoCatLogo"
           src={gitHubLogin.toString()}
+          onClick={login}
         />
       </div>
     </header>

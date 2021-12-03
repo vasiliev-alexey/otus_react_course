@@ -37,7 +37,7 @@
 
 .login-form-button {
   width: 100%;
-  max-width: 200px;
+  //max-width: 200px;
   padding: 7px;
   border: none;
   border-radius: 5px;
@@ -51,4 +51,33 @@
 
 #login-form-reset {
   background-color: red;
+}
+
+.login-enter-label {
+  width: 90%;
+  align-self: center;
+  border: #3a3a3a 0.5px dashed;
+  padding-top: 10px;
+}
+
+.login-btn {
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  margin: 10px;
+  padding: 10px;
+}
+
+.login-signup-button {
+  width: 100%;
+  // max-width: 100px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  outline: none;
+  //margin: 5px;
 }

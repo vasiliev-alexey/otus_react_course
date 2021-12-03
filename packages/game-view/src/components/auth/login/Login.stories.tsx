@@ -3,7 +3,7 @@ import React from 'react';
 import { Story } from '@storybook/react';
 
 import Login from './Login';
-import { AUTH_ROOT } from '../storyStructure';
+import { AUTH_ROOT } from '../../storyStructure';
 
 const storyTitle = 'Страница входа';
 export default {

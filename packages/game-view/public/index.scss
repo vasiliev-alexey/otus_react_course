@@ -4,6 +4,7 @@
 @import 'css/contsants';
 @import './css/mixins';
 @import '../src/components/game/Game';
+@import '../src/components/help/Help';
 @import '../src/components/game/gamescreen/scoreBoard/ScoreBoard.scss';
 @import '../src/components/game/gamescreen/playField/PlayField.scss';
 @import '../src/components/game/actionPanel/controlPanel/ControlPanel';
@@ -14,7 +15,7 @@
 @import '../src/components/game/gamescreen/pauseLabel/pauseLabel';
 @import '../src/components/game/gamescreen/GameScreen.scss';
 @import '../src/components/header/Header.scss';
-@import '../src/components/auth/Login.scss';
+@import '../src/components/auth/login/Login';
 @import '../src/components/game/gamescreen/gamover/GamOver';
 
 @import '../src/components/footer/Footer.scss';

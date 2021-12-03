@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
     login: '',
     password: '',
@@ -18,7 +18,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-center" data-testid="login-form-test-id">
+    <div className="login-center" data-testid="signup-form-test-id">
       <form id="login-form">
         <input
           onChange={inputLoginHandler}
@@ -26,7 +26,7 @@ const Login: React.FC = () => {
           name="username"
           id="username-field"
           className="login-form-field"
-          placeholder="Username"
+          placeholder="Логин"
           data-testid="login-input-test-id"
         />
         <input
@@ -34,19 +34,19 @@ const Login: React.FC = () => {
           name="password"
           id="password-field"
           className="login-form-field"
-          placeholder="Password"
+          placeholder="Пароль"
           onChange={inputPasswordHandler}
         />
         <div className="action-input">
           <input
             type="submit"
-            value="Login"
+            value="Регистрация"
             className="login-form-button"
             onClick={submitHandler}
           />
           <input
             type="reset"
-            value="Cancel"
+            value="Отмена"
             className="login-form-button"
             id="login-form-reset"
           />
@@ -56,4 +56,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;
