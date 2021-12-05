@@ -2,24 +2,17 @@
 
 .rotationPanel {
   box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6), inset 0 0px 10px rgba(0, 0, 0, 0.1);
-
   width: 50%;
-  //height: 90%;
-  //max-height: 100px;
-  //display: flex;
   border-radius: 10%;
-  //flex-direction: row;
   margin: 5px;
   padding: 3px;
-
   align-items: center;
-
   justify-content: space-around;
   background: contsants.$base-color;
 
   display: flex;
-
-  //padding: 10px ;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .circleButton {
@@ -40,4 +33,12 @@
 
 .transparentBac {
   background-color: transparent;
+}
+
+.btnMiddle {
+  position: relative;
+  top: 40%;
+  transform: translate(0%, -50%);
+  padding-top: 17px;
+  padding-right: 17px;
 }

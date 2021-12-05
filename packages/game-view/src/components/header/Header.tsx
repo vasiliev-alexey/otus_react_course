@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import gitHubLogin from '../../../../assets/images/iconmonstr-github-5.svg';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
@@ -61,4 +61,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

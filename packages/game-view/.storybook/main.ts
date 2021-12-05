@@ -1,6 +1,6 @@
 module.exports = {
   stories: [
-    '../src/components/Game.stories.tsx', // default page
+    '../src/components/game/GameView.stories.tsx', // default page
     '../src/components/**/*.stories.@(tsx)',
   ],
   addons: [

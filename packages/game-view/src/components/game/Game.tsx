@@ -1,18 +1,22 @@
 import React from 'react';
-import '../../../public/index.scss';
+
 import { Game as GameEngine } from '@tetris/game-engine';
-import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
-import TitleBar from './titleBar/TitleBar';
-import ActionPanel from './actionPanel/ActionPanel';
-import ErrorBoundary from '../utils/ErrorBoundary';
 
 import pause from '../../../../assets/sounds/pause.mp3';
 import rotate from '../../../../assets/sounds/blockRotate.mp3';
 import gamover from '../../../../assets/sounds/gameover.mp3';
 import fall from '../../../../assets/sounds/fall.mp3';
+import GameView from './GameView';
+import { PlayFieldType } from '@tetris/game-engine';
 
-interface GameState extends GameScreenProps {
+interface GameState {
   isPause?: boolean;
+  isGameOver?: boolean;
+  playfield: PlayFieldType;
+  nextPiece: number[][];
+  lines?: number;
+  score?: number;
+  level?: number;
 }
 
 class Game extends React.Component<unknown, GameState> {
@@ -133,23 +137,21 @@ class Game extends React.Component<unknown, GameState> {
 
   render(): JSX.Element {
     return (
-      <>
-        <div className="frame">
-          <TitleBar />
-          <ErrorBoundary>
-            <GameScreen {...this.state} />
-          </ErrorBoundary>
-          <ActionPanel
-            left={this.#left}
-            right={this.#right}
-            down={this.#down}
-            reset={this.#reset}
-            isPause={this.state.isPause}
-            togglePause={this.#togglePause}
-            rotate={this.#rotate}
-          />
-        </div>
-      </>
+      <GameView
+        isPause={this.state.isPause}
+        playfield={this.state.playfield}
+        nextPiece={this.state.nextPiece}
+        togglePause={this.#togglePause}
+        reset={this.#reset}
+        left={this.#left}
+        right={this.#right}
+        down={this.#down}
+        rotate={this.#rotate}
+        level={this.state.level}
+        score={this.state.score}
+        isGameOver={this.state.isGameOver}
+        lines={this.state.lines}
+      />
     );
   }
 }

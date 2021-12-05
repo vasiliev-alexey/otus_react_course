@@ -14,24 +14,25 @@ const GamePanel: React.FC<GamePanelProps> = ({
   return (
     <div className="gamePanel">
       <button
-        data-testid="GamePanel-pause-btb"
-        className="circleButton transparentBac mdBtn"
+        className="circleButton smBtn btnBackColor btnMiddle"
         onClick={togglePause}
+        data-testid="GamePanel-pause-btb"
       >
-        {(isPause != undefined && !isPause ? 'pause' : 'start') + '🟡'}
+        {isPause != undefined && !isPause ? 'pause' : 'start'}
       </button>
       <button
-        className="circleButton transparentBac smBtn"
+        className="circleButton smBtn btnBackColor btnMiddle"
         data-testid="GamePanel-sound-btb"
       >
-        sound🟡
+        sound
       </button>
+
       <button
         onClick={reset}
-        className="circleButton transparentBac mdBtn "
+        className="circleButton smBtn btnBackColor btnMiddle"
         data-testid="GamePanel-reset-btb"
       >
-        reset🟡
+        reset
       </button>
     </div>
   );

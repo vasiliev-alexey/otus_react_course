@@ -23,8 +23,6 @@ const GameScreen: React.FC<GameScreenProps> = ({
   isGameOver,
   level,
 }) => {
-  //const [nextPieces] = useState(initNextPieceFields);
-
   return (
     <div className="gameScreen">
       <>
@@ -37,7 +35,7 @@ const GameScreen: React.FC<GameScreenProps> = ({
         />
       </>
       {isGameOver && <GameOver />}
-      {(!isGameOver && isPause && <PauseLabel />) || <p></p>}
+      {!isGameOver && isPause && <PauseLabel />}
     </div>
   );
 };

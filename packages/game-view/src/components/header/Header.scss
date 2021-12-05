@@ -33,6 +33,7 @@ $colorFontLow: #585ae7;
 $colorFontHigh: #f60528;
 
 .sign {
+  user-select: none;
   position: absolute;
   display: flex;
   justify-content: center;
