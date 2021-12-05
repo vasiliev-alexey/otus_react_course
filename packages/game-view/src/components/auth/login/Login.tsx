@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import help from '../../../../../assets/images/iconmonstr-github-5.svg';
 import google from '../../../../../assets/images/google.png';
 import { useNavigate } from 'react-router';
+import { githubSignin, signInWithGoogle } from '../../../api/auth';
+
+const gitHubLoginId = 'gitHubLoginId';
+const googleSignId = 'googleSignId';
+type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 
 const Login: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -17,14 +22,28 @@ const Login: React.FC = () => {
     setInputField({ ...inputField, password: e.target.value });
   };
 
-  const submitHandler = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-  };
+  // const submitHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  // };
 
   const onSignUp = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     navigate('/signup');
   };
+
+  const onAuthLogin = useCallback(async (d) => {
+    let userData: UnPromisify<ReturnType<typeof githubSignin>>;
+    if (d.target.id === gitHubLoginId) {
+      userData = await githubSignin();
+    } else if (d.target.id === googleSignId) {
+      userData = await signInWithGoogle();
+    } else {
+      d.preventDefault();
+    }
+    if (userData?.uid) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="login-center" data-testid="login-form-test-id">
@@ -51,7 +70,7 @@ const Login: React.FC = () => {
             type="submit"
             value="Войти"
             className="login-form-button"
-            onClick={submitHandler}
+            onClick={onAuthLogin}
           />
           <input
             type="reset"
@@ -71,8 +90,20 @@ const Login: React.FC = () => {
         </div>
         <div className="action-input login-enter-label login-border">
           <p>Войти через:</p>
-          <img alt="github" className="login-btn" src={help.toString()} />
-          <img alt="google" className="login-btn" src={google.toString()} />
+          <img
+            id={gitHubLoginId}
+            alt="github"
+            className="login-btn"
+            src={help.toString()}
+            onClick={onAuthLogin}
+          />
+          <img
+            alt="google"
+            id={googleSignId}
+            className="login-btn"
+            src={google.toString()}
+            onClick={onAuthLogin}
+          />
         </div>
       </form>
     </div>

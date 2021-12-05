@@ -23,6 +23,7 @@
   justify-self: start;
   align-self: center;
   margin-left: 2rem;
+  transform: rotate(90deg);
 }
 
 .topBtn {
@@ -35,8 +36,10 @@
   grid-area: left;
   justify-self: flex-end;
   align-self: center;
+  transform: rotate(270deg);
 }
 
 .downBtn {
   grid-area: down;
+  transform: rotate(180deg);
 }

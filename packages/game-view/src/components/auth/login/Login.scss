@@ -3,6 +3,9 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  background: rgba(19, 54, 231, 0.29);
+  height: 30%;
+  padding-top: 20px;
 }
 
 #login-form {
@@ -43,7 +46,7 @@
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  background-color: #3a3a3a;
+  background-color: $button-action-color;
   cursor: pointer;
   outline: none;
   margin: 5px;
@@ -56,7 +59,7 @@
 .login-enter-label {
   width: 90%;
   align-self: center;
-  border: #3a3a3a 0.5px dashed;
+  // border: #3a3a3a 0.5px dashed;
   padding-top: 10px;
 }
 
@@ -66,6 +69,7 @@
   background: transparent;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .login-signup-button {
@@ -76,8 +80,8 @@
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  background-color: #3a3a3a;
+  background-color: $button-action-color;
   cursor: pointer;
   outline: none;
-  //margin: 5px;
+  text-align: center;
 }

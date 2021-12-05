@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <Router>
         <Header />
+        <div className="bg" />
         <main>
           <AppRouter />
         </main>

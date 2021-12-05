@@ -4,6 +4,7 @@
   background: transparent;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .siteHeader {
@@ -11,22 +12,13 @@
   justify-content: end;
   min-height: 50px;
 }
-
-.Footer-Toolbar {
-  align-self: center;
-  margin-left: auto;
+.btn-go-to-game {
+  width: 30px;
+  height: 32px;
+  margin: 7px;
+  cursor: pointer;
+  user-select: none;
 }
-
-.Footer-Greeting {
-  align-self: center;
-  margin-left: 20%;
-  letter-spacing: 1.2rem;
-}
-
-//@font-face {
-//  font-family: Tetris2-VP0w;
-//  src: url('https://acupoftee.github.io/fonts/Clip.ttf');
-//}
 
 $color1: #eede42;
 $colorFontLow: #585ae7;
@@ -50,7 +42,7 @@ $colorFontHigh: #f60528;
   letter-spacing: 0.2em;
   // left: 50%;
   top: 2%;
-
+  margin-top: 2px;
   font-family: Tetris2-VP0w;
   text-transform: uppercase;
   font-size: 2em;

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import gitHubLogin from '../../../../assets/images/login.png';
-import help from '../../../../assets/images/help.png';
+import tetris from '../../../../assets/images/tetris.png';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
 import musicOff from '../../../../assets/images/mute.png';
@@ -40,10 +40,17 @@ const Header: React.FC = () => {
   }, [isAudioOn]);
 
   const login = useCallback(() => navigate('/login'), []);
-  const havigateToHelp = useCallback(() => navigate('/help'), []);
+  const tetrisRoute = useCallback(() => navigate('/'), []);
 
   return (
     <header className="siteHeader">
+      <img
+        alt="game play"
+        className="btn-go-to-game"
+        src={tetris.toString()}
+        onClick={tetrisRoute}
+      />
+
       <div className="sign" data-testid="welcome-label">
         <span className="fast-flicker">online </span>
         <span className="flicker"> tetris </span>
@@ -58,12 +65,12 @@ const Header: React.FC = () => {
           src={isAudioOn ? musicOn.toString() : musicOff.toString()}
           onClick={playAudio}
         />
-        <img
-          alt="help"
-          className="octoCatLogo"
-          src={help.toString()}
-          onClick={havigateToHelp}
-        />
+        {/*<img*/}
+        {/*  alt="help"*/}
+        {/*  className="octoCatLogo"*/}
+        {/*  src={help.toString()}*/}
+        {/*  onClick={havigateToHelp}*/}
+        {/*/>*/}
         <img
           alt="octocat login"
           className="octoCatLogo"

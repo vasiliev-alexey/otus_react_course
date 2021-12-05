@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Footer from './Footer';
+import { MemoryRouter } from 'react-router';
 
 describe('Test Footer component', () => {
   test('Footer component is a function', () => {
@@ -9,7 +10,11 @@ describe('Test Footer component', () => {
   });
 
   test('Frame must be render in page', () => {
-    render(<Footer />);
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>
+    );
     'GAMETRIS'
       .split('')
       .forEach((l) =>

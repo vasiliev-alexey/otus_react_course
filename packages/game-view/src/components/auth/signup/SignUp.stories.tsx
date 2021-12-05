@@ -2,14 +2,14 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 
-import Login from './Login';
+import SignUp from './SignUp';
 import { AUTH_ROOT } from '../../storyStructure';
 
 const storyTitle = 'Страница входа';
 export default {
-  component: Login,
+  component: SignUp,
 
   title: `${AUTH_ROOT}/${storyTitle}`,
 };
 
-export const LoginForm: Story = (args) => <Login {...args} />;
+export const SignUpForm: Story = (args) => <SignUp {...args} />;

@@ -1,5 +1,9 @@
 import React from 'react';
 
+//up-arrow
+
+import upArrow from '../../../../../../assets/images/move-up-svgrepo-com.svg';
+
 export interface ControlPanelProps {
   left: () => void;
   right: () => void;
@@ -9,33 +13,30 @@ export interface ControlPanelProps {
 const ControlPanel: React.FC<ControlPanelProps> = ({ left, down, right }) => {
   return (
     <div className="controlPanel">
-      <button
+      <img
         data-testid="btn-left"
         className="circleButton mdBtn btnBackColor leftBtn"
         onClick={left}
-      >
-        ⬅
-      </button>
-      <button
+        src={upArrow.toString()}
+      />
+
+      <img
         className="circleButton mdBtn btnBackColor topBtn"
         data-testid="btn-top"
-      >
-        ⬆
-      </button>
-      <button
+        src={upArrow.toString()}
+      />
+      <img
         className="circleButton mdBtn btnBackColor downBtn"
         onClick={down}
         data-testid="btn-down"
-      >
-        ⬇
-      </button>
-      <button
+        src={upArrow.toString()}
+      />
+      <img
         className="circleButton mdBtn btnBackColor rightBtn"
         onClick={right}
         data-testid="btn-right"
-      >
-        ➡
-      </button>
+        src={upArrow.toString()}
+      />
     </div>
   );
 };

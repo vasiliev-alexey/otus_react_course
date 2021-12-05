@@ -1,21 +1,26 @@
 .siteFooter {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   letter-spacing: 1.2rem;
   font-size: 1.5rem;
   user-select: none;
+  width: 100%;
 }
 
 .labelColorWhite {
   color: white;
 }
+
 .labelColorRed {
   color: red;
 }
+
 .labelColorGreen {
   color: #52e752;
 }
+
 .labelColorOrange {
   color: #ef5d28;
 }
@@ -23,6 +28,7 @@
 .labelColorBlue {
   color: #0429a2;
 }
+
 .labelColorYellow {
   color: #eed860;
 }
@@ -38,4 +44,25 @@
 
 .Footer-Label__right {
   padding-left: 10px;
+}
+
+.Footer-Toolbar {
+  align-self: center;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.Footer-Greeting {
+  align-self: center;
+  margin-left: 20%;
+  letter-spacing: 1.2rem;
+}
+
+.helpBtn {
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  margin: 7px;
+  cursor: pointer;
 }
