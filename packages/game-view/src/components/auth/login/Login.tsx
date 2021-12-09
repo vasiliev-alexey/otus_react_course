@@ -3,6 +3,7 @@ import help from '../../../../../assets/images/iconmonstr-github-5.svg';
 import google from '../../../../../assets/images/google.png';
 import { useNavigate } from 'react-router';
 import { githubSignin, signInWithGoogle } from '../../../api/auth';
+import { useAuthContext } from '../../../context';
 
 const gitHubLoginId = 'gitHubLoginId';
 const googleSignId = 'googleSignId';
@@ -14,6 +15,7 @@ const Login: React.FC = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
 
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
@@ -35,8 +37,10 @@ const Login: React.FC = () => {
     let userData: UnPromisify<ReturnType<typeof githubSignin>>;
     if (d.target.id === gitHubLoginId) {
       userData = await githubSignin();
+      dispatch({ type: 'SET_USER_NAME', payload: userData.displayName });
     } else if (d.target.id === googleSignId) {
       userData = await signInWithGoogle();
+      dispatch({ type: 'SET_USER_NAME', payload: userData.displayName });
     } else {
       d.preventDefault();
     }
