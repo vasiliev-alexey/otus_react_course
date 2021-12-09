@@ -3,6 +3,7 @@ import help from '../../../../../assets/images/iconmonstr-github-5.svg';
 import google from '../../../../../assets/images/google.png';
 import { useNavigate } from 'react-router';
 import { githubSignin, signInWithGoogle } from '../../../api/auth';
+import { useAuthContext } from '../../../context';
 
 const gitHubLoginId = 'gitHubLoginId';
 const googleSignId = 'googleSignId';
@@ -14,6 +15,7 @@ const Login: React.FC = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
 
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
@@ -21,10 +23,6 @@ const Login: React.FC = () => {
   const inputPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, password: e.target.value });
   };
-
-  // const submitHandler = (e: React.MouseEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  // };
 
   const onSignUp = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -40,11 +38,21 @@ const Login: React.FC = () => {
     } else {
       d.preventDefault();
     }
+    if (userData) {
+      dispatch({
+        type: 'SET_USER_NAME',
+        payload: {
+          userName: userData.displayName,
+          userPictUrl: userData.photoUrl,
+          uid: userData.uid,
+        },
+      });
+    }
+
     if (userData?.uid) {
       navigate('/');
     }
   }, []);
-
   return (
     <div className="login-center" data-testid="login-form-test-id">
       <form id="login-form">
