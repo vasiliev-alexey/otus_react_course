@@ -33,8 +33,10 @@ const Login: React.FC = () => {
     let userData: UnPromisify<ReturnType<typeof githubSignin>>;
     if (d.target.id === gitHubLoginId) {
       userData = await githubSignin();
+      dispatch({ type: 'SET_USER_NAME', payload: userData.displayName });
     } else if (d.target.id === googleSignId) {
       userData = await signInWithGoogle();
+      dispatch({ type: 'SET_USER_NAME', payload: userData.displayName });
     } else {
       d.preventDefault();
     }
