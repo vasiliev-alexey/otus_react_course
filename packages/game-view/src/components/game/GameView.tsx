@@ -20,7 +20,6 @@ const GameView: React.FC<GameViewProps> = ({
   level,
   playfield,
   nextPiece,
-
   lines,
   score,
   isGameOver,
