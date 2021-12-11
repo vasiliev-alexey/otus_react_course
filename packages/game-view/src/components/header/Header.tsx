@@ -27,6 +27,8 @@ const Header: React.FC = () => {
     return audioWork;
   }, []);
 
+  const [showMenu, setShowMenu] = useState(false);
+
   const playAudio = useMemo(() => {
     return () => {
       if (isAudioOn) {
@@ -41,7 +43,20 @@ const Header: React.FC = () => {
   }, [isAudioOn]);
   const { authState } = useAuthContext();
   const login = useCallback(() => navigate('/login'), []);
-  const logout = useCallback(() => navigate('/logout'), []);
+  const showExit = useCallback(() => {
+    setShowMenu((s) => !s);
+
+    window.setTimeout(() => {
+      if (showExit) {
+        setShowMenu(false);
+      }
+    }, 10000);
+  }, []);
+  const logout = useCallback(() => {
+    showExit();
+    navigate('/logout');
+  }, []);
+
   const tetrisRoute = useCallback(() => {
     navigate('/');
   }, []);
@@ -80,12 +95,19 @@ const Header: React.FC = () => {
           />
         )}
         {authState.isAuth && (
-          <img
-            alt="octocat login"
-            className="octoCatLogo"
-            src={authState.userPictUrl}
-            onClick={logout}
-          />
+          <span>
+            <img
+              alt="octocat login"
+              className="octoCatLogo"
+              src={authState.userPictUrl}
+              onClick={showExit}
+            />
+            {showMenu && (
+              <ul className="profileMenu">
+                <li onClick={logout}>Выход</li>
+              </ul>
+            )}
+          </span>
         )}
       </div>
     </header>

@@ -25,15 +25,17 @@ describe('LogOut comp is function', () => {
     expect(screen.getByRole('button', { name: /выход/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /отмена/i })).toBeInTheDocument();
   });
+});
+
+describe('LogOut comp behaviour', () => {
+  const history = createMemoryHistory({
+    initialEntries: ['/aaa'],
+    initialIndex: 0,
+  });
+  const pushRoute = jest.fn();
+  history.push = pushRoute;
 
   test('LogOut must have button submit and click goto /', () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/aaa'],
-      initialIndex: 0,
-    });
-    const pushRoute = jest.fn();
-    history.push = pushRoute;
-
     expect(history.location.pathname).toBe('/aaa');
     render(
       <Router location={''} navigator={history}>
@@ -52,15 +54,22 @@ describe('LogOut comp is function', () => {
     );
   });
 
-  // test('SignUp must have button reset', () => {
-  //   render(<SignUp />);
-  //   const btn = screen.getByText('Отмена');
-  //   expect(btn).toBeInTheDocument();
-  //   const inputLogin = screen.getByPlaceholderText('Логин');
-  //   expect(inputLogin).toBeInTheDocument();
-  //   userEvent.type(inputLogin, 'ddd');
-  //   expect(screen.getByTestId('login-input-test-id')).toHaveValue('ddd');
-  //   userEvent.click(btn);
-  //   expect(screen.getByTestId('login-input-test-id')).toHaveValue('');
-  // });
+  test('LogOut must have button exit and click goto /', () => {
+    expect(history.location.pathname).toBe('/aaa');
+    render(
+      <Router location={''} navigator={history}>
+        <LogOut />
+      </Router>
+    );
+    expect(history.location.pathname).toBe('/aaa');
+    const btnCancel = screen.getByRole('button', { name: /отмена/i });
+    expect(btnCancel).toBeInTheDocument();
+    userEvent.click(btnCancel);
+
+    expect(pushRoute).nthCalledWith(
+      1,
+      { hash: '', pathname: '/', search: '' },
+      undefined
+    );
+  });
 });

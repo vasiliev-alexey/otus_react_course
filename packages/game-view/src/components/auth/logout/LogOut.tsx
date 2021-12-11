@@ -11,6 +11,11 @@ const LogOut: React.FC = () => {
     navigate('/');
   };
 
+  const submitExit = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    navigate('/');
+  };
+
   return (
     <div className="login-center" data-testid="logout-form-test-id">
       <form id="login-form">
@@ -28,6 +33,7 @@ const LogOut: React.FC = () => {
             value="Отмена"
             className="login-form-button"
             id="login-form-reset"
+            onClick={submitExit}
           />
         </div>
       </form>

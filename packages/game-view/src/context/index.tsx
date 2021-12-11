@@ -30,7 +30,7 @@ export const AuthContextProvider = ({
   children,
 }: {
   children: ReactNode;
-}): React.ReactNode => {
+}): React.ReactElement => {
   const [state, dispatch] = useReducer(authReducer, initialState);
   return (
     <authContext.Provider
