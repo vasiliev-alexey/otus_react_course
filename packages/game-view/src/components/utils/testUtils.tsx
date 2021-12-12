@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const dummyFunc = (): void => {};
 
