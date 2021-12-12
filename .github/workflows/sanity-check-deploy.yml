@@ -13,6 +13,7 @@ on:
 jobs:
   lint_and_deploy:
     runs-on: ubuntu-20.04
+    environment: Build
     env:
       REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
       REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_AUTHDOMAIN }}
