@@ -20,7 +20,6 @@
   user-select: none;
 }
 
-
 .profileMenu {
   z-index: 99;
   position: absolute;
@@ -29,15 +28,14 @@
 }
 
 .profileMenu li {
-  font-family: "Trebuchet MS", "Lucida Sans";
+  font-family: 'Trebuchet MS', 'Lucida Sans';
   padding: 7px 20px;
   margin-bottom: 10px;
   border-radius: 5px;
   border-left: 10px solid #f05d22;
-  box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
-  -2px -2px 5px 0 rgba(0,0,0,.1),
-  2px 2px 5px 0 rgba(0,0,0,.1),
-  -2px 2px 5px 0 rgba(0,0,0,.1);
+  box-shadow: 2px -2px 5px 0 rgba(0, 0, 0, 0.1),
+    -2px -2px 5px 0 rgba(0, 0, 0, 0.1), 2px 2px 5px 0 rgba(0, 0, 0, 0.1),
+    -2px 2px 5px 0 rgba(0, 0, 0, 0.1);
   font-size: 20px;
   letter-spacing: 2px;
   transition: 0.3s all linear;
@@ -48,6 +46,12 @@
 $color1: #eede42;
 $colorFontLow: #585ae7;
 $colorFontHigh: #f60528;
+
+.user-name-label {
+  margin: 10px;
+  color: #52e752;
+  font-size: 1.5em;
+}
 
 .sign {
   user-select: none;

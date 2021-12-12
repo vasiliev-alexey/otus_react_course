@@ -2,7 +2,11 @@ import React, { useCallback, useState } from 'react';
 import help from '../../../../../assets/images/iconmonstr-github-5.svg';
 import google from '../../../../../assets/images/google.png';
 import { useNavigate } from 'react-router';
-import { githubSignin, signInWithGoogle } from '../../../api/auth';
+import {
+  doSignInWithEmailAndPassword,
+  githubSignin,
+  signInWithGoogle,
+} from '../../../api/auth';
 import { useAuthContext } from '../../../context';
 
 const gitHubLoginId = 'gitHubLoginId';
@@ -10,17 +14,28 @@ const googleSignId = 'googleSignId';
 type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 
 const Login: React.FC = () => {
-  const [inputField, setInputField] = useState({
+  const [inputField, setInputField] = useState<{
+    login: string;
+    password: string;
+  }>({
     login: '',
     password: '',
   });
   const navigate = useNavigate();
   const { dispatch } = useAuthContext();
 
-  const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputField({ ...inputField, login: e.target.value });
-  };
+  const [error, setError] = useState('');
+
+  const inputLoginHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setError('');
+      setInputField({ ...inputField, login: e.target.value });
+    },
+    []
+  );
+
   const inputPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError('');
     setInputField({ ...inputField, password: e.target.value });
   };
 
@@ -29,30 +44,48 @@ const Login: React.FC = () => {
     navigate('/signup');
   };
 
-  const onAuthLogin = useCallback(async (d) => {
-    let userData: UnPromisify<ReturnType<typeof githubSignin>>;
-    if (d.target.id === gitHubLoginId) {
-      userData = await githubSignin();
-    } else if (d.target.id === googleSignId) {
-      userData = await signInWithGoogle();
-    } else {
-      d.preventDefault();
-    }
-    if (userData) {
-      dispatch({
-        type: 'SET_USER_NAME',
-        payload: {
-          userName: userData.displayName,
-          userPictUrl: userData.photoUrl,
-          uid: userData.uid,
-        },
-      });
-    }
+  const onAuthLogin = useCallback(
+    async (event) => {
+      let userData: UnPromisify<ReturnType<typeof githubSignin>>;
+      try {
+        if (event.target.id === gitHubLoginId) {
+          userData = await githubSignin();
+        } else if (event.target.id === googleSignId) {
+          userData = await signInWithGoogle();
+        } else {
+          event.preventDefault();
+          const data = await doSignInWithEmailAndPassword(
+            inputField.login,
+            inputField.password
+          );
 
-    if (userData?.uid) {
-      navigate('/');
-    }
-  }, []);
+          userData = {
+            uid: data.user.uid,
+            displayName: data.user.email,
+            photoUrl: '',
+          };
+        }
+      } catch (e) {
+        setError(e);
+      }
+
+      if (userData) {
+        dispatch({
+          type: 'SET_USER_NAME',
+          payload: {
+            userName: userData.displayName,
+            userPictUrl: userData.photoUrl,
+            uid: userData.uid,
+          },
+        });
+      }
+
+      if (userData?.uid) {
+        navigate('/');
+      }
+    },
+    [inputField]
+  );
   return (
     <div className="login-center" data-testid="login-form-test-id">
       <form id="login-form">
@@ -73,6 +106,7 @@ const Login: React.FC = () => {
           placeholder="Password"
           onChange={inputPasswordHandler}
         />
+        {error && <div className="login-form-error"> {error.toString()}</div>}
         <div className="action-input">
           <input
             type="submit"
@@ -100,6 +134,7 @@ const Login: React.FC = () => {
           <p>Войти через:</p>
           <img
             id={gitHubLoginId}
+            data-testid="gitHubLoginId"
             alt="github"
             className="login-btn"
             src={help.toString()}
@@ -108,6 +143,7 @@ const Login: React.FC = () => {
           <img
             alt="google"
             id={googleSignId}
+            data-testid="googleSignId"
             className="login-btn"
             src={google.toString()}
             onClick={onAuthLogin}

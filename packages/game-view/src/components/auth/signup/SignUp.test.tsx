@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import SignUp from './SignUp';
+import { MemoryRouter } from 'react-router';
 
 describe('login comp is function', () => {
   test('login is function', () => {
@@ -11,20 +12,32 @@ describe('login comp is function', () => {
   });
 
   test('SignUp must be render in page', () => {
-    render(<SignUp />);
+    render(
+      <MemoryRouter>
+        <SignUp />
+      </MemoryRouter>
+    );
     expect(screen.getByTestId('signup-form-test-id')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Логин')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Пароль')).toBeInTheDocument();
   });
 
   test('SignUp must have button submit and cancel', () => {
-    render(<SignUp />);
+    render(
+      <MemoryRouter>
+        <SignUp />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Регистрация')).toBeInTheDocument();
     expect(screen.getByText('Отмена')).toBeInTheDocument();
   });
 
   test('SignUp must have button reset', () => {
-    render(<SignUp />);
+    render(
+      <MemoryRouter>
+        <SignUp />
+      </MemoryRouter>
+    );
     const btn = screen.getByText('Отмена');
     expect(btn).toBeInTheDocument();
     const inputLogin = screen.getByPlaceholderText('Логин');

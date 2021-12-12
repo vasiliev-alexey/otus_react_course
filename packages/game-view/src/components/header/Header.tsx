@@ -4,6 +4,7 @@ import tetris from '../../../../assets/images/tetris.png';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
 import musicOff from '../../../../assets/images/mute.png';
+import avatar from '../../../../assets/images/avatar.png';
 import audio from '../../../../assets/sounds/tetrisMain.mp3';
 import { useNavigate } from 'react-router';
 import { useAuthContext } from '../../context';
@@ -68,6 +69,7 @@ const Header: React.FC = () => {
         className="btn-go-to-game"
         src={tetris.toString()}
         onClick={tetrisRoute}
+        data-testid="btn-go-to-game"
       />
 
       <div className="sign" data-testid="welcome-label">
@@ -76,7 +78,9 @@ const Header: React.FC = () => {
         <span className="fast-flicker"> championship</span>
       </div>
 
-      <p>{authState.userName}</p>
+      {authState.isAuth && (
+        <p className="user-name-label"> Player: {authState.userName}</p>
+      )}
 
       <div className="Footer-Toolbar">
         <img alt="panda" className="octoCatLogo" src={String(leaderBoard)} />
@@ -99,7 +103,7 @@ const Header: React.FC = () => {
             <img
               alt="octocat login"
               className="octoCatLogo"
-              src={authState.userPictUrl}
+              src={authState.userPictUrl || avatar.toString()}
               onClick={showExit}
             />
             {showMenu && (

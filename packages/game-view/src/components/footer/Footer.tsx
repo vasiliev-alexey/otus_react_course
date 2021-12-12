@@ -30,6 +30,7 @@ const Footer: React.FC = () => {
           alt="help"
           className="helpBtn"
           src={help.toString()}
+          data-testid="havigateToHelp"
           onClick={havigateToHelp}
         />
       </div>

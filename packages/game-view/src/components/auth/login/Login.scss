@@ -29,6 +29,13 @@
   padding: 0px 0px 5px 5px;
 }
 
+.login-form-error {
+  max-width: 250px;
+  background: #e33333;
+
+  margin: 10px;
+}
+
 .action-input {
   align-self: center;
   display: flex;
@@ -59,7 +66,6 @@
 .login-enter-label {
   width: 90%;
   align-self: center;
-  // border: #3a3a3a 0.5px dashed;
   padding-top: 10px;
 }
 
@@ -74,7 +80,6 @@
 
 .login-signup-button {
   width: 100%;
-  // max-width: 100px;
   padding: 7px;
   border: none;
   border-radius: 5px;
