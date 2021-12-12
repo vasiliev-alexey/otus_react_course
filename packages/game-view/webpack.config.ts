@@ -8,7 +8,7 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import * as path from 'path';
 
 const gitRevisionPlugin = new GitRevisionPlugin();
-const envPlugin = new webpack.EnvironmentPlugin([
+const envPluginProd = new webpack.EnvironmentPlugin([
   'REACT_APP_API_KEY',
   'REACT_APP_AUTHDOMAIN',
   'REACT_APP_BASEURL',
@@ -17,6 +17,8 @@ const envPlugin = new webpack.EnvironmentPlugin([
   'REACT_APP_MESSAGING_SENDER_ID',
   'REACT_APP_APP_ID',
 ]);
+
+const envPluginDev = new webpack.EnvironmentPlugin([]);
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -115,7 +117,7 @@ const webpackConfig = (
 
   plugins: [
     gitRevisionPlugin,
-    envPlugin,
+    arg.mode === 'production' ? envPluginProd : envPluginDev,
     new Dotenv({
       safe: true,
       path: path.resolve(__dirname, '.env'),
