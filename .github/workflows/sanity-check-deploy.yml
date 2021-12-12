@@ -39,8 +39,6 @@ jobs:
       - name: npm vers 🏗️
         run: |
           npm --version
-          echo $REACT_APP_API_KEY
-          echo $REACT_APP_AUTHDOMAIN
 
       - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
         id: Npm-install
