@@ -61,6 +61,10 @@ jobs:
         working-directory: ./packages/game-view
         run: |
           npm run loki-test
+        env:
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_AUTHDOMAIN }}
+          REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
 
       - name: webpack  build
         id: Build
