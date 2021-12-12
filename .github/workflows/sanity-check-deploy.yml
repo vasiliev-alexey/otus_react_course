@@ -51,7 +51,6 @@ jobs:
       - name: Run  Jest  T-E-S-T
         id: Jest-Test
         run: |
-          echo $REACT_APP_AUTHDOMAIN
           npm run test --coverage
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
