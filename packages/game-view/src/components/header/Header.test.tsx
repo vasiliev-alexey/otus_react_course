@@ -25,7 +25,7 @@ describe('Test header component', () => {
 
   test('Frame must be render in page', () => {
     render(<Header />);
-    const greeting = screen.getByText('Чемпионат по Online Тетрису');
+    const greeting = screen.getByTestId('welcome-label');
     expect(greeting).toBeInTheDocument();
   });
 });

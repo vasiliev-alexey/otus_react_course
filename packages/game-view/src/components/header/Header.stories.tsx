@@ -11,4 +11,8 @@ export default {
   title: `${SITE_ROOT}/${storyTitle}`,
 };
 
-export const SiteHeader: Story = (args) => <Header {...args} />;
+export const SiteHeader: Story = (args) => (
+  <div style={{ margin: 0, padding: 0 }}>
+    <Header {...args} />
+  </div>
+);

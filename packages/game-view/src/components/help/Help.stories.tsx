@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 
-import Footer from './Footer';
 import { SITE_ROOT } from '../storyStructure';
+import Help from './Help';
 
-const storyTitle = 'Подвал сайта';
+const storyTitle = 'Помощь';
 export default {
-  component: Footer,
+  component: Help,
   title: `${SITE_ROOT}/${storyTitle}`,
 };
 
-export const SiteFooter: Story = (args) => <Footer {...args} />;
+export const HelpPage: Story = (args) => <Help {...args} />;

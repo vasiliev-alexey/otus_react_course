@@ -1,7 +1,7 @@
 const ROWS_COUNT = 20;
 const COLUMNS_COUNT = 10;
 
-interface PieceType {
+export interface PieceType {
   blocks?: number[][];
   x: number;
   y: number;
@@ -80,8 +80,6 @@ export class Game {
       nextPiece: init ? initPiece : this.#nextPiece,
       playfield,
       isGameOver: this.#topOut,
-      //   isSoundOn: this.sound.getSoundState().isSoundOn,
-      //   isMusicOn: this.sound.getSoundState().isMusicOn,
     };
   }
 
@@ -289,7 +287,6 @@ export class Game {
         continue;
       } else if (numberOfBlocks === COLUMNS_COUNT) {
         lines.unshift(y);
-        //  this.playSoundIndepended('clear');
       }
     }
 

@@ -5,9 +5,10 @@ import RotationPanel, {
 } from './rotationPanel/RotationPanel';
 import GamePanel, { GamePanelProps } from './gamePanel/GamePanel';
 
-export type ActionPanelProps = GamePanelProps &
-  ControlPanelProps &
-  RotationPanelProps;
+export interface ActionPanelProps
+  extends GamePanelProps,
+    ControlPanelProps,
+    RotationPanelProps {}
 
 const ActionPanel: React.FC<ActionPanelProps> = ({
   togglePause,

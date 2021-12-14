@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import gitHubLogin from '../../../../assets/images/iconmonstr-github-5.svg';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
@@ -37,8 +37,10 @@ const Header: React.FC = () => {
 
   return (
     <header className="siteHeader">
-      <div className="Footer-Greeting">
-        <h1>Чемпионат по Online Тетрису</h1>
+      <div className="sign" data-testid="welcome-label">
+        <span className="fast-flicker">online </span>
+        <span className="flicker"> tetris </span>
+        <span className="fast-flicker"> championship</span>
       </div>
 
       <div className="Footer-Toolbar">
@@ -59,4 +61,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
