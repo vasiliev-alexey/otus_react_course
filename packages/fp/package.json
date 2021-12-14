@@ -1,0 +1,19 @@
+{
+  "name": "hw-6",
+  "private": true,
+  "version": "1.0.0",
+  "description": "functional programming",
+  "scripts": {
+    "compile": "tsc",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.27.50"
+  }
+}
