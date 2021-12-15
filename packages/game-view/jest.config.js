@@ -8,6 +8,7 @@ module.exports = {
     {
       displayName: 'dom',
       clearMocks: true,
+      restoreMocks: true,
       resetMocks: true,
       testEnvironment: 'jsdom',
       setupFiles: ['dotenv/config'],

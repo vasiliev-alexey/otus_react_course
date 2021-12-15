@@ -7,7 +7,7 @@ import Login from './Login';
 import { MemoryRouter } from 'react-router';
 import {
   doSignInWithEmailAndPassword,
-  githubSignin,
+  signInWithGithub,
   signInWithGoogle,
 } from '../../../api/auth';
 import { act } from 'react-dom/test-utils';
@@ -23,7 +23,7 @@ jest.mock('../../../api/auth', () => ({
       },
     };
   }),
-  githubSignin: jest.fn(() => {
+  signInWithGithub: jest.fn(() => {
     return {
       user: {
         uud: 'a',
@@ -124,7 +124,7 @@ describe('login  behaviour', () => {
     const btn = screen.getByTestId('gitHubLoginId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);
-    expect(githubSignin).nthCalledWith(1);
+    expect(signInWithGithub).nthCalledWith(1);
   });
 
   test('login call siginin with Google', async () => {

@@ -4,7 +4,7 @@ import google from '../../../../../assets/images/google.png';
 import { useNavigate } from 'react-router';
 import {
   doSignInWithEmailAndPassword,
-  githubSignin,
+  signInWithGithub,
   signInWithGoogle,
 } from '../../../api/auth';
 import { useAuthContext } from '../../../context';
@@ -46,10 +46,10 @@ const Login: React.FC = () => {
 
   const onAuthLogin = useCallback(
     async (event) => {
-      let userData: UnPromisify<ReturnType<typeof githubSignin>>;
+      let userData: UnPromisify<ReturnType<typeof signInWithGithub>>;
       try {
         if (event.target.id === gitHubLoginId) {
-          userData = await githubSignin();
+          userData = await signInWithGithub();
         } else if (event.target.id === googleSignId) {
           userData = await signInWithGoogle();
         } else {

@@ -117,11 +117,12 @@ const webpackConfig = (
 
   plugins: [
     gitRevisionPlugin,
-    arg.mode === 'production' ? envPluginProd : envPluginDev,
-    new Dotenv({
-      safe: true,
-      path: path.resolve(__dirname, '.env'),
-    }),
+    arg.mode === 'production'
+      ? envPluginProd
+      : new Dotenv({
+          safe: true,
+          path: path.resolve(__dirname, '.env'),
+        }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(gitRevisionPlugin.version()),
       COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
