@@ -22,7 +22,8 @@
     "react-router-dom": "^6.0.2",
     "react-router": "^6.0.2",
     "firebase": "^8.8.1",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "@reduxjs/toolkit": "^1.7.0"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
