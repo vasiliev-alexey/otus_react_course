@@ -16,7 +16,7 @@ export const registerUser = (
 
 const provider = new firebase.auth.GithubAuthProvider();
 
-interface User {
+export interface User {
   displayName: string;
   photoUrl: string;
   uid: string;

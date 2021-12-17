@@ -1,6 +1,14 @@
-import reducer, { loginWithEmailAndPassword } from './authSlice';
+import reducer, {
+  loginWithEmailAndPassword,
+  loginWithGitHubAuth,
+  loginWithGoogleAuth,
+} from './authSlice';
 import { nanoid } from '@reduxjs/toolkit';
-import { doSignInWithEmailAndPassword } from '../api/auth';
+import {
+  doSignInWithEmailAndPassword,
+  signInWithGithub,
+  signInWithGoogle,
+} from '../api/auth';
 import { store } from './store';
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -53,6 +61,44 @@ describe('exampleSlice', () => {
     await sleep(0);
 
     expect(doSignInWithEmailAndPasswordMock).toBeCalledTimes(1);
+    expect(store.getState().auth).toEqual({
+      errorMessage: 'some exception',
+      isAuth: false,
+    });
+  });
+});
+
+describe('test login with googleAuth - Error', () => {
+  it('resolve thunk if auth service is Error', async () => {
+    const signInWithGoogleMock = signInWithGoogle as jest.MockedFunction<
+      typeof signInWithGoogle
+    >;
+    signInWithGoogleMock.mockImplementation(() => {
+      throw new Error('some exception');
+    });
+
+    store.dispatch(loginWithGoogleAuth());
+    await sleep(0);
+    expect(signInWithGoogle).toBeCalledTimes(1);
+    expect(store.getState().auth).toEqual({
+      errorMessage: 'some exception',
+      isAuth: false,
+    });
+  });
+});
+
+describe('test login with GitHubAuth - Error', () => {
+  it('reject GitHubAuth thunk if auth service is Error', async () => {
+    const signInWithGithubMock = signInWithGithub as jest.MockedFunction<
+      typeof signInWithGithub
+    >;
+    signInWithGithubMock.mockImplementation(() => {
+      throw new Error('some exception');
+    });
+
+    store.dispatch(loginWithGitHubAuth());
+    await sleep(0);
+    expect(signInWithGithub).toBeCalledTimes(1);
     expect(store.getState().auth).toEqual({
       errorMessage: 'some exception',
       isAuth: false,
