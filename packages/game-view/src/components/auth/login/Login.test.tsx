@@ -12,8 +12,6 @@ import {
 } from '../../../api/auth';
 import { act } from 'react-dom/test-utils';
 
-//jest.mock('../../../api/auth');
-
 jest.mock('../../../api/auth', () => ({
   doSignInWithEmailAndPassword: jest.fn(() => {
     return {
