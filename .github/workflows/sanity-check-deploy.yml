@@ -11,7 +11,7 @@ on:
     paths:
       - 'package/calc/**'
 jobs:
-  lint_and_deploy:
+  lint_and_test:
     runs-on: ubuntu-20.04
     environment: Build
     env:
@@ -72,6 +72,20 @@ jobs:
         run: |
           npm run loki-test
 
+  build_and_deploy:
+    runs-on: ubuntu-20.04
+    needs: lint_and_test
+    environment: Prod
+    env:
+      REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+      REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_AUTHDOMAIN }}
+      REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
+      REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+      REACT_APP_STORAGEBUCKET: ${{ secrets.REACT_APP_STORAGEBUCKET }}
+      REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
+      REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
+
+    steps:
       - name: webpack  build
         id: Build
         run: |
