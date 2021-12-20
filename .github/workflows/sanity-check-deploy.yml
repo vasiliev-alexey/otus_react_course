@@ -36,9 +36,12 @@ jobs:
         with:
           node-version: '16'
 
-      - name: npm vers 🏗️
-        run: |
-          npm --version
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
         id: Npm-install
@@ -86,6 +89,19 @@ jobs:
       REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: false
+
+      - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
+        id: Npm-install
+        env:
+          HUSKY_SKIP_INSTALL: 1
+        run: |
+          npm install --legacy-peer-deps
+          npm install --legacy-peer-deps --workspaces
+
       - name: webpack  build
         id: Build
         run: |
