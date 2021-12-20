@@ -9,7 +9,7 @@ const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 jest.mock('../api/db');
 
-describe('auth leader board reducer tests - get Data', () => {
+describe('auth leader board reducer tests', () => {
   const initialState = { leaderList: [] as Gamer[] };
 
   it('getLeaderBoardData is a function', () => {
@@ -22,48 +22,34 @@ describe('auth leader board reducer tests - get Data', () => {
     expect(state.leaderList).toHaveLength(0);
   });
 
-  it('test   getLeaderBoardData is resolved', async () => {
-    const rndId = nanoid(10);
-
+  it('test   getLeaderBoardData is rejected', async () => {
     const getTopGamerListMock = getTopGamerList as jest.MockedFunction<
       typeof getTopGamerList
     >;
     getTopGamerListMock.mockClear();
-    getTopGamerListMock.mockResolvedValue([
-      { uid: rndId, pictUrl: '', topScore: 100, userName: 'Jon Daw' },
-      { uid: nanoid(10), pictUrl: '', topScore: 10, userName: 'Jon Snow' },
-    ]);
+    getTopGamerListMock.mockImplementation(() => {
+      throw new Error('some exception');
+    });
 
     store.dispatch(getLeaderBoardData());
     expect(getTopGamerList).toBeCalledTimes(1);
     await sleep(0);
 
     const state = store.getState();
-    expect(state.leaderBoard.leaderList).toHaveLength(2);
-    expect(state.leaderBoard.leaderList[0].uid).toEqual(rndId);
-  });
-});
-describe('auth leader board reducer tests - save Data', () => {
-  const initialState = { leaderList: [] as Gamer[] };
+    expect(state.leaderBoard.leaderList).toHaveLength(0);
 
-  it('getLeaderBoardData is a function', () => {
-    expect(saveUserResultFb).toBeInstanceOf(Function);
+    expect(state.leaderBoard.errorMessage).toEqual('some exception');
   });
-
-  it('test  getLeaderBoardData is pending', () => {
-    const action = { type: saveUserResultFb.pending.type };
-    const state = reducer(initialState, action);
-    expect(state.leaderList).toHaveLength(0);
-  });
-
-  it('test   saveUserResultFb is resolved', async () => {
+  it('test   saveUserResultFb is rejected', async () => {
     const rndId = nanoid(10);
 
     const saveUserResultMock = saveUserResult as jest.MockedFunction<
       typeof saveUserResult
     >;
     saveUserResultMock.mockClear();
-    saveUserResultMock.mockResolvedValue(true);
+    saveUserResultMock.mockImplementation(() => {
+      throw new Error('some exception');
+    });
 
     store.dispatch(
       saveUserResultFb({
@@ -73,13 +59,12 @@ describe('auth leader board reducer tests - save Data', () => {
         userName: 'Jon Daw',
       })
     );
-
+    expect(saveUserResultMock).toBeCalledTimes(1);
     await sleep(0);
-    expect(saveUserResultMock).nthCalledWith(1, {
-      uid: rndId,
-      pictUrl: '',
-      topScore: 100,
-      userName: 'Jon Daw',
-    });
+
+    const state = store.getState();
+    expect(state.leaderBoard.leaderList).toHaveLength(0);
+
+    expect(state.leaderBoard.errorMessage).toEqual('some exception');
   });
 });
