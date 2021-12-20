@@ -38,7 +38,10 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: |
+            ~/.npm
+            **/node_modules
+
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -101,6 +104,10 @@ jobs:
         run: |
           npm install --legacy-peer-deps
           npm install --legacy-peer-deps --workspaces
+
+      - name: build  dependencies project 🔨➡️🔨➡️🔨
+        run: |
+          tsc --build tsconfig.build.json
 
       - name: webpack  build
         id: Build
