@@ -23,7 +23,8 @@
     "react-router": "^6.0.2",
     "firebase": "^8.8.1",
     "dotenv": "^10.0.0",
-    "@reduxjs/toolkit": "^1.7.0"
+    "@reduxjs/toolkit": "^1.7.0",
+    "react-redux": "^7.2.6"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
@@ -42,11 +43,14 @@
     "@types/node": "^16.11.0",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.21",
     "loki": "^0.28.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.4.2",
-    "history": "^5.1.0"
+    "history": "^5.1.0",
+    "redux-mock-store": "^1.5.4",
+    "@types/redux-mock-store": "^1.0.3"
   },
   "keywords": [
     "jest",

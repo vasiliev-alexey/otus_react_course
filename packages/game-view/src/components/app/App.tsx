@@ -5,22 +5,23 @@ import Footer from '../footer/Footer';
 
 import '../../../public/index.scss';
 import AppRouter from '../appRouter/AppRouter';
-import { AuthContextProvider } from '../../context';
+
+import { store } from '../../store/store';
+import { Provider } from 'react-redux';
 
 class App extends Component {
   render(): React.ReactElement {
     return (
-      <AuthContextProvider>
+      <Provider store={store}>
         <Router>
           <Header />
-
           <div className="bg" />
           <main>
             <AppRouter />
           </main>
           <Footer />
         </Router>
-      </AuthContextProvider>
+      </Provider>
     );
   }
 }
