@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   doSignInWithEmailAndPassword,
+  doSignOut,
+  registerUser,
   signInWithGithub,
   signInWithGoogle,
   User,
@@ -12,7 +14,7 @@ interface userCred {
   errorMessage?: string;
 }
 
-export interface initStateType {
+export interface AuthStateType {
   uid?: string;
   userName?: string;
   userPict?: string;
@@ -22,7 +24,7 @@ export interface initStateType {
 
 const initialState = {
   isAuth: false,
-} as Readonly<initStateType>;
+} as Readonly<AuthStateType>;
 
 export const loginWithEmailAndPassword = createAsyncThunk<
   userCred,
@@ -33,12 +35,41 @@ export const loginWithEmailAndPassword = createAsyncThunk<
   async ({ username, password }, thunkApi) => {
     try {
       const data = await doSignInWithEmailAndPassword(username, password);
-
       return {
         uid: data.user.uid,
-        userName: data.user.displayName,
+        userName: data.user.email,
         isAuth: true,
       };
+    } catch (e) {
+      return thunkApi.rejectWithValue({ errorMessage: e.message });
+    }
+  }
+);
+export const doRegisterUser = createAsyncThunk<
+  userCred,
+  { username: string; password: string }
+>(
+  'auth/register',
+
+  async ({ username, password }, thunkApi) => {
+    try {
+      const data = await registerUser(username, password);
+      return {
+        uid: data.user.uid,
+        userName: data.user.email,
+        isAuth: true,
+      };
+    } catch (e) {
+      return thunkApi.rejectWithValue({ errorMessage: e.message });
+    }
+  }
+);
+export const doLogOut = createAsyncThunk<userCred>(
+  'auth/logout',
+
+  async (_, thunkApi) => {
+    try {
+      await doSignOut();
     } catch (e) {
       return thunkApi.rejectWithValue({ errorMessage: e.message });
     }
@@ -119,9 +150,21 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.errorMessage = (action.payload as userCred).errorMessage;
     });
+
+    builder.addCase(doLogOut.fulfilled, (state) => {
+      state.isAuth = false;
+      state.userName = null;
+      state.uid = null;
+      state.userPict = null;
+    });
+
+    builder.addCase(doLogOut.rejected, (state, action) => {
+      state.isAuth = false;
+      state.errorMessage = (action.payload as userCred).errorMessage;
+    });
   },
 });
 
-const { reducer } = authSlice;
+export const { reducer, actions } = authSlice;
 
-export default reducer;
+// export default reducer;

@@ -5,39 +5,53 @@ import userEvent from '@testing-library/user-event';
 
 import SignUp from './SignUp';
 import { MemoryRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-describe('login comp is function', () => {
-  test('login is function', () => {
+import thunk from 'redux-thunk';
+import { Middleware } from '@reduxjs/toolkit';
+
+const renderPage = (): void => {
+  const initialState = {
+    auth: {
+      userName: '',
+      isAuthenticated: false,
+    },
+  };
+  const middlewares: Middleware[] = [thunk];
+  const mockStore = configureStore(middlewares);
+  const store = mockStore(initialState);
+
+  render(
+    <MemoryRouter>
+      <Provider store={store}>
+        <SignUp />
+      </Provider>
+    </MemoryRouter>
+  );
+};
+
+describe('SignUp comp is function', () => {
+  beforeEach(() => {
+    renderPage();
+  });
+
+  test('SignUp is function', () => {
     expect(SignUp).toBeInstanceOf(Object);
   });
 
   test('SignUp must be render in page', () => {
-    render(
-      <MemoryRouter>
-        <SignUp />
-      </MemoryRouter>
-    );
     expect(screen.getByTestId('signup-form-test-id')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Логин')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Пароль')).toBeInTheDocument();
   });
 
   test('SignUp must have button submit and cancel', () => {
-    render(
-      <MemoryRouter>
-        <SignUp />
-      </MemoryRouter>
-    );
     expect(screen.getByText('Регистрация')).toBeInTheDocument();
     expect(screen.getByText('Отмена')).toBeInTheDocument();
   });
 
   test('SignUp must have button reset', () => {
-    render(
-      <MemoryRouter>
-        <SignUp />
-      </MemoryRouter>
-    );
     const btn = screen.getByText('Отмена');
     expect(btn).toBeInTheDocument();
     const inputLogin = screen.getByPlaceholderText('Логин');

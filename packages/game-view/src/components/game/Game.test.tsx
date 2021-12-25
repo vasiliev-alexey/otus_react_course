@@ -2,6 +2,15 @@ import React from 'react';
 import Game from './Game';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import { Middleware } from '@reduxjs/toolkit';
+import configureStore from 'redux-mock-store';
+
+import thunk from 'redux-thunk';
+
+const middlewares: Middleware[] = [thunk];
+
+const mockStore = configureStore(middlewares);
 
 describe('Test Frame component', () => {
   let playBackup: () => Promise<void>;
@@ -24,7 +33,19 @@ describe('Test Frame component', () => {
   });
 
   test('Frame must be render in page', () => {
-    render(<Game />);
+    const initialState = {
+      auth: {
+        userName: 'userName',
+        isAuthenticated: true,
+      },
+    };
+
+    const store = mockStore(initialState);
+    render(
+      <Provider store={store}>
+        <Game />
+      </Provider>
+    );
 
     const pauseBtn = screen.getByTestId('GamePanel-pause-btb');
     const pauseLbl = screen.queryAllByTestId('Pause-Label');

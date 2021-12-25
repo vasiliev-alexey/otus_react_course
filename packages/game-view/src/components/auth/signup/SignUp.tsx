@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { registerUser } from '../../../api/auth';
-import { useAuthContext } from '../../../context';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -11,7 +11,7 @@ const SignUp: React.FC = () => {
 
   const [error, setError] = useState('');
 
-  const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
