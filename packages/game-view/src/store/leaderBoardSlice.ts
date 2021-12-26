@@ -29,10 +29,12 @@ export const saveUserResultFb = createAsyncThunk<boolean, Gamer>(
 export interface LeaderList {
   leaderList: Gamer[];
   errorMessage?: string;
+  isLoading: boolean;
 }
 
 const initialState: LeaderList = {
   leaderList: [],
+  isLoading: true,
 };
 
 const leaderBoardSlice = createSlice({
@@ -42,9 +44,11 @@ const leaderBoardSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getLeaderBoardData.pending, (state) => {
       state.leaderList = [];
+      state.isLoading = true;
     });
     builder.addCase(getLeaderBoardData.fulfilled, (state, action) => {
       state.leaderList = action.payload;
+      state.isLoading = false;
     });
 
     builder.addCase(getLeaderBoardData.rejected, (state, action) => {

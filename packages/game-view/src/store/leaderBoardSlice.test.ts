@@ -10,7 +10,7 @@ const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 jest.mock('../api/db');
 
 describe('auth leader board reducer tests - get Data', () => {
-  const initialState = { leaderList: [] as Gamer[] };
+  const initialState = { leaderList: [] as Gamer[], isLoading: true };
 
   it('getLeaderBoardData is a function', () => {
     expect(getLeaderBoardData).toBeInstanceOf(Function);
@@ -44,7 +44,7 @@ describe('auth leader board reducer tests - get Data', () => {
   });
 });
 describe('auth leader board reducer tests - save Data', () => {
-  const initialState = { leaderList: [] as Gamer[] };
+  const initialState = { leaderList: [] as Gamer[], isLoading: true };
 
   it('getLeaderBoardData is a function', () => {
     expect(saveUserResultFb).toBeInstanceOf(Function);
