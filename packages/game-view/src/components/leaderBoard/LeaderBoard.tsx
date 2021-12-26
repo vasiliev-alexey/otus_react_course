@@ -1,0 +1,53 @@
+import React, { useEffect } from 'react';
+import avatar from '../../../../assets/images/avatar.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { getLeaderBoardData, LeaderList } from '../../store/leaderBoardSlice';
+import { ClimbingBoxLoader } from 'react-spinners';
+
+const LeaderBoard: React.FC = () => {
+  const dispatcher = useDispatch();
+
+  useEffect(() => {
+    dispatcher(getLeaderBoardData());
+  }, []);
+
+  const { isLoading, leaderList } = useSelector<RootState, LeaderList>(
+    (st) => st.leaderBoard
+  );
+
+  return (
+    <>
+      {isLoading ? (
+        <ClimbingBoxLoader size={50} color={'blue'} />
+      ) : (
+        <div className="container">
+          <div className="leaderboard">
+            <div className="head">
+              <i className="fas fa-crown"></i>
+              <h1>Лидеры соревнования</h1>
+            </div>
+            <div className="body">
+              <ol>
+                {leaderList.map((gam) => {
+                  return (
+                    <li key={gam.uid}>
+                      <img
+                        src={gam.pictUrl || avatar.toString()}
+                        className="leaderboard-avatar"
+                      />
+                      <mark>{gam.userName}</mark>
+                      <small>{gam.topScore}</small>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default LeaderBoard;

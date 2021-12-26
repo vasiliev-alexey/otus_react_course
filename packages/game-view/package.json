@@ -24,7 +24,9 @@
     "firebase": "^8.8.1",
     "dotenv": "^10.0.0",
     "@reduxjs/toolkit": "^1.7.0",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "react-spinners": "^0.11.0",
+    "@emotion/react": "^11.7.1"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",

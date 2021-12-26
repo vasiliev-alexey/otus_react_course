@@ -21,8 +21,8 @@ describe('test db functions', () => {
   test('test setUserCategoryTree', async () => {
     const x = await saveUserResult({
       uid: 'gamer22',
-      userName: '',
-      pictUrl: '',
+      userName: 'unit-test-user',
+      pictUrl: 'https://randomuser.me/api/portraits/men/89.jpg',
       topScore: 111,
     });
     expect(x).not.toBeNull();

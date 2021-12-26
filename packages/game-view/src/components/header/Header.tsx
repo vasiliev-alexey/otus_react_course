@@ -48,6 +48,7 @@ const Header: React.FC = () => {
     (st) => st.auth
   );
   const login = useCallback(() => navigate('/login'), []);
+  const leaderboard = useCallback(() => navigate('/leaderboard'), []);
   const showExit = useCallback(() => {
     setShowMenu((s) => !s);
 
@@ -85,7 +86,12 @@ const Header: React.FC = () => {
       {isAuth && <p className="user-name-label"> Player: {userName}</p>}
 
       <div className="Footer-Toolbar">
-        <img alt="panda" className="octoCatLogo" src={String(leaderBoard)} />
+        <img
+          alt="panda"
+          className="octoCatLogo"
+          src={String(leaderBoard)}
+          onClick={leaderboard}
+        />
         <img
           alt="panda"
           className="octoCatLogo"
