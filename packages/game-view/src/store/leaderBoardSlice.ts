@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {} from '../api/auth';
 import { Gamer, getTopGamerList, saveUserResult } from '../api/db';
 
 export const getLeaderBoardData = createAsyncThunk<Gamer[]>(
