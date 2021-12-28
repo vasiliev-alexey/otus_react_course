@@ -4,7 +4,7 @@
   "description": "tetris-game",
   "private": true,
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage  --detectOpenHandles --forceExit",
     "dev": "webpack serve  --port 5000 --mode=development",
     "build:prod": "webpack --mode production",
     "postbuild:prod": "build-storybook -o ../../dist/storybooks --quiet",
@@ -52,7 +52,9 @@
     "@testing-library/user-event": "^13.4.2",
     "history": "^5.1.0",
     "redux-mock-store": "^1.5.4",
-    "@types/redux-mock-store": "^1.0.3"
+    "@types/redux-mock-store": "^1.0.3",
+    "faker": "^5.5.3",
+    "@types/faker": "^5.5.9"
   },
   "keywords": [
     "jest",

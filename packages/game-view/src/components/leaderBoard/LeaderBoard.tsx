@@ -19,9 +19,11 @@ const LeaderBoard: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <ClimbingBoxLoader size={50} color={'blue'} />
+        <div data-testid="leaderboard-spinner">
+          <ClimbingBoxLoader size={50} color={'blue'} />
+        </div>
       ) : (
-        <div className="container">
+        <div className="container" data-testid="leaderboard-container">
           <div className="leaderboard">
             <div className="head">
               <i className="fas fa-crown"></i>
@@ -31,7 +33,7 @@ const LeaderBoard: React.FC = () => {
               <ol>
                 {leaderList.map((gam) => {
                   return (
-                    <li key={gam.uid}>
+                    <li key={gam.uid} data-testid={`leaderboard-${gam.uid}`}>
                       <img
                         src={gam.pictUrl || avatar.toString()}
                         className="leaderboard-avatar"
