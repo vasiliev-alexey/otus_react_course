@@ -4,13 +4,14 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter, Router } from 'react-router';
 import {
   doSignInWithEmailAndPassword,
   githubSignin,
   signInWithGoogle,
 } from '../../../api/auth';
 import { act } from 'react-dom/test-utils';
+import { createMemoryHistory } from 'history';
 
 //jest.mock('../../../api/auth');
 
@@ -70,10 +71,17 @@ describe('login comp is function', () => {
   });
 
   test('login must have button reset', () => {
+    const history = createMemoryHistory({
+      initialEntries: ['/aaa'],
+      initialIndex: 0,
+    });
+    const pushRoute = jest.fn();
+    history.push = pushRoute;
+
     render(
-      <MemoryRouter>
+      <Router location={'dd'} navigator={history}>
         <Login />
-      </MemoryRouter>
+      </Router>
     );
     const btn = screen.getByText('Отмена');
     expect(btn).toBeInTheDocument();
@@ -82,7 +90,11 @@ describe('login comp is function', () => {
     userEvent.type(inputLogin, 'ddd');
     expect(screen.getByTestId('login-input-test-id')).toHaveValue('ddd');
     userEvent.click(btn);
-    expect(screen.getByTestId('login-input-test-id')).toHaveValue('');
+    expect(pushRoute).nthCalledWith(
+      1,
+      { hash: '', pathname: '/', search: '' },
+      undefined
+    );
   });
 });
 

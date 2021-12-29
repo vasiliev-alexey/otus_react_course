@@ -44,6 +44,11 @@ const Login: React.FC = () => {
     navigate('/signup');
   };
 
+  const onReset = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    navigate('/');
+  };
+
   const onAuthLogin = useCallback(
     async (event) => {
       let userData: UnPromisify<ReturnType<typeof githubSignin>>;
@@ -119,6 +124,7 @@ const Login: React.FC = () => {
             value="Отмена"
             className="login-form-button"
             id="login-form-reset"
+            onClick={onReset}
           />
         </div>
 

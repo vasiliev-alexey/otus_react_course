@@ -20,6 +20,8 @@ const SignUp: React.FC = () => {
     setInputField({ ...inputField, password: e.target.value });
   };
 
+  const submitCancel = () => navigate('/login');
+
   const submitHandler = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -75,6 +77,7 @@ const SignUp: React.FC = () => {
             value="Отмена"
             className="login-form-button"
             id="login-form-reset"
+            onClick={submitCancel}
           />
         </div>
       </form>
