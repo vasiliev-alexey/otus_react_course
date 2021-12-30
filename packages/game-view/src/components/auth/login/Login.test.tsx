@@ -13,8 +13,6 @@ import {
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
 
-//jest.mock('../../../api/auth');
-
 jest.mock('../../../api/auth', () => ({
   doSignInWithEmailAndPassword: jest.fn(() => {
     return {
@@ -124,7 +122,6 @@ describe('login  behaviour', () => {
     });
 
     expect(doSignInWithEmailAndPassword).nthCalledWith(1, 'ddd', '');
-    // act(() => {});
   });
 
   test('login call siginin with GitHub', async () => {
