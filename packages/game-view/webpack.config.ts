@@ -83,7 +83,10 @@ const webpackConfig = (
             '@babel/preset-env',
             '@babel/preset-typescript',
           ],
-          plugins: ['@babel/plugin-transform-runtime'],
+          plugins: [
+            '@babel/plugin-transform-runtime',
+            'babel-plugin-jsx-remove-data-test-id',
+          ],
         },
         exclude: /dist/,
       },
@@ -143,7 +146,7 @@ const webpackConfig = (
     }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
-        files: './src/**/*.{ts,tsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,tsx}',
       },
       typescript: {
         tsconfig: getTsConfigName(arg.mode),
