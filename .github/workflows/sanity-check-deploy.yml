@@ -58,19 +58,27 @@ jobs:
         run: |
           tsc --build tsconfig.build.json
 
-      - name: Lint check
-        id: LinterS
-        run: |
-          npm run lint
-
-      - name: Run  Jest  T-E-S-T
-        id: Jest-Test
-        run: |
-          npm run test --coverage
+      #      - name: Lint check
+      #        id: LinterS
+      #        run: |
+      #          npm run lint
+      #
+      #      - name: Run  Jest  T-E-S-T
+      #        id: Jest-Test
+      #        run: |
+      #          npm run test --coverage
 
       - name: build story book for test
         working-directory: ./packages/game-view
         run: npm run build-storybook
+
+      - name: Archive storybook artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-storybook
+          path: |
+            dist
+          retention-days: 2
 
       - name: run loki test
         id: loki_test
