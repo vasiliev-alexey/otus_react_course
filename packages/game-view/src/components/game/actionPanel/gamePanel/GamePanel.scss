@@ -2,7 +2,7 @@
 //@import '../../../../../public/css/mixins';
 
 $lg-size: 4.75rem;
-$md-size: 3rem;
+$md-size: 2rem;
 $sm-size: 1rem;
 
 .lgBtn {
@@ -13,6 +13,11 @@ $sm-size: 1rem;
 .mdBtn {
   width: $md-size;
   height: $md-size;
+  padding: 5px;
+}
+
+.smBtn:focus {
+  outline: none;
 }
 
 .smBtn {

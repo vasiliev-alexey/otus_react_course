@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useNavigate } from 'react-router';
 import remarkGfm from 'remark-gfm';
 
 const helpText = `
@@ -16,6 +17,7 @@ const helpText = `
 поэтому его задача — заполнять ряды, не заполняя сам стакан (по вертикали) как можно дольше,
 чтобы таким образом получить как можно больше очков.  
 
+---
   
 ### Элементы управления
 
@@ -23,18 +25,39 @@ const helpText = `
   * Правая стрелка (➡️) перемещение фигуры вправо 
   * Нижняя стрелка (⬇️) перемещение фигуры вниз (сброс)
   * Пробел - вращение фигуры 
-  * Pause - установка игры на паузу
+  * Pause - установка игры на паузу  
+
+
+---
 
 ### Уровни
     1: 40,
     2: 100,
     3: 300,
     4: 1200,
+    
+---
+    
 ### Рейтинги
+
+to be done
+
 `;
 
 const Help: React.FC = () => {
-  return <ReactMarkdown remarkPlugins={[remarkGfm]}>{helpText}</ReactMarkdown>;
-};
+  const navigator = useNavigate();
 
-export default Help;
+  const go2Game = useCallback(() => {
+    navigator('/');
+  }, []);
+
+  return (
+    <div className="helpPanel">
+      <ReactMarkdown className="help" remarkPlugins={[remarkGfm]}>
+        {helpText}
+      </ReactMarkdown>
+      <button onClick={go2Game}>GAME</button>
+    </div>
+  );
+};
+export default memo(Help);

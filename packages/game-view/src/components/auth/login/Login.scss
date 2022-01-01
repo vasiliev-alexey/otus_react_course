@@ -3,6 +3,9 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  background: rgba(19, 54, 231, 0.29);
+  height: 30%;
+  padding-top: 20px;
 }
 
 #login-form {
@@ -26,6 +29,12 @@
   padding: 0px 0px 5px 5px;
 }
 
+.login-form-error {
+  max-width: 250px;
+  background: #e33333;
+  margin: 10px;
+}
+
 .action-input {
   align-self: center;
   display: flex;
@@ -37,13 +46,12 @@
 
 .login-form-button {
   width: 100%;
-  max-width: 200px;
   padding: 7px;
   border: none;
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  background-color: #3a3a3a;
+  background-color: $button-action-color;
   cursor: pointer;
   outline: none;
   margin: 5px;
@@ -51,4 +59,32 @@
 
 #login-form-reset {
   background-color: red;
+}
+
+.login-enter-label {
+  width: 90%;
+  align-self: center;
+  padding-top: 10px;
+}
+
+.login-btn {
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.login-signup-button {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: $button-action-color;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
 }

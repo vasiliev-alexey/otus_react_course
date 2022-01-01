@@ -1,12 +1,18 @@
-import React, { memo, useMemo, useState } from 'react';
-import gitHubLogin from '../../../../assets/images/iconmonstr-github-5.svg';
+import React, { useCallback, useMemo, useState } from 'react';
+import gitHubLogin from '../../../../assets/images/login.png';
+import tetris from '../../../../assets/images/tetris.png';
 import musicOn from '../../../../assets/images/musical-notes.png';
 import leaderBoard from '../../../../assets/images/leaderboard.png';
 import musicOff from '../../../../assets/images/mute.png';
+import avatar from '../../../../assets/images/avatar.png';
 import audio from '../../../../assets/sounds/tetrisMain.mp3';
+import { useNavigate } from 'react-router';
+import { useAuthContext } from '../../context';
 
 const Header: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState(false);
+
+  const navigate = useNavigate();
 
   const audioMain = useMemo(() => {
     const audioWork = new Audio(audio);
@@ -22,6 +28,8 @@ const Header: React.FC = () => {
     return audioWork;
   }, []);
 
+  const [showMenu, setShowMenu] = useState(false);
+
   const playAudio = useMemo(() => {
     return () => {
       if (isAudioOn) {
@@ -34,31 +42,80 @@ const Header: React.FC = () => {
       }
     };
   }, [isAudioOn]);
+  const { authState } = useAuthContext();
+  const login = useCallback(() => navigate('/login'), []);
+  const showExit = useCallback(() => {
+    setShowMenu((s) => !s);
+
+    window.setTimeout(() => {
+      if (showExit) {
+        setShowMenu(false);
+      }
+    }, 10000);
+  }, []);
+  const logout = useCallback(() => {
+    showExit();
+    navigate('/logout');
+  }, []);
+
+  const tetrisRoute = useCallback(() => {
+    navigate('/');
+  }, []);
 
   return (
     <header className="siteHeader">
+      <img
+        alt="game play"
+        className="btn-go-to-game"
+        src={tetris.toString()}
+        onClick={tetrisRoute}
+        data-testid="btn-go-to-game"
+      />
+
       <div className="sign" data-testid="welcome-label">
         <span className="fast-flicker">online </span>
         <span className="flicker"> tetris </span>
         <span className="fast-flicker"> championship</span>
       </div>
 
+      {authState.isAuth && (
+        <p className="user-name-label"> Player: {authState.userName}</p>
+      )}
+
       <div className="Footer-Toolbar">
-        <img alt="panda" className="octoCatLogo" src={String(leaderBoard)} />{' '}
+        <img alt="panda" className="octoCatLogo" src={String(leaderBoard)} />
         <img
           alt="panda"
           className="octoCatLogo"
           src={isAudioOn ? musicOn.toString() : musicOff.toString()}
           onClick={playAudio}
         />
-        <img
-          alt="octocat login"
-          className="octoCatLogo"
-          src={gitHubLogin.toString()}
-        />
+        {!authState.isAuth && (
+          <img
+            alt="octocat login"
+            className="octoCatLogo"
+            src={gitHubLogin.toString()}
+            onClick={login}
+          />
+        )}
+        {authState.isAuth && (
+          <span>
+            <img
+              alt="octocat login"
+              className="octoCatLogo"
+              src={authState.userPictUrl || avatar.toString()}
+              onClick={showExit}
+            />
+            {showMenu && (
+              <ul className="profileMenu">
+                <li onClick={logout}>Выход</li>
+              </ul>
+            )}
+          </span>
+        )}
       </div>
     </header>
   );
 };
 
-export default memo(Header);
+export default Header;

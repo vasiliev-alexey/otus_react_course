@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { registerUser } from '../../../api/auth';
+import { useAuthContext } from '../../../context';
+import { useNavigate } from 'react-router-dom';
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
     login: '',
     password: '',
   });
 
+  const [error, setError] = useState('');
+
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
   };
@@ -13,12 +20,32 @@ const Login: React.FC = () => {
     setInputField({ ...inputField, password: e.target.value });
   };
 
-  const submitHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+  const submitCancel = () => navigate('/login');
+
+  const submitHandler = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
+
+    try {
+      const data = await registerUser(inputField.login, inputField.password);
+
+      if (data.operationType === 'signIn') {
+        dispatch({
+          type: 'SET_USER_NAME',
+          payload: {
+            userName: data.user.email,
+            userPictUrl: '',
+            uid: data.user.uid,
+          },
+        });
+      }
+      navigate('/');
+    } catch (e) {
+      setError(e);
+    }
   };
 
   return (
-    <div className="login-center" data-testid="login-form-test-id">
+    <div className="login-center" data-testid="signup-form-test-id">
       <form id="login-form">
         <input
           onChange={inputLoginHandler}
@@ -26,7 +53,7 @@ const Login: React.FC = () => {
           name="username"
           id="username-field"
           className="login-form-field"
-          placeholder="Username"
+          placeholder="Логин"
           data-testid="login-input-test-id"
         />
         <input
@@ -34,21 +61,23 @@ const Login: React.FC = () => {
           name="password"
           id="password-field"
           className="login-form-field"
-          placeholder="Password"
+          placeholder="Пароль"
           onChange={inputPasswordHandler}
         />
+        {error && <div className="login-form-error"> {error.toString()}</div>}
         <div className="action-input">
           <input
             type="submit"
-            value="Login"
+            value="Регистрация"
             className="login-form-button"
             onClick={submitHandler}
           />
           <input
             type="reset"
-            value="Cancel"
+            value="Отмена"
             className="login-form-button"
             id="login-form-reset"
+            onClick={submitCancel}
           />
         </div>
       </form>
@@ -56,4 +85,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;
