@@ -6,14 +6,8 @@ import GameView from './GameView';
 import { dummyFunc } from '../utils/testUtils';
 
 const storyTitle = 'Игра основной экран';
-export default {
-  component: GameView,
-  title: `${GAME_ROOT}/${storyTitle}`,
-};
 
-let dummyField: number[][];
-
-dummyField = Array.from(Array(20)).map(() =>
+const dummyField: number[][] = Array.from(Array(20)).map(() =>
   Array.from(Array(10)).map(() => 0)
 );
 
@@ -32,3 +26,8 @@ export const GameSimpleUse: Story = () => (
     />
   </div>
 );
+
+export default {
+  component: GameView,
+  title: `${GAME_ROOT}/${storyTitle}`,
+};
