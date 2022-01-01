@@ -73,6 +73,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Archive storybook artifacts
+        working-directory: ./packages/game-view
         uses: actions/upload-artifact@v2
         with:
           name: dist-storybook
