@@ -2,9 +2,38 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
-import { MemoryRouter, Router } from 'react-router';
+import { Router } from 'react-router';
 import userEvent from '@testing-library/user-event';
-import { createMemoryHistory } from 'history';
+import { createMemoryHistory, MemoryHistory } from 'history';
+import { Middleware } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+
+const defaultHistory = createMemoryHistory({
+  initialEntries: ['/aaa'],
+  initialIndex: 0,
+});
+
+const renderPage = (history: MemoryHistory = defaultHistory): void => {
+  const initialState = {
+    auth: {
+      userName: '',
+      isAuthenticated: false,
+    },
+  };
+  const middlewares: Middleware[] = [thunk];
+  const mockStore = configureStore(middlewares);
+  const store = mockStore(initialState);
+
+  render(
+    <Router location={''} navigator={history}>
+      <Provider store={store}>
+        <Header />
+      </Provider>
+    </Router>
+  );
+};
 
 describe('Test header component', () => {
   let playBackup: () => Promise<void>;
@@ -22,16 +51,13 @@ describe('Test header component', () => {
     window.HTMLMediaElement.prototype.pause = pauseBackup;
   });
 
+  beforeEach(() => renderPage());
+
   test('Header component is a function', () => {
     expect(Header).toBeInstanceOf(Object);
   });
 
   test('Frame must be render in page', () => {
-    render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
-    );
     const greeting = screen.getByTestId('welcome-label');
     expect(greeting).toBeInTheDocument();
   });
@@ -45,13 +71,9 @@ describe('Test header component', () => {
   const pushRoute = jest.fn();
   history.push = pushRoute;
 
+  beforeEach(() => renderPage(history));
+
   test('Header call game button - must redirect to /', () => {
-    expect(history.location.pathname).toBe('/aaa');
-    render(
-      <Router location={''} navigator={history}>
-        <Header />
-      </Router>
-    );
     expect(history.location.pathname).toBe('/aaa');
     const btn2root = screen.getByTestId('btn-go-to-game');
     expect(btn2root).toBeInTheDocument();

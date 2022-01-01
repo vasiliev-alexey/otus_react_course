@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-
+import { Provider } from 'react-redux';
 import Login from './Login';
 import { MemoryRouter } from 'react-router';
 import {
@@ -11,6 +11,14 @@ import {
   signInWithGoogle,
 } from '../../../api/auth';
 import { act } from 'react-dom/test-utils';
+import { Middleware } from '@reduxjs/toolkit';
+import configureStore from 'redux-mock-store';
+
+import thunk from 'redux-thunk';
+
+const middlewares: Middleware[] = [thunk];
+
+const mockStore = configureStore(middlewares);
 
 jest.mock('../../../api/auth', () => ({
   doSignInWithEmailAndPassword: jest.fn(() => {
@@ -39,17 +47,35 @@ jest.mock('../../../api/auth', () => ({
   }),
 }));
 
+const renderPage = (): void => {
+  const initialState = {
+    auth: {
+      userName: 'userName',
+      isAuthenticated: true,
+    },
+  };
+
+  const store = mockStore(initialState);
+
+  render(
+    <MemoryRouter>
+      <Provider store={store}>
+        <Login />
+      </Provider>
+    </MemoryRouter>
+  );
+};
+
 describe('login comp is function', () => {
+  beforeEach(() => {
+    renderPage();
+  });
+
   test('login is function', () => {
     expect(Login).toBeInstanceOf(Object);
   });
 
   test('login must be render in page', () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     expect(screen.getByTestId('login-form-test-id')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
@@ -58,21 +84,11 @@ describe('login comp is function', () => {
   });
 
   test('login must have button submit and cancel', () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     expect(screen.getByText('Войти')).toBeInTheDocument();
     expect(screen.getByText('Отмена')).toBeInTheDocument();
   });
 
   test('login must have button reset', () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     const btn = screen.getByText('Отмена');
     expect(btn).toBeInTheDocument();
     const inputLogin = screen.getByPlaceholderText('Username');
@@ -89,12 +105,11 @@ describe('login  behaviour', () => {
     jest.resetAllMocks();
   });
 
+  beforeEach(() => {
+    renderPage();
+  });
+
   test('login call siginin', async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     const btn = screen.getByText('Войти');
     expect(btn).toBeInTheDocument();
     const inputLogin = screen.getByPlaceholderText('Username');
@@ -110,15 +125,9 @@ describe('login  behaviour', () => {
     });
 
     expect(doSignInWithEmailAndPassword).nthCalledWith(1, 'ddd', '');
-    // act(() => {});
   });
 
   test('login call siginin with GitHub', async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     const btn = screen.getByTestId('gitHubLoginId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);
@@ -126,11 +135,6 @@ describe('login  behaviour', () => {
   });
 
   test('login call siginin with Google', async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
     const btn = screen.getByTestId('googleSignId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);

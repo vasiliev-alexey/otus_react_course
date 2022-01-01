@@ -7,7 +7,9 @@ import musicOff from '../../../../assets/images/mute.png';
 import avatar from '../../../../assets/images/avatar.png';
 import audio from '../../../../assets/sounds/tetrisMain.mp3';
 import { useNavigate } from 'react-router';
-import { useAuthContext } from '../../context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { AuthStateType } from '../../store/authSlice';
 
 const Header: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState(false);
@@ -42,8 +44,11 @@ const Header: React.FC = () => {
       }
     };
   }, [isAudioOn]);
-  const { authState } = useAuthContext();
+  const { isAuth, userPict, userName } = useSelector<RootState, AuthStateType>(
+    (st) => st.auth
+  );
   const login = useCallback(() => navigate('/login'), []);
+  const leaderboard = useCallback(() => navigate('/leaderboard'), []);
   const showExit = useCallback(() => {
     setShowMenu((s) => !s);
 
@@ -78,19 +83,22 @@ const Header: React.FC = () => {
         <span className="fast-flicker"> championship</span>
       </div>
 
-      {authState.isAuth && (
-        <p className="user-name-label"> Player: {authState.userName}</p>
-      )}
+      {isAuth && <p className="user-name-label"> Player: {userName}</p>}
 
       <div className="Footer-Toolbar">
-        <img alt="panda" className="octoCatLogo" src={String(leaderBoard)} />
+        <img
+          alt="panda"
+          className="octoCatLogo"
+          src={String(leaderBoard)}
+          onClick={leaderboard}
+        />
         <img
           alt="panda"
           className="octoCatLogo"
           src={isAudioOn ? musicOn.toString() : musicOff.toString()}
           onClick={playAudio}
         />
-        {!authState.isAuth && (
+        {!isAuth && (
           <img
             alt="octocat login"
             className="octoCatLogo"
@@ -98,12 +106,12 @@ const Header: React.FC = () => {
             onClick={login}
           />
         )}
-        {authState.isAuth && (
+        {isAuth && (
           <span>
             <img
               alt="octocat login"
               className="octoCatLogo"
-              src={authState.userPictUrl || avatar.toString()}
+              src={userPict || avatar.toString()}
               onClick={showExit}
             />
             {showMenu && (
