@@ -11,7 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "loki-test": "loki --requireReference --reactUri file:./dist ",
     "loki-upd-ref": "loki update --requireReference --reactUri file:./dist ",
-    "build-storybook": "build-storybook -o ./dist --quiet"
+    "build-storybook": "build-storybook --debug-webpack -o ./dist --quiet"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
@@ -53,7 +53,8 @@
     "@types/react-redux": "^7.1.21",
     "@types/redux-mock-store": "^1.0.3",
     "faker": "^5.5.3",
-    "@types/faker": "^5.5.9"
+    "@types/faker": "^5.5.9",
+    "@babel/plugin-transform-block-scoping": "^7.16.7"
   },
   "keywords": [
     "jest",

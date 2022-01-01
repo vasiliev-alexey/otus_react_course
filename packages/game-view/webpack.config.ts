@@ -87,7 +87,7 @@ const webpackConfig = (
             '@babel/plugin-transform-runtime',
             'babel-plugin-jsx-remove-data-test-id',
             // https://github.com/webpack/webpack/issues/9173
-            //'@babel/plugin-transform-block-scoping',
+            '@babel/plugin-transform-block-scoping',
           ],
         },
         exclude: /dist/,

@@ -72,19 +72,20 @@ jobs:
         working-directory: ./packages/game-view
         run: npm run build-storybook
 
-      - name: Archive storybook artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist-storybook
-          path: |
-            ./packages/game-view/dist
-          retention-days: 2
-
       - name: run loki test
         id: loki_test
         working-directory: ./packages/game-view
         run: |
           npm run loki-test
+
+      - name: Archive storybook artifacts
+        uses: actions/upload-artifact@v2
+        if: ${{ failure()  }}
+        with:
+          name: dist-storybook
+          path: |
+            ./packages/game-view/dist
+          retention-days: 2
 
   build_and_deploy:
     runs-on: ubuntu-20.04
