@@ -74,10 +74,11 @@ jobs:
 
       - name: run loki test
         id: loki_test
+        continue-on-error: true
         working-directory: ./packages/game-view
         run: |
           pwd
-          ls -a ./dist
+          ls -a ./dist 
           npm run loki-test
       - name: 'Send telegram notification'
         if: ${{ always() }}
