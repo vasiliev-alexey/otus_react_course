@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,15 +9,15 @@ const LogOut: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const submitHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+  const submitHandler = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     dispatch(doLogOut());
-  };
+  }, []);
 
-  const submitExit = (e: React.MouseEvent<HTMLInputElement>) => {
+  const submitExit = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     navigate('/');
-  };
+  }, []);
 
   const isAuth = useSelector<RootState>((state) => state.auth.isAuth);
   return (

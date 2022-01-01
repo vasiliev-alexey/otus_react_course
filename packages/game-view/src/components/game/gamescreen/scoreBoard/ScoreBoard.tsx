@@ -22,8 +22,8 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   const [linesState, setLinesState] = useState(0);
 
   useEffect(() => {
-    if (linesState !== (lines | 0)) setLinesState(lines);
-    {
+    if (linesState !== (lines | 0)) {
+      setLinesState(lines);
       audioWork.play();
     }
   }, [lines]);

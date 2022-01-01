@@ -83,7 +83,7 @@ const webpackConfig = (
             '@babel/preset-env',
             '@babel/preset-typescript',
           ],
-          plugins: ['@babel/plugin-transform-runtime'],
+          plugins: ['@babel/plugin-transform-runtime', '@emotion'],
         },
         exclude: /dist/,
       },

@@ -4,13 +4,13 @@ import { Story } from '@storybook/react';
 
 import Header from './Header';
 import { SITE_ROOT } from '../storyStructure';
-import { RouterDecorator } from '../utils/testUtils';
+import { ProviderDecorator, RouterDecorator } from '../utils/testUtils';
 
 const storyTitle = 'Заголовок сайта';
 export default {
   component: Header,
   title: `${SITE_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator],
+  decorators: [RouterDecorator, ProviderDecorator],
 };
 
 export const SiteHeader: Story = (args) => (

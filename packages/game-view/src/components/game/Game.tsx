@@ -10,7 +10,7 @@ import GameView from './GameView';
 import { PlayFieldType } from '@tetris/game-engine';
 import { RootState } from '../../store/store';
 import { connect } from 'react-redux';
-import { saveUserResultFb } from '../../store/leaderBoardSlice';
+import { setUserScore } from '../../store/leaderBoardSlice';
 import { ThunkAction, Action } from '@reduxjs/toolkit';
 
 type AppThunk<ReturnType = void> = ThunkAction<
@@ -37,7 +37,7 @@ interface GameState {
 }
 
 type GameProps = ReturnType<typeof mapStateToProps> &
-  ThunkProps<typeof mapDispatchThunkToProps>;
+  typeof mapDispatchThunkToProps;
 
 class Game extends React.Component<GameProps, GameState> {
   #gameEngine: GameEngine = new GameEngine();
@@ -99,7 +99,6 @@ class Game extends React.Component<GameProps, GameState> {
 
       if (this.props.auth.isAuth) {
         const { userName, uid, userPict: pictUrl } = this.props.auth;
-
         this.props.saveUserResult({
           uid,
           pictUrl: pictUrl || '',
@@ -189,7 +188,7 @@ class Game extends React.Component<GameProps, GameState> {
 
 // export default Game;
 
-const mapDispatchThunkToProps = { saveUserResult: saveUserResultFb };
+const mapDispatchThunkToProps = { saveUserResult: setUserScore };
 
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,

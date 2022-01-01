@@ -1,16 +1,34 @@
 import React from 'react';
-
 import { Story } from '@storybook/react';
-
 import LogOut from './LogOut';
 import { AUTH_ROOT } from '../../storyStructure';
-import { RouterDecorator } from '../../utils/testUtils';
+import { ProviderDecorator, RouterDecorator } from '../../utils/testUtils';
+
+import { Provider } from 'react-redux';
+import { RootState } from '../../../store/store';
+
+import { Middleware } from '@reduxjs/toolkit';
+import configureStore from 'redux-mock-store';
+
+const middlewares: Middleware[] = [];
+
+const mockStore = configureStore(middlewares);
 
 const storyTitle = 'Страница выхода';
 export default {
   component: LogOut,
   title: `${AUTH_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator],
+  decorators: [RouterDecorator, ProviderDecorator],
 };
 
-export const LogOutForm: Story = (args) => <LogOut {...args} />;
+const initialState: Partial<RootState> = {
+  auth: {
+    isAuth: true,
+  },
+};
+const store = mockStore(initialState);
+export const LogOutForm: Story = (args) => (
+  <Provider store={store}>
+    <LogOut {...args} />
+  </Provider>
+);
