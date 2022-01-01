@@ -6,7 +6,7 @@ export const getTopGamerList = async (limitSize = 10): Promise<Gamer[]> => {
   try {
     const data = await db
       .collection(GAMERS)
-      .orderBy('topScore')
+      .orderBy('topScore', 'desc')
       .limit(limitSize)
       .get();
 

@@ -1,0 +1,91 @@
+a {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+}
+.blog {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* container */
+.container {
+  width: 30rem;
+  height: auto;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* leaderboard */
+.leaderboard {
+  background: linear-gradient(to bottom, #5e84de, #043bbe);
+}
+
+/* head */
+.leaderboard .head {
+  //padding: 20px 16px;
+  color: snow;
+  font-size: 15px;
+  text-align: center;
+}
+.leaderboard .head h1 {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+/* body */
+.leaderboard .body {
+  font-size: 16px;
+  color: rgba(6, 10, 2, 0.98);
+}
+.leaderboard ol {
+  counter-reset: number;
+}
+.leaderboard li {
+  padding: 16px;
+  display: flex;
+}
+.leaderboard li mark {
+  flex-grow: 1;
+
+  background-color: transparent;
+}
+.leaderboard li:before {
+  counter-increment: number;
+  content: counter(number) '.';
+  margin-right: 4px;
+}
+.leaderboard li:nth-child(1) {
+  background: desaturate(gold, 15%);
+  font-weight: bold;
+}
+.leaderboard li:nth-child(2) {
+  background: silver;
+  font-weight: bold;
+}
+.leaderboard li:nth-child(3) {
+  background: #cd7f32;
+  font-weight: bold;
+}
+.leaderboard li {
+  background: desaturate(#d6e2ee, 15%);
+}
+
+.leaderboard-avatar {
+  width: 25px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
