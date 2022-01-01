@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../../public/index.scss';
 
 import { Story } from '@storybook/react';
 
