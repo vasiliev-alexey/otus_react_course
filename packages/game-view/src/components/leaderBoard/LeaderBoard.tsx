@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import avatar from '../../../../assets/images/avatar.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { getLeaderBoardData, LeaderList } from '../../store/leaderBoardSlice';
+import { fetchData, LeaderList } from '../../store/leaderBoardSlice';
 import { ClimbingBoxLoader } from 'react-spinners';
 
 const LeaderBoard: React.FC = () => {
   const dispatcher = useDispatch();
 
   useEffect(() => {
-    dispatcher(getLeaderBoardData());
+    dispatcher(fetchData());
   }, []);
 
   const { isLoading, leaderList } = useSelector<RootState, LeaderList>(

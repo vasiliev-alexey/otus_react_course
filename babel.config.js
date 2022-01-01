@@ -8,6 +8,6 @@ module.exports = {
     '@babel/plugin-transform-modules-commonjs',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-transform-runtime',
-    '@emotion',
+    '@emotion/babel-plugin',
   ],
 };
