@@ -23,6 +23,11 @@
     "react-router": "^6.0.2",
     "firebase": "^8.8.1",
     "dotenv": "^10.0.0",
+    "remark-gfm": "^3.0.1",
+    "react-router-dom": "^6.0.2",
+    "react-router": "^6.0.2",
+    "firebase": "^8.8.1",
+    "dotenv": "^10.0.0",
     "@reduxjs/toolkit": "^1.7.0"
   },
   "lint-staged": {
