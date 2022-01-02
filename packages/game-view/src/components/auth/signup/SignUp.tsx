@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { registerUser } from '../../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { actions } from '../../../store/authSlice';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -27,14 +28,23 @@ const SignUp: React.FC = () => {
       const data = await registerUser(inputField.login, inputField.password);
 
       if (data.operationType === 'signIn') {
-        dispatch({
-          type: 'SET_USER_NAME',
-          payload: {
+        dispatch(
+          //     {
+          //   type: 'SET_USER_NAME',
+          //   payload: {
+          //     userName: data.user.email,
+          //     userPictUrl: '',
+          //     uid: data.user.uid,
+          //   },
+          // }
+          //
+          actions.setUserName({
             userName: data.user.email,
-            userPictUrl: '',
+            pictUrl: '',
             uid: data.user.uid,
-          },
-        });
+            topScore: 0,
+          })
+        );
       }
       navigate('/');
     } catch (e) {

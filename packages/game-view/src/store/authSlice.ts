@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  CaseReducer,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import {
   doSignInWithEmailAndPassword,
   doSignOut,
@@ -7,6 +12,7 @@ import {
   signInWithGoogle,
   User,
 } from '../api/auth';
+import { Gamer } from '../api/db';
 
 interface userCred {
   uid: string;
@@ -102,10 +108,22 @@ export const loginWithGitHubAuth = createAsyncThunk<User>(
   }
 );
 
+const setUserName: CaseReducer<AuthStateType, PayloadAction<Gamer>> = (
+  state,
+  action
+) => {
+  state.userName = action.payload.userName;
+  state.uid = action.payload.uid;
+  state.userPict = action.payload.pictUrl;
+  state.isAuth = true;
+};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setUserName,
+  },
   extraReducers: (builder) => {
     builder.addCase(loginWithEmailAndPassword.pending, (state) => {
       state.isAuth = false;
@@ -166,5 +184,3 @@ const authSlice = createSlice({
 });
 
 export const { reducer, actions } = authSlice;
-
-// export default reducer;
