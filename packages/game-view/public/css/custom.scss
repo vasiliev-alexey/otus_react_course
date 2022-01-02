@@ -3,6 +3,10 @@ main {
   justify-content: center;
   align-items: center;
   height: 90vh;
+  //background-image: url('https://image.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg');
+  //background-image: url('https://img.huffingtonpost.com/asset/5772b9891800002500fa2dde.jpeg?cache=kkwjisxort&ops=1778_1000');
+  //background-image: url('https://cdn.shazoo.ru/350954_iXFS7o23db_tetris.jpg');
+  //  background-image: url('https://cdn.pixabay.com/photo/2014/04/03/00/39/tetris-308986_1280.png');
   background-image: url('img/tetris-308986_1280.webp');
   background-repeat: no-repeat;
   background-size: 100vw;
@@ -15,8 +19,11 @@ footer {
 }
 
 tr {
+  //  border-bottom: none;
+  // border-top: none;
   display: table-row;
   vertical-align: center;
+  // border-collapse: collapse;
 }
 
 table {

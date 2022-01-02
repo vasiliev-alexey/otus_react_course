@@ -10,7 +10,7 @@ doc/Заметки.md
 /**/dist
 /**/storybook-static
 
-.env
+**/*.env
 
 *.tgz
 

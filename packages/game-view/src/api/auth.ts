@@ -1,14 +1,12 @@
 import { auth } from './firebase';
 import firebase from 'firebase';
 
-// Sign In
 export const doSignInWithEmailAndPassword = (
   email: string,
   password: string
 ): Promise<firebase.auth.UserCredential> =>
   auth.signInWithEmailAndPassword(email, password);
 
-// Sign out
 export const doSignOut = (): Promise<void> => auth.signOut();
 export const registerUser = (
   email: string,
@@ -18,7 +16,7 @@ export const registerUser = (
 
 const provider = new firebase.auth.GithubAuthProvider();
 
-interface User {
+export interface User {
   displayName: string;
   photoUrl: string;
   uid: string;
@@ -35,7 +33,7 @@ const getGiHubUser = async (id: string, uid: string): Promise<User> => {
   };
 };
 
-export const githubSignin = async (): Promise<User> => {
+export const signInWithGithub = async (): Promise<User> => {
   const data = await firebase.auth().signInWithPopup(provider);
   return await getGiHubUser(data.user.providerData.at(0).uid, data.user.uid);
 };

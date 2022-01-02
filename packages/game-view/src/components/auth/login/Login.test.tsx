@@ -4,14 +4,13 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
-import { MemoryRouter, Router } from 'react-router';
+import { MemoryRouter } from 'react-router';
 import {
   doSignInWithEmailAndPassword,
-  githubSignin,
+  signInWithGithub,
   signInWithGoogle,
 } from '../../../api/auth';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
 
 jest.mock('../../../api/auth', () => ({
   doSignInWithEmailAndPassword: jest.fn(() => {
@@ -22,7 +21,7 @@ jest.mock('../../../api/auth', () => ({
       },
     };
   }),
-  githubSignin: jest.fn(() => {
+  signInWithGithub: jest.fn(() => {
     return {
       user: {
         uud: 'a',
@@ -69,17 +68,10 @@ describe('login comp is function', () => {
   });
 
   test('login must have button reset', () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/aaa'],
-      initialIndex: 0,
-    });
-    const pushRoute = jest.fn();
-    history.push = pushRoute;
-
     render(
-      <Router location={'dd'} navigator={history}>
+      <MemoryRouter>
         <Login />
-      </Router>
+      </MemoryRouter>
     );
     const btn = screen.getByText('Отмена');
     expect(btn).toBeInTheDocument();
@@ -88,11 +80,7 @@ describe('login comp is function', () => {
     userEvent.type(inputLogin, 'ddd');
     expect(screen.getByTestId('login-input-test-id')).toHaveValue('ddd');
     userEvent.click(btn);
-    expect(pushRoute).nthCalledWith(
-      1,
-      { hash: '', pathname: '/', search: '' },
-      undefined
-    );
+    expect(screen.getByTestId('login-input-test-id')).toHaveValue('');
   });
 });
 
@@ -122,6 +110,7 @@ describe('login  behaviour', () => {
     });
 
     expect(doSignInWithEmailAndPassword).nthCalledWith(1, 'ddd', '');
+    // act(() => {});
   });
 
   test('login call siginin with GitHub', async () => {
@@ -133,7 +122,7 @@ describe('login  behaviour', () => {
     const btn = screen.getByTestId('gitHubLoginId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);
-    expect(githubSignin).nthCalledWith(1);
+    expect(signInWithGithub).nthCalledWith(1);
   });
 
   test('login call siginin with Google', async () => {

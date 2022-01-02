@@ -83,7 +83,10 @@ const webpackConfig = (
             '@babel/preset-env',
             '@babel/preset-typescript',
           ],
-          plugins: ['@babel/plugin-transform-runtime'],
+          plugins: [
+            '@babel/plugin-transform-runtime',
+            'babel-plugin-jsx-remove-data-test-id',
+          ],
         },
         exclude: /dist/,
       },
@@ -117,11 +120,12 @@ const webpackConfig = (
 
   plugins: [
     gitRevisionPlugin,
-    arg.mode === 'production' ? envPluginProd : envPluginDev,
-    new Dotenv({
-      safe: true,
-      path: path.resolve(__dirname, '.env'),
-    }),
+    arg.mode === 'production'
+      ? envPluginProd
+      : new Dotenv({
+          safe: true,
+          path: path.resolve(__dirname, '.env'),
+        }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(gitRevisionPlugin.version()),
       COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
@@ -142,7 +146,7 @@ const webpackConfig = (
     }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
-        files: './src/**/*.{ts,tsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,tsx}',
       },
       typescript: {
         tsconfig: getTsConfigName(arg.mode),
