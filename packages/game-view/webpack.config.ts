@@ -142,7 +142,7 @@ const webpackConfig = (
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: '../assets/images/tetris.png',
+      favicon: '../assets/images/tetris.svg',
     }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
