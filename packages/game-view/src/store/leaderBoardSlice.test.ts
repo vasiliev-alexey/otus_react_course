@@ -1,6 +1,6 @@
 import { setUserScore, fetchData } from './leaderBoardSlice';
 
-import { getTopGamerList, saveUserResult } from '../api/db';
+import { getTopGamerList, saveUserResult } from '@api/db';
 import { store } from './store';
 
 import { nanoid } from '@reduxjs/toolkit';

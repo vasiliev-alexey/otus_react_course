@@ -9,7 +9,7 @@ import {
   doSignInWithEmailAndPassword,
   signInWithGithub,
   signInWithGoogle,
-} from '../../../api/auth';
+} from '@api/auth';
 import { act } from 'react-dom/test-utils';
 import { Middleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';

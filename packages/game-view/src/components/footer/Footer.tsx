@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import help from '../../../../assets/images/help.png';
+import help from '@images/help.png';
 
 const Footer: React.FC = () => {
   const navigate = useNavigate();

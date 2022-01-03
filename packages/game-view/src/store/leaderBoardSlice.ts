@@ -4,7 +4,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { Gamer } from '../api/db';
+import { Gamer } from '@api/db';
 
 const rootActionName = 'score/leaderboard';
 

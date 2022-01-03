@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import avatar from '../../../../assets/images/avatar.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { fetchData, LeaderList } from '../../store/leaderBoardSlice';
+import { RootState } from '@store/store';
+import { fetchData, LeaderList } from '@store/leaderBoardSlice';
 import { ClimbingBoxLoader } from 'react-spinners';
 
 const LeaderBoard: React.FC = () => {

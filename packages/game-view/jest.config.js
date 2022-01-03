@@ -2,7 +2,19 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/en/configuration.html
  */
+// eslint-disable-next-line
+// @ts-ignore
+// eslint-disable-next-line  @typescript-eslint/no-var-requires
+const paths = require('./tsconfig.json').compilerOptions.paths;
+const aliases = {};
 
+for (let key in paths) {
+  if (paths.hasOwnProperty(key)) {
+    const aliasKey = key.replace('/*', '');
+    const aliasValue = String(paths[key]).replace('/*', '');
+    aliases[`^${aliasKey}(.*)$`] = `<rootDir>/${aliasValue}$1`;
+  }
+}
 module.exports = {
   projects: [
     {
@@ -37,6 +49,7 @@ module.exports = {
           'jest-transform-stub',
       },
       moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+      moduleNameMapper: aliases,
     },
 
     {

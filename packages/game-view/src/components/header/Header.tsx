@@ -8,8 +8,8 @@ import avatar from '../../../../assets/images/avatar.png';
 import audio from '../../../../assets/sounds/tetrisMain.mp3';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { AuthStateType } from '../../store/authSlice';
+import { RootState } from '@store/store';
+import { AuthStateType } from '@store/authSlice';
 
 const Header: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState(false);

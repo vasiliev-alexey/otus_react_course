@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import help from '../../../../../assets/images/iconmonstr-github-5.svg';
-import google from '../../../../../assets/images/google.png';
+import help from '@images/iconmonstr-github-5.svg';
+import google from '@images/google.png';
 import { Navigate, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginWithEmailAndPassword,
   loginWithGitHubAuth,
   loginWithGoogleAuth,
-} from '../../../store/authSlice';
-import { RootState } from '../../../store/store';
+} from '@store/authSlice';
+import { RootState } from '@store/store';
 
 const gitHubLoginId = 'gitHubLoginId';
 const googleSignId = 'googleSignId';

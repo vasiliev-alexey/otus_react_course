@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 import LogOut from './LogOut';
-import { AUTH_ROOT } from '../../storyStructure';
-import { ProviderDecorator, RouterDecorator } from '../../utils/testUtils';
+import { AUTH_ROOT } from '@ui/storyStructure';
+import { ProviderDecorator, RouterDecorator } from '@ui/utils/testUtils';
 
 import { Provider } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '@store/store';
 
 import { Middleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';

@@ -7,8 +7,8 @@ import { Middleware, nanoid } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { RootState } from '../../store/store';
-import { LeaderList } from '../../store/leaderBoardSlice';
+import { RootState } from '@store/store';
+import { LeaderList } from '@store/leaderBoardSlice';
 
 import faker from 'faker';
 

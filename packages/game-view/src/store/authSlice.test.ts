@@ -8,7 +8,7 @@ import {
   doSignInWithEmailAndPassword,
   signInWithGithub,
   signInWithGoogle,
-} from '../api/auth';
+} from '@api/auth';
 import firebase from 'firebase';
 import { store } from './store';
 
