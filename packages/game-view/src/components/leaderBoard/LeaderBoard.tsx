@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import avatar from '../../../../assets/images/avatar.png';
+import avatar from '@images/avatar.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/store';
 import { fetchData, LeaderList } from '@store/leaderBoardSlice';

@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import gitHubLogin from '../../../../assets/images/login.png';
-import tetris from '../../../../assets/images/tetris.png';
-import musicOn from '../../../../assets/images/musical-notes.png';
-import leaderBoard from '../../../../assets/images/leaderboard.png';
-import musicOff from '../../../../assets/images/mute.png';
-import avatar from '../../../../assets/images/avatar.png';
-import audio from '../../../../assets/sounds/tetrisMain.mp3';
+import gitHubLogin from '@images/login.svg';
+import tetris from '@images/tetris.svg';
+import musicOn from '@images/sound_on.svg';
+import leaderBoard from '@images/leaderboard.svg';
+import musicOff from '@images/sound_off.svg';
+import avatar from '@images/avatar.svg';
+import audio from '@sounds/tetrisMain.mp3';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/store';

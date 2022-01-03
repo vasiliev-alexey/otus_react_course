@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import help from '@images/iconmonstr-github-5.svg';
-import google from '@images/google.png';
+import google from '@images/google.svg';
 import { Navigate, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
