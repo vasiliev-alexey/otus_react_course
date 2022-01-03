@@ -7,7 +7,7 @@ import configureStore from 'redux-mock-store';
 
 import thunk from 'redux-thunk';
 import { Middleware } from '@reduxjs/toolkit';
-import { store } from '../../store/store';
+import { store } from '@store/store';
 
 const middlewares: Middleware[] = [thunk];
 

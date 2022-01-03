@@ -7,7 +7,7 @@ import {
   ForkEffect,
   takeLeading,
 } from 'redux-saga/effects';
-import { Gamer, getTopGamerList, saveUserResult } from '../../api/db';
+import { Gamer, getTopGamerList, saveUserResult } from '@api/db';
 import { actions, fetchData, setUserScore } from '../leaderBoardSlice';
 
 function* fetchLeaderBoardData(): Generator<

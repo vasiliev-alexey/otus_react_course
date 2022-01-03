@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../../api/auth';
+import { registerUser } from '@api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../../store/authSlice';
+import { actions } from '@store/authSlice';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -29,15 +29,6 @@ const SignUp: React.FC = () => {
 
       if (data.operationType === 'signIn') {
         dispatch(
-          //     {
-          //   type: 'SET_USER_NAME',
-          //   payload: {
-          //     userName: data.user.email,
-          //     userPictUrl: '',
-          //     uid: data.user.uid,
-          //   },
-          // }
-          //
           actions.setUserName({
             userName: data.user.email,
             pictUrl: '',

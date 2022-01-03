@@ -53,6 +53,10 @@ const webpackConfig = (
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
 
+    // alias: {
+    //   '@store': path.resolve(__dirname, 'src/store'),
+    // },
+
     //@ts-ignore
     plugins: [
       new TsconfigPathsPlugin({
@@ -98,7 +102,6 @@ const webpackConfig = (
           // Compiles Sass to CSS
           'sass-loader',
         ],
-        // include: [path.resolve(__dirname, '../public')],
       },
 
       { test: /\.(mp3)$/, loader: 'file-loader' },

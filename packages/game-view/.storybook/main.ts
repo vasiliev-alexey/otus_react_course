@@ -22,6 +22,7 @@ module.exports = {
   webpackFinal: async (config) => {
     let cgf = {
       ...config,
+      resolve: custCfg.resolve,
       plugins: [...config.plugins, ...custCfg.plugins],
       module: {
         ...config.module,

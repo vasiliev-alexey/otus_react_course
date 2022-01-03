@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getColor } from '../utils';
-import audio from '../../../../../../assets/sounds/clear.mp3';
+import audio from '@sounds/clear.mp3';
 
 type ScoreBoardProps = {
   nextPieceBlock: number[][];

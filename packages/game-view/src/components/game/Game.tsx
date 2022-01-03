@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Game as GameEngine } from '@tetris/game-engine';
 
-import pause from '../../../../assets/sounds/pause.mp3';
-import rotate from '../../../../assets/sounds/blockRotate.mp3';
-import gamover from '../../../../assets/sounds/gameover.mp3';
-import fall from '../../../../assets/sounds/fall.mp3';
-import GameView from './GameView';
+import pause from '@sounds/pause.mp3';
+import rotate from '@sounds/blockRotate.mp3';
+import gamover from '@sounds/gameover.mp3';
+import fall from '@sounds/fall.mp3';
+import GameView from '@gameUi/GameView';
 import { PlayFieldType } from '@tetris/game-engine';
-import { RootState } from '../../store/store';
+import { RootState } from '@store/store';
 import { connect } from 'react-redux';
-import { setUserScore } from '../../store/leaderBoardSlice';
+import { setUserScore } from '@store/leaderBoardSlice';
 import { ThunkAction, Action } from '@reduxjs/toolkit';
 
 type AppThunk<ReturnType = void> = ThunkAction<

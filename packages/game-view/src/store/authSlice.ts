@@ -11,8 +11,8 @@ import {
   signInWithGithub,
   signInWithGoogle,
   User,
-} from '../api/auth';
-import { Gamer } from '../api/db';
+} from '@api/auth';
+import { Gamer } from '@api/db';
 
 interface userCred {
   uid: string;

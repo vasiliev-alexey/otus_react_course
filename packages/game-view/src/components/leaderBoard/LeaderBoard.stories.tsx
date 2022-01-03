@@ -9,8 +9,8 @@ import configureStore from 'redux-mock-store';
 
 import thunk from 'redux-thunk';
 import { Middleware, nanoid } from '@reduxjs/toolkit';
-import { RootState } from '../../store/store';
-import { LeaderList } from '../../store/leaderBoardSlice';
+import { RootState } from '@store/store';
+import { LeaderList } from '@store/leaderBoardSlice';
 import { Provider } from 'react-redux';
 
 const middlewares: Middleware[] = [thunk];
