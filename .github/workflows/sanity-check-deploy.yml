@@ -162,6 +162,6 @@ jobs:
           token: ${{ secrets.TG_TOKEN }}
           message: |
             ${{ (job.status == 'success' && '✅' ) || '⛔'}} repository: ${{ github.repository }}
-            Задание: Деплой
+            Задание: Деплой на GHP
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
             ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} ${{ (steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} ${{ (steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ') || '' }} ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' ) || ''}} ${{ (steps.Build.outcome == 'failure' &&  'Build ⛔ ') || '' }}
