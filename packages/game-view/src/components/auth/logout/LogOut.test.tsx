@@ -46,7 +46,6 @@ describe('LogOut comp is function', () => {
         </Router>
       </Provider>
     );
-    //  console.log('sssssssss');
 
     expect(screen.getByTestId('logout-form-test-id')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /выход/i })).toBeInTheDocument();

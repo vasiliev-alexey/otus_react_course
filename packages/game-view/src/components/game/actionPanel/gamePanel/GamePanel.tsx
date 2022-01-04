@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 export interface GamePanelProps {
   togglePause: () => void;
@@ -11,11 +11,16 @@ const GamePanel: React.FC<GamePanelProps> = ({
   reset,
   isPause,
 }) => {
+  const pauseClick = useCallback((event) => {
+    event.target.blur();
+    togglePause();
+  }, []);
+
   return (
     <div className="gamePanel">
       <button
         className="circleButton smBtn btnBackColor btnMiddle"
-        onClick={togglePause}
+        onClick={pauseClick}
         data-testid="GamePanel-pause-btb"
       >
         {isPause != undefined && !isPause ? 'pause' : 'start'}

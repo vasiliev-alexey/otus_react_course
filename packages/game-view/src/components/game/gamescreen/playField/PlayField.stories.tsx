@@ -37,5 +37,3 @@ export const PlayFieldComponent: Story = (args) => (
     <PlayField playField={initGameField} {...args} />
   </div>
 );
-
-// export const PlayFieldComponent = (Template);

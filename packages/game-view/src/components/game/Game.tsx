@@ -186,8 +186,6 @@ class Game extends React.Component<GameProps, GameState> {
   }
 }
 
-// export default Game;
-
 const mapDispatchThunkToProps = { saveUserResult: setUserScore };
 
 const mapStateToProps = (state: RootState) => ({

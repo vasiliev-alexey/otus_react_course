@@ -47,7 +47,6 @@ const Login: React.FC = () => {
 
   const onAuthLogin = useCallback(
     async (event) => {
-      // let userData: UnPromisify<ReturnType<typeof signInWithGithub>>;
       try {
         if (event.target.id === gitHubLoginId) {
           dispatchRedux(loginWithGitHubAuth());
