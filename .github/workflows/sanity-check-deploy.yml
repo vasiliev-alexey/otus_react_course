@@ -74,7 +74,6 @@ jobs:
 
       - name: run loki test
         id: loki_test
-        continue-on-error: true
         working-directory: ./packages/game-view
         run: |
           pwd
@@ -88,6 +87,7 @@ jobs:
           name: dist-storybook
           path: |
             ./packages/game-view/dist
+            ./packages/game-view/.loki/differene
           retention-days: 2
 
       - name: 'Send telegram notification'
