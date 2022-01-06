@@ -7,13 +7,12 @@ import { SITE_ROOT } from '../storyStructure';
 import { RouterDecorator } from '../utils/testUtils';
 import configureStore from 'redux-mock-store';
 
-import thunk from 'redux-thunk';
 import { Middleware, nanoid } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { LeaderList } from '@store/leaderBoardSlice';
 import { Provider } from 'react-redux';
 
-const middlewares: Middleware[] = [thunk];
+const middlewares: Middleware[] = [];
 
 const mockStore = configureStore(middlewares);
 

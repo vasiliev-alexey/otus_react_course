@@ -1,7 +1,7 @@
 import {
-  loginWithEmailAndPassword,
   loginWithGitHubAuth,
   loginWithGoogleAuth,
+  loginWithNameAndPass,
 } from './authSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import {
@@ -11,6 +11,7 @@ import {
 } from '@api/auth';
 import firebase from 'firebase';
 import { store } from './store';
+import faker from 'faker';
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -18,8 +19,8 @@ jest.mock('../api/auth');
 describe('test login with email and pass - success', () => {
   it('resolve thunk if auth service is success', async () => {
     const rndUser = {
-      uid: nanoid(11),
-      email: 'aa', // nanoid(20),
+      uid: faker.datatype.string(11),
+      email: faker.name.firstName(),
     };
     const doSignInWithEmailAndPasswordMock =
       doSignInWithEmailAndPassword as jest.MockedFunction<
@@ -29,7 +30,7 @@ describe('test login with email and pass - success', () => {
       user: rndUser,
     } as firebase.auth.UserCredential);
 
-    store.dispatch(loginWithEmailAndPassword({ username: 'a', password: 'a' }));
+    store.dispatch(loginWithNameAndPass({ login: 'a', password: 'a' }));
     await sleep(0);
 
     expect(doSignInWithEmailAndPasswordMock).toBeCalledTimes(1);

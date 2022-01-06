@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { doLogOut } from '@store/authSlice';
+import { logout } from '@store/authSlice';
 import { RootState } from '@store/store';
 
 const LogOut: React.FC = () => {
@@ -11,7 +10,7 @@ const LogOut: React.FC = () => {
 
   const submitHandler = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    dispatch(doLogOut());
+    dispatch(logout());
   }, []);
 
   const submitExit = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
