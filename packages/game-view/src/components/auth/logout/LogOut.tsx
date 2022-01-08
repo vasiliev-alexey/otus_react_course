@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@store/authSlice';
 import { RootState } from '@store/store';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const LogOut: React.FC = () => {
   const navigate = useNavigate();

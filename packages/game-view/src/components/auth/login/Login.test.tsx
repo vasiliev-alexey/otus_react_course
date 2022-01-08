@@ -1,16 +1,16 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import Login from './Login';
-import { MemoryRouter } from 'react-router';
 
-import { act } from 'react-dom/test-utils';
 import { Middleware } from '@reduxjs/toolkit';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
 import configureStore from 'redux-mock-store';
-
 import thunk from 'redux-thunk';
+
+import Login from './Login';
 
 const middlewares: Middleware[] = [thunk];
 const mockStore = configureStore(middlewares);

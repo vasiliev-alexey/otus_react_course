@@ -1,8 +1,9 @@
 import React from 'react';
-import PlayField from './playField/PlayField';
-import ScoreBoard from './scoreBoard/ScoreBoard';
+
 import GameOver from './gamover/GameOver';
 import PauseLabel from './pauseLabel/PauseLabel';
+import PlayField from './playField/PlayField';
+import ScoreBoard from './scoreBoard/ScoreBoard';
 
 export interface GameScreenProps {
   isPause?: boolean;

@@ -1,16 +1,14 @@
-import React from 'react';
-
+import { Middleware, nanoid } from '@reduxjs/toolkit';
+import { LeaderList } from '@store/leaderBoardSlice';
+import { RootState } from '@store/store';
 import { Story } from '@storybook/react';
-
-import LeaderBoard from './LeaderBoard';
-import { SITE_ROOT } from '../storyStructure';
-import { RouterDecorator } from '../utils/testUtils';
+import React from 'react';
+import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { Middleware, nanoid } from '@reduxjs/toolkit';
-import { RootState } from '@store/store';
-import { LeaderList } from '@store/leaderBoardSlice';
-import { Provider } from 'react-redux';
+import { SITE_ROOT } from '../storyStructure';
+import { RouterDecorator } from '../utils/testUtils';
+import LeaderBoard from './LeaderBoard';
 
 const middlewares: Middleware[] = [];
 

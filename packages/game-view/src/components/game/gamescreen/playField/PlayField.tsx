@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getColor } from '../utils';
 
 type ScoreBoardProps = {

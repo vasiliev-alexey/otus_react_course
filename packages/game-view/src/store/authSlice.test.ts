@@ -1,17 +1,18 @@
 import {
-  loginWithGitHubAuth,
-  loginWithGoogleAuth,
-  loginWithNameAndPass,
-} from './authSlice';
-import { nanoid } from '@reduxjs/toolkit';
-import {
   doSignInWithEmailAndPassword,
   signInWithGithub,
   signInWithGoogle,
 } from '@api/auth';
-import firebase from 'firebase';
-import { store } from './store';
+import { nanoid } from '@reduxjs/toolkit';
 import faker from 'faker';
+import firebase from 'firebase';
+
+import {
+  loginWithGitHubAuth,
+  loginWithGoogleAuth,
+  loginWithNameAndPass,
+} from './authSlice';
+import { store } from './store';
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 

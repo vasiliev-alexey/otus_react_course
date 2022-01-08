@@ -1,14 +1,13 @@
-import React from 'react';
+import { Middleware } from '@reduxjs/toolkit';
+import { RootState } from '@store/store';
 import { Story } from '@storybook/react';
-import LogOut from './LogOut';
 import { AUTH_ROOT } from '@ui/storyStructure';
 import { ProviderDecorator, RouterDecorator } from '@ui/utils/testUtils';
-
+import React from 'react';
 import { Provider } from 'react-redux';
-import { RootState } from '@store/store';
-
-import { Middleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';
+
+import LogOut from './LogOut';
 
 const middlewares: Middleware[] = [];
 

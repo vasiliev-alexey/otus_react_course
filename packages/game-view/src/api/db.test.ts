@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
-import { getTopGamerList, saveUserResult } from './db';
-
 import firebase from 'firebase';
+
+import { getTopGamerList, saveUserResult } from './db';
 
 describe('test db functions', () => {
   beforeAll(() => {

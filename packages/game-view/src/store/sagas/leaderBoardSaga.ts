@@ -1,20 +1,29 @@
+import { getTopGamerList, saveUserResult } from '@api/db';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { AuthStateType } from '@store/authSlice';
 import {
-  CallEffect,
-  PutEffect,
+  fetchData,
+  LeaderBoardActions,
+  setUserScore,
+} from '@store/leaderBoardSlice';
+import { authSelector } from '@store/selectors/authSelector';
+import {
   call,
-  put,
+  CallEffect,
   ForkEffect,
+  put,
+  PutEffect,
+  select,
+  SelectEffect,
   takeLeading,
 } from 'redux-saga/effects';
-import { Gamer, getTopGamerList, saveUserResult } from '@api/db';
-import { actions, fetchData, setUserScore } from '@store/leaderBoardSlice';
 
 export function* fetchLeaderBoardData(): Generator<
   | CallEffect<Awaited<ReturnType<typeof getTopGamerList>>>
   | PutEffect<
       ReturnType<
-        typeof actions.leaderBoardData | typeof actions.errorLeaderBoardData
+        | typeof LeaderBoardActions.leaderBoardData
+        | typeof LeaderBoardActions.errorLeaderBoardData
       >
     >
 > {
@@ -22,22 +31,38 @@ export function* fetchLeaderBoardData(): Generator<
     const userPosts = (yield call(getTopGamerList, 10)) as Awaited<
       ReturnType<typeof getTopGamerList>
     >;
-    yield put(actions.leaderBoardData(userPosts));
+    yield put(LeaderBoardActions.leaderBoardData(userPosts));
   } catch (e) {
-    yield put(actions.errorLeaderBoardData({ errorMessage: e.message }));
+    yield put(
+      LeaderBoardActions.errorLeaderBoardData({ errorMessage: e.message })
+    );
   }
 }
 
 export function* setUserScoreWorker(
-  action: PayloadAction<Gamer>
+  action: PayloadAction<number>
 ): Generator<
   | CallEffect<Awaited<ReturnType<typeof saveUserResult>>>
-  | PutEffect<ReturnType<typeof actions.errorLeaderBoardData>>
+  | PutEffect<ReturnType<typeof LeaderBoardActions.errorLeaderBoardData>>
+  | SelectEffect
 > {
-  try {
-    yield call(saveUserResult, action.payload);
-  } catch (e) {
-    yield put(actions.errorLeaderBoardData({ errorMessage: e.message }));
+  const { isAuth, uid, userPict, userName } = (yield select(
+    authSelector
+  )) as AuthStateType;
+
+  if (isAuth) {
+    try {
+      yield call(saveUserResult, {
+        uid,
+        pictUrl: userPict || '',
+        userName,
+        topScore: action.payload,
+      });
+    } catch (e) {
+      yield put(
+        LeaderBoardActions.errorLeaderBoardData({ errorMessage: e.message })
+      );
+    }
   }
 }
 

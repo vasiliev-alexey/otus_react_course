@@ -1,11 +1,11 @@
 import {
-  mul,
-  div,
   add,
-  minus,
-  square,
-  power,
+  div,
   factorial,
+  minus,
+  mul,
+  power,
+  square,
 } from './mathOperators';
 
 describe('mathOperators test cases', () => {

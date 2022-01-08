@@ -1,9 +1,11 @@
 import '@css/index.scss';
-import React from 'react';
+
 import TitleBar from '@ui/game/titleBar/TitleBar';
+import React from 'react';
+
 import ErrorBoundary from '../utils/ErrorBoundary';
-import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
 import ActionPanel, { ActionPanelProps } from './actionPanel/ActionPanel';
+import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
 
 export interface GameViewProps extends GameScreenProps, ActionPanelProps {
   isPause: boolean;

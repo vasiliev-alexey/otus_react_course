@@ -1,7 +1,7 @@
 import {
-  unaryPrioritiesCalc,
   firstPrioritiesCalc,
   secondPrioritiesCalc,
+  unaryPrioritiesCalc,
 } from './engine';
 
 describe('unaryPrioritiesCalc', () => {

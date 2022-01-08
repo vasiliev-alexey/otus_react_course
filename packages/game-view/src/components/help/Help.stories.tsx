@@ -1,10 +1,9 @@
+import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Story } from '@storybook/react';
-
 import { SITE_ROOT } from '../storyStructure';
-import Help from './Help';
 import { RouterDecorator } from '../utils/testUtils';
+import Help from './Help';
 
 const storyTitle = 'Помощь';
 export default {

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import ControlPanel, { ControlPanelProps } from './controlPanel/ControlPanel';
+import GamePanel, { GamePanelProps } from './gamePanel/GamePanel';
 import RotationPanel, {
   RotationPanelProps,
 } from './rotationPanel/RotationPanel';
-import GamePanel, { GamePanelProps } from './gamePanel/GamePanel';
 
 export interface ActionPanelProps
   extends GamePanelProps,

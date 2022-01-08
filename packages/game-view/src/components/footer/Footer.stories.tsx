@@ -1,10 +1,9 @@
+import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Story } from '@storybook/react';
-
-import Footer from './Footer';
 import { SITE_ROOT } from '../storyStructure';
 import { RouterDecorator } from '../utils/testUtils';
+import Footer from './Footer';
 
 const storyTitle = 'Подвал сайта';
 export default {

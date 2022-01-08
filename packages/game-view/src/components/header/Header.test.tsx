@@ -1,14 +1,16 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './Header';
-import { Router } from 'react-router';
+
+import { Middleware } from '@reduxjs/toolkit';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { Middleware } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
+import Header from './Header';
 
 const defaultHistory = createMemoryHistory({
   initialEntries: ['/aaa'],

@@ -1,10 +1,9 @@
+import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Story } from '@storybook/react';
-
-import Header from './Header';
 import { SITE_ROOT } from '../storyStructure';
 import { ProviderDecorator, RouterDecorator } from '../utils/testUtils';
+import Header from './Header';
 
 const storyTitle = 'Заголовок сайта';
 export default {

@@ -13,7 +13,7 @@ export interface GameState {
   level: number;
   lines: number;
   score: number;
-  nextPiece: PieceType;
+  nextPiece: PlayFieldType;
   playfield: PlayFieldType;
   isGameOver: boolean;
   isRotateError: boolean;
@@ -77,20 +77,20 @@ export class Game {
       lines: this.#lines,
       score: this.#score,
       isRotateError: this.#isRotateError,
-      nextPiece: init ? initPiece : this.#nextPiece,
+      nextPiece: init ? initPiece.blocks : this.#nextPiece.blocks,
       playfield,
       isGameOver: this.#topOut,
     };
   }
 
-  reset(): void {
+  reset = (): void => {
     this.#score = 0;
     this.#lines = 0;
     this.#topOut = false;
     this.#playfield = this.#createPlayfield();
     this.#activePiece = this.#createPiece();
     this.#nextPiece = this.#createPiece();
-  }
+  };
 
   #createPlayfield(emptyBlock = 0): PlayFieldType {
     const playfield: PlayFieldType = [];

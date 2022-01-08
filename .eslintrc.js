@@ -9,6 +9,7 @@ module.exports = {
     '@typescript-eslint',
     'react',
     'eslint-plugin-import',
+    'simple-import-sort',
     'prettier',
     'jest',
   ],
@@ -29,6 +30,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     'no-console': 'warn',
     'max-len': [
       'error',

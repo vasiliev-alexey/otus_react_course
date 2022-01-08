@@ -1,15 +1,15 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import gitHubLogin from '@images/login.svg';
-import tetris from '@images/tetris.svg';
-import musicOn from '@images/sound_on.svg';
-import leaderBoard from '@images/leaderboard.svg';
-import musicOff from '@images/sound_off.svg';
 import avatar from '@images/avatar.svg';
+import leaderBoard from '@images/leaderboard.svg';
+import gitHubLogin from '@images/login.svg';
+import musicOff from '@images/sound_off.svg';
+import musicOn from '@images/sound_on.svg';
+import tetris from '@images/tetris.svg';
 import audio from '@sounds/tetrisMain.mp3';
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
-import { RootState } from '@store/store';
 import { AuthStateType } from '@store/authSlice';
+import { RootState } from '@store/store';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const Header: React.FC = () => {
   const [isAudioOn, setIsAudioOn] = useState(false);

@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { Story } from '@storybook/react';
-
-import SignUp from './SignUp';
 import { AUTH_ROOT } from '@ui/storyStructure';
 import { ProviderDecorator, RouterDecorator } from '@ui/utils/testUtils';
+import React from 'react';
+
+import SignUp from './SignUp';
 
 const storyTitle = 'Страница регистрации';
 

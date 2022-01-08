@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
+
 import { getColor } from '../utils';
-import audio from '@sounds/clear.mp3';
 
 type ScoreBoardProps = {
   nextPieceBlock: number[][];
@@ -15,19 +15,6 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   score,
   level,
 }) => {
-  const audioWork = useMemo(() => {
-    return new Audio(audio);
-  }, []);
-
-  const [linesState, setLinesState] = useState(0);
-
-  useEffect(() => {
-    if (linesState !== (lines | 0)) {
-      setLinesState(lines);
-      audioWork.play();
-    }
-  }, [lines]);
-
   const initTrs = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
@@ -67,8 +54,10 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   );
 };
 
-export default React.memo(
-  ScoreBoard,
-  ({ nextPieceBlock: prev }, { nextPieceBlock: next }) =>
-    next.every((value, index) => value === prev[index])
-);
+// export default React.memo(
+//   ScoreBoard,
+//   ({ nextPieceBlock: prev }, { nextPieceBlock: next }) =>
+//     next.every((value, index) => (value + 0) === prev[index]))
+// );
+
+export default ScoreBoard;

@@ -1,1 +1,1 @@
-export { GameState, Game } from './GameEngine';
+export { Game, GameState } from './GameEngine';
