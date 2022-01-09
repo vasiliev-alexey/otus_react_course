@@ -37,6 +37,7 @@ export interface GameState {
   lines?: number;
   score?: number;
   level?: number;
+  isRotateError?: boolean;
 }
 
 //  AC
@@ -46,6 +47,12 @@ export const movePieceDown = createAction(`${sliceName}/movePieceDown`);
 export const rotatePiece = createAction(`${sliceName}/rotatePiece`);
 export const togglePause = createAction(`${sliceName}/togglePause`);
 export const gameReset = createAction(`${sliceName}/gameReset`);
+
+export const soundLineClear = createAction(`${sliceName}/soundLineClear`);
+export const soundPause = createAction(`${sliceName}/soundPause`);
+export const soundRotateError = createAction(`${sliceName}/soundRotateError`);
+export const soundRotate = createAction(`${sliceName}/soundRotate`);
+export const soundGameOver = createAction(`${sliceName}/soundGameOver`);
 
 // Reducers
 export const gameResetState: CaseReducer = (state) => {
@@ -82,6 +89,7 @@ export const syncGameView: CaseReducer<GameState, PayloadAction<GameState>> = (
 const initialState: GameState = {
   playfield: initGameField,
   nextPiece: [],
+  //isRotateError: false,
 };
 
 const gameSlice = createSlice({

@@ -11,7 +11,7 @@ import {
   setUserScoreWatcherSaga,
   setUserScoreWorker,
 } from '@store/sagas/leaderBoardSaga';
-import { authSelector } from '@store/selectors/authSelector';
+import { authSelector } from '@store/selectors/selectors';
 import faker from 'faker';
 import { call } from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
@@ -81,6 +81,14 @@ describe('test setUserScoreWorker', () => {
       .select(authSelector)
       .next({ userName, uid, userPict, isAuth: true })
       .call(saveUserResult, { ...gamer, topScore })
+      .next()
+      .isDone();
+
+    testSaga(setUserScoreWorker, setUserScore(topScore))
+      .next()
+      .select(authSelector)
+      .next({ userName, uid, userPict: '', isAuth: true })
+      .call(saveUserResult, { ...gamer, pictUrl: '', topScore })
       .next()
       .isDone();
   });

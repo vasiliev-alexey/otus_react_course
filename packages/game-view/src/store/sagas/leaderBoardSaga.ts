@@ -6,7 +6,7 @@ import {
   LeaderBoardActions,
   setUserScore,
 } from '@store/leaderBoardSlice';
-import { authSelector } from '@store/selectors/authSelector';
+import { authSelector } from '@store/selectors/selectors';
 import {
   call,
   CallEffect,

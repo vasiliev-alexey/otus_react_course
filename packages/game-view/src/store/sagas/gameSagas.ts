@@ -6,6 +6,11 @@ import {
   movePieceLeft,
   movePieceRight,
   rotatePiece,
+  soundGameOver,
+  soundLineClear,
+  soundPause,
+  soundRotate,
+  soundRotateError,
   togglePause as togglePauseAction,
 } from '@store/gameSlice';
 import {
@@ -18,6 +23,7 @@ import {
   ForkEffect,
   put,
   PutEffect,
+  select,
   takeEvery,
   takeLeading,
 } from 'redux-saga/effects';
@@ -25,6 +31,14 @@ const gameOver = new Audio(gamover);
 
 import pause from '@sounds/pause.mp3';
 const pauseSound = new Audio(pause);
+
+import clearLineSound from '@sounds/clear.mp3';
+const clearLineAudio = new Audio(clearLineSound);
+
+import rotateSound from '@sounds/blockRotate.mp3';
+import fall from '@sounds/fall.mp3';
+const rotateAudio = new Audio(rotateSound);
+const rotateError = new Audio(fall);
 
 import {
   gameTick,
@@ -34,40 +48,78 @@ import {
   reset,
   rotate,
 } from '@api/game';
-import { AnyAction } from '@reduxjs/toolkit';
+import { Action } from '@reduxjs/toolkit';
 import { GameActions } from '@store/gameSlice';
 import { setUserScore } from '@store/leaderBoardSlice';
 import { SagaActionWorker, Watcher } from '@store/sagas/types';
+import { lineCountSelector } from '@store/selectors/selectors';
 import { Task } from 'redux-saga';
 
-const switchController = (act: string): (() => GameState) => {
-  switch (act) {
-    case rotatePiece.type:
-      return rotate;
-    case movePieceDown.type:
-      return moveDown;
-    case movePieceRight.type:
-      return moveRight;
-    case movePieceLeft.type:
-      return moveLeft;
-  }
-};
-
 export function* movePieceWorker(
-  act: AnyAction
-): SagaActionWorker<() => GameState, typeof GameActions.syncGameView> {
-  const func = switchController(act.type);
+  act: Action
+):
+  | SagaActionWorker<() => GameState, typeof GameActions.syncGameView>
+  | Generator<CallEffect> {
+  let func;
+  switch (act.type) {
+    case rotatePiece.type:
+      func = rotate;
+      break;
+    case movePieceDown.type:
+      func = moveDown;
+      break;
+    case movePieceRight.type:
+      func = moveRight;
+      break;
+    case movePieceLeft.type:
+      func = moveLeft;
+      break;
+  }
   const gameData = (yield call(func)) as GameState;
+
+  if (gameData.isRotateError) {
+    yield put(soundRotateError());
+  } else {
+    yield put(soundRotate());
+  }
+
   yield put(GameActions.syncGameView(gameData));
 }
 
+export function* gameSoundWorker(act: Action) {
+  switch (act.type) {
+    case soundLineClear.type:
+      clearLineAudio.play();
+      break;
+    case soundPause.type:
+      pauseSound.play();
+      break;
+    case soundRotate.type:
+      rotateAudio.play();
+      break;
+    case soundRotateError.type:
+      rotateError.play();
+      break;
+    case soundGameOver.type:
+      gameOver.play();
+      break;
+  }
+}
+
 function* gameTickSaga() {
+  let prevLinesCount: number = yield select(lineCountSelector);
+  prevLinesCount = prevLinesCount | 0;
   while (true) {
     const gameData = (yield call(gameTick)) as GameState;
 
+    if (prevLinesCount < gameData.lines) {
+      yield put(soundLineClear());
+      prevLinesCount = gameData.lines;
+    }
+
     yield put(GameActions.syncGameView(gameData));
     if (gameData.isGameOver) {
-      gameOver.play();
+      yield put(soundGameOver());
       yield put(setUserScore(gameData.score));
       break;
     }
@@ -81,7 +133,8 @@ export function* togglePauseWorker(): Generator<
   | ForkEffect
   | CancelEffect
 > {
-  pauseSound.play();
+  yield put(soundPause());
+
   if (tickTask && tickTask.isRunning()) {
     tickTask.cancel();
     yield put(GameActions.gameSetPause());
@@ -121,9 +174,22 @@ export function* togglePauseWatcher(): Watcher {
 export function* gameResetWatcher(): Watcher {
   yield takeEvery(gameReset.type, gameResetWorker);
 }
+export function* gameSoundWatcher(): Watcher {
+  yield takeEvery(
+    [
+      soundLineClear.type,
+      soundPause.type,
+      soundRotateError.type,
+      soundRotate.type,
+      soundGameOver.type,
+    ],
+    gameSoundWorker
+  );
+}
 
 export const gameSagas: Watcher[] = [
   togglePauseWatcher(),
   movePieceWatcher(),
   gameResetWatcher(),
+  gameSoundWatcher(),
 ];
