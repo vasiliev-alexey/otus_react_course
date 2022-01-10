@@ -4,11 +4,15 @@ import { getColor } from '../utils';
 
 type ScoreBoardProps = {
   playField: number[][];
+  isBlur?: boolean;
 };
 
-const PlayField: React.FC<ScoreBoardProps> = ({ playField }) => {
+const PlayField: React.FC<ScoreBoardProps> = ({
+  playField,
+  isBlur = false,
+}) => {
   return (
-    <table className="playground-table">
+    <table className={'playground-table ' + (isBlur && 'blur')}>
       <tbody>
         {playField.map((row, rInd) => (
           <tr key={rInd}>

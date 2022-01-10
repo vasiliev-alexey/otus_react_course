@@ -7,6 +7,7 @@ type ScoreBoardProps = {
   lines: number;
   score: number;
   level: number;
+  isBlur?: boolean;
 };
 
 const ScoreBoard: React.FC<ScoreBoardProps> = ({
@@ -14,6 +15,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   lines,
   score,
   level,
+  isBlur = false,
 }) => {
   const initTrs = [
     [0, 0, 0, 0],
@@ -30,7 +32,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
 
   return (
     <div>
-      <table className="next-piece-table">
+      <table className={'next-piece-table ' + (isBlur && 'blur')}>
         <tbody>
           {initTrs.map((row, rInd) => (
             <tr key={rInd}>

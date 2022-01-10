@@ -61,6 +61,7 @@ class Game extends React.Component<GameProps, GameState> {
   render(): JSX.Element {
     return (
       <GameView
+        data-testid={'game-view-main'}
         isPause={this.props.game.isPause}
         playfield={this.props.game.playfield}
         nextPiece={this.props.game.nextPiece}

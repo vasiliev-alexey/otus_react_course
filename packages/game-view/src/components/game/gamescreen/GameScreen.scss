@@ -9,3 +9,7 @@
   background: #d6e2ee;
   position: relative;
 }
+
+.blur {
+  filter: blur(2px) grayscale(18%);
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import GameOver from './gamover/GameOver';
 import PauseLabel from './pauseLabel/PauseLabel';
@@ -24,15 +24,18 @@ const GameScreen: React.FC<GameScreenProps> = ({
   isGameOver,
   level,
 }) => {
+  const isBlur = useMemo(() => isGameOver || isPause, [isGameOver, isPause]);
+
   return (
     <div className="gameScreen">
       <>
-        <PlayField playField={playfield} />
+        <PlayField playField={playfield} isBlur={isBlur} />
         <ScoreBoard
           nextPieceBlock={nextPiece}
           lines={lines}
           score={score}
           level={level}
+          isBlur={isBlur}
         />
       </>
       {isGameOver && <GameOver />}
