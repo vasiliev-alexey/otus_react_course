@@ -68,9 +68,7 @@ const Login: React.FC = () => {
     [inputField]
   );
 
-  const isAuth = useSelector<RootState>((state) => {
-    return state.auth.isAuth;
-  });
+  const isAuth = useSelector<RootState>((state) => state.auth.isAuth);
 
   return (
     <>
@@ -95,7 +93,7 @@ const Login: React.FC = () => {
             placeholder="Password"
             onChange={inputPasswordHandler}
           />
-          {error && <div className="login-form-error"> {error.toString()}</div>}
+          {error && <div className="login-form-error"> {error}</div>}
           <div className="action-input">
             <input
               type="submit"

@@ -4,7 +4,7 @@
  */
 // eslint-disable-next-line
 // @ts-ignore
-// eslint-disable-next-line  @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const paths = require('./tsconfig.json').compilerOptions.paths;
 const aliases = {};
 
@@ -32,7 +32,6 @@ module.exports = {
           statements: 60,
         },
       },
-      //  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
       testMatch: ['**/*.test.ts?(x)'],
       testPathIgnorePatterns: ['/api/'],
 
@@ -67,7 +66,6 @@ module.exports = {
           statements: 60,
         },
       },
-      //  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
       testMatch: ['**/api/*.test.ts?(x)'],
       globals: {
         'ts-jest': {
