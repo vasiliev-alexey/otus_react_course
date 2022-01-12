@@ -1,4 +1,5 @@
-import reducer, {
+import {
+  reducer,
   loginWithEmailAndPassword,
   loginWithGitHubAuth,
   loginWithGoogleAuth,
@@ -8,7 +9,7 @@ import {
   doSignInWithEmailAndPassword,
   signInWithGithub,
   signInWithGoogle,
-} from '../api/auth';
+} from '@api/auth';
 import { store } from './store';
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));

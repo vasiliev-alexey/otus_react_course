@@ -53,6 +53,10 @@ const webpackConfig = (
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
 
+    // alias: {
+    //   '@store': path.resolve(__dirname, 'src/store'),
+    // },
+
     //@ts-ignore
     plugins: [
       new TsconfigPathsPlugin({
@@ -83,10 +87,7 @@ const webpackConfig = (
             '@babel/preset-env',
             '@babel/preset-typescript',
           ],
-          plugins: [
-            '@babel/plugin-transform-runtime',
-            'babel-plugin-jsx-remove-data-test-id',
-          ],
+          plugins: ['@babel/plugin-transform-runtime', '@emotion'],
         },
         exclude: /dist/,
       },
@@ -101,7 +102,6 @@ const webpackConfig = (
           // Compiles Sass to CSS
           'sass-loader',
         ],
-        // include: [path.resolve(__dirname, '../public')],
       },
 
       { test: /\.(mp3)$/, loader: 'file-loader' },
@@ -142,11 +142,11 @@ const webpackConfig = (
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: '../assets/images/tetris.png',
+      favicon: '../assets/images/tetris.svg',
     }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
-        files: './src/**/*.{ts,tsx}',
+        files: './src/**/*.{ts,tsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
       },
       typescript: {
         tsconfig: getTsConfigName(arg.mode),

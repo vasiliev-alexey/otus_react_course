@@ -1,7 +1,6 @@
-import reducer, { saveUserResultFb } from './leaderBoardSlice';
+import { setUserScore, fetchData } from './leaderBoardSlice';
 
-import { Gamer, getTopGamerList, saveUserResult } from '../api/db';
-import { getLeaderBoardData } from './leaderBoardSlice';
+import { getTopGamerList, saveUserResult } from '@api/db';
 import { store } from './store';
 
 import { nanoid } from '@reduxjs/toolkit';
@@ -10,19 +9,11 @@ const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 jest.mock('../api/db');
 
 describe('auth leader board reducer tests - get Data', () => {
-  const initialState = { leaderList: [] as Gamer[] };
-
-  it('getLeaderBoardData is a function', () => {
-    expect(getLeaderBoardData).toBeInstanceOf(Function);
+  it('fetchData is a function', () => {
+    expect(fetchData).toBeInstanceOf(Function);
   });
 
-  it('test  getLeaderBoardData is pending', () => {
-    const action = { type: getLeaderBoardData.pending.type };
-    const state = reducer(initialState, action);
-    expect(state.leaderList).toHaveLength(0);
-  });
-
-  it('test   getLeaderBoardData is resolved', async () => {
+  it('test   fetchData is resolved', async () => {
     const rndId = nanoid(10);
 
     const getTopGamerListMock = getTopGamerList as jest.MockedFunction<
@@ -34,7 +25,7 @@ describe('auth leader board reducer tests - get Data', () => {
       { uid: nanoid(10), pictUrl: '', topScore: 10, userName: 'Jon Snow' },
     ]);
 
-    store.dispatch(getLeaderBoardData());
+    store.dispatch(fetchData());
     expect(getTopGamerList).toBeCalledTimes(1);
     await sleep(0);
 
@@ -43,17 +34,9 @@ describe('auth leader board reducer tests - get Data', () => {
     expect(state.leaderBoard.leaderList[0].uid).toEqual(rndId);
   });
 });
-describe('auth leader board reducer tests - save Data', () => {
-  const initialState = { leaderList: [] as Gamer[] };
-
-  it('getLeaderBoardData is a function', () => {
-    expect(saveUserResultFb).toBeInstanceOf(Function);
-  });
-
-  it('test  getLeaderBoardData is pending', () => {
-    const action = { type: saveUserResultFb.pending.type };
-    const state = reducer(initialState, action);
-    expect(state.leaderList).toHaveLength(0);
+describe('leader board reducer tests - save Data', () => {
+  it('setUserScore is a function', () => {
+    expect(setUserScore).toBeInstanceOf(Function);
   });
 
   it('test   saveUserResultFb is resolved', async () => {
@@ -66,7 +49,7 @@ describe('auth leader board reducer tests - save Data', () => {
     saveUserResultMock.mockResolvedValue(true);
 
     store.dispatch(
-      saveUserResultFb({
+      setUserScore({
         uid: rndId,
         pictUrl: '',
         topScore: 100,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story } from '@storybook/react';
 import PlayField from './PlayField';
-import { GAME_ROOT } from '../../../storyStructure';
+import { GAME_ROOT } from '@ui/storyStructure';
 
 const initGameField = [
   [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,5 +37,3 @@ export const PlayFieldComponent: Story = (args) => (
     <PlayField playField={initGameField} {...args} />
   </div>
 );
-
-// export const PlayFieldComponent = (Template);

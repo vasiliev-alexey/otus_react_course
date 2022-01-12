@@ -8,7 +8,7 @@ import {
   doSignInWithEmailAndPassword,
   signInWithGithub,
   signInWithGoogle,
-} from '../api/auth';
+} from '@api/auth';
 import firebase from 'firebase';
 import { store } from './store';
 
@@ -19,7 +19,7 @@ describe('test login with email and pass - success', () => {
   it('resolve thunk if auth service is success', async () => {
     const rndUser = {
       uid: nanoid(11),
-      displayName: 'aa', // nanoid(20),
+      email: 'aa', // nanoid(20),
     };
     const doSignInWithEmailAndPasswordMock =
       doSignInWithEmailAndPassword as jest.MockedFunction<
@@ -36,7 +36,7 @@ describe('test login with email and pass - success', () => {
 
     expect(store.getState().auth).toEqual({
       uid: rndUser.uid,
-      userName: rndUser.displayName,
+      userName: rndUser.email,
       isAuth: true,
     });
   });

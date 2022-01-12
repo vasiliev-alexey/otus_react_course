@@ -2,12 +2,29 @@ import React from 'react';
 
 import { Game as GameEngine } from '@tetris/game-engine';
 
-import pause from '../../../../assets/sounds/pause.mp3';
-import rotate from '../../../../assets/sounds/blockRotate.mp3';
-import gamover from '../../../../assets/sounds/gameover.mp3';
-import fall from '../../../../assets/sounds/fall.mp3';
-import GameView from './GameView';
+import pause from '@sounds/pause.mp3';
+import rotate from '@sounds/blockRotate.mp3';
+import gamover from '@sounds/gameover.mp3';
+import fall from '@sounds/fall.mp3';
+import GameView from '@gameUi/GameView';
 import { PlayFieldType } from '@tetris/game-engine';
+import { RootState } from '@store/store';
+import { connect } from 'react-redux';
+import { setUserScore } from '@store/leaderBoardSlice';
+import { ThunkAction, Action } from '@reduxjs/toolkit';
+
+type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown, // or some ThunkExtraArgument interface
+  Action<string>
+>;
+
+export type ThunkProps<
+  T extends { [K in keyof T]: (...a: unknown[]) => AppThunk<void> }
+> = {
+  [K in keyof T]: (...args: Parameters<T[K]>) => void;
+};
 
 interface GameState {
   isPause?: boolean;
@@ -19,7 +36,10 @@ interface GameState {
   level?: number;
 }
 
-class Game extends React.Component<unknown, GameState> {
+type GameProps = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchThunkToProps;
+
+class Game extends React.Component<GameProps, GameState> {
   #gameEngine: GameEngine = new GameEngine();
   #rotateAudio: HTMLAudioElement;
   #rotateError: HTMLAudioElement;
@@ -74,8 +94,18 @@ class Game extends React.Component<unknown, GameState> {
     this.#gameEngine.movePieceDown();
     this.#syncEngineAndView();
     if (this.state.isGameOver) {
-      this.#gamOver.play();
       window.clearInterval(this.intervalHolder);
+      this.#gamOver.play();
+
+      if (this.props.auth.isAuth) {
+        const { userName, uid, userPict: pictUrl } = this.props.auth;
+        this.props.saveUserResult({
+          uid,
+          pictUrl: pictUrl || '',
+          userName,
+          topScore: this.state.score,
+        });
+      }
     }
   };
 
@@ -156,4 +186,9 @@ class Game extends React.Component<unknown, GameState> {
   }
 }
 
-export default Game;
+const mapDispatchThunkToProps = { saveUserResult: setUserScore };
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { ...mapDispatchThunkToProps })(Game);

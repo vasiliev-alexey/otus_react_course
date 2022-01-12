@@ -47,7 +47,6 @@
 
 .login-form-button {
   width: 100%;
-  //max-width: 200px;
   padding: 7px;
   border: none;
   border-radius: 5px;
@@ -83,10 +82,10 @@
   padding: 7px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  outline: none;
   color: white;
   font-weight: bold;
   background-color: $button-action-color;
-  cursor: pointer;
-  outline: none;
   text-align: center;
 }

@@ -74,9 +74,33 @@ jobs:
 
       - name: run loki test
         id: loki_test
+        continue-on-error: true
         working-directory: ./packages/game-view
         run: |
+          pwd
+          ls -a ./dist 
           npm run loki-test
+
+      - name: Archive storybook artifacts
+        uses: actions/upload-artifact@v2
+        if: ${{ failure()  }}
+        with:
+          name: dist-storybook
+          path: |
+            ./packages/game-view/dist
+          retention-days: 2
+
+      - name: 'Send telegram notification'
+        if: ${{ always() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_TOKEN }}
+          message: |
+            ${{ (job.status == 'success' && '✅' ) || '⛔'}} repository: ${{ github.repository }}
+            Задание: Билд
+            status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
+            ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} ${{ (steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} ${{ (steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ') || '' }} ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' ) || ''}}
 
   build_and_deploy:
     runs-on: ubuntu-20.04
@@ -95,7 +119,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          lfs: false
+          lfs: true
 
       - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
         id: Npm-install
@@ -116,7 +140,7 @@ jobs:
 
       - name: Deploy 🚀
         id: Deploy
-        if: ${{ false  }}
+        #        if: ${{ false  }}
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -138,7 +162,6 @@ jobs:
           token: ${{ secrets.TG_TOKEN }}
           message: |
             ${{ (job.status == 'success' && '✅' ) || '⛔'}} repository: ${{ github.repository }}
-            wf: ${{github.workflow}}
-            event: ${{github.event.name}}
+            Задание: Деплой на GHP
             status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
             ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} ${{ (steps.LinterS.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} ${{ (steps.loki_test.outcome == 'failure' &&  'LOKI ⛔ ') || '' }} ${{ (steps.Jest-Test.outcome == 'failure' &&  'JEST ⛔ ' ) || ''}} ${{ (steps.Build.outcome == 'failure' &&  'Build ⛔ ') || '' }}

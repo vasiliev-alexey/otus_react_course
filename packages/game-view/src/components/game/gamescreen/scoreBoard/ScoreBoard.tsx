@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getColor } from '../utils';
-import audio from '../../../../../../assets/sounds/clear.mp3';
+import audio from '@sounds/clear.mp3';
 
 type ScoreBoardProps = {
   nextPieceBlock: number[][];
@@ -22,8 +22,8 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   const [linesState, setLinesState] = useState(0);
 
   useEffect(() => {
-    if (linesState !== (lines | 0)) setLinesState(lines);
-    {
+    if (linesState !== (lines | 0)) {
+      setLinesState(lines);
       audioWork.play();
     }
   }, [lines]);

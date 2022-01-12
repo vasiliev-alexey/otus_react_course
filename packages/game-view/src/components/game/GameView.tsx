@@ -1,6 +1,6 @@
-import '../../../public/index.scss';
+import '@css/index.scss';
 import React from 'react';
-import TitleBar from './titleBar/TitleBar';
+import TitleBar from '@ui/game/titleBar/TitleBar';
 import ErrorBoundary from '../utils/ErrorBoundary';
 import GameScreen, { GameScreenProps } from './gamescreen/GameScreen';
 import ActionPanel, { ActionPanelProps } from './actionPanel/ActionPanel';

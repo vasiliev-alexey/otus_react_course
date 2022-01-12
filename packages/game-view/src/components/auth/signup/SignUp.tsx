@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../../api/auth';
-import { useAuthContext } from '../../../context';
+import { registerUser } from '@api/auth';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actions } from '@store/authSlice';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -11,7 +12,7 @@ const SignUp: React.FC = () => {
 
   const [error, setError] = useState('');
 
-  const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
@@ -27,14 +28,14 @@ const SignUp: React.FC = () => {
       const data = await registerUser(inputField.login, inputField.password);
 
       if (data.operationType === 'signIn') {
-        dispatch({
-          type: 'SET_USER_NAME',
-          payload: {
+        dispatch(
+          actions.setUserName({
             userName: data.user.email,
-            userPictUrl: '',
+            pictUrl: '',
             uid: data.user.uid,
-          },
-        });
+            topScore: 0,
+          })
+        );
       }
       navigate('/');
     } catch (e) {

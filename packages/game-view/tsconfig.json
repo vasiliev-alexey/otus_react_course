@@ -16,7 +16,19 @@
     "downlevelIteration": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "composite": true
+    "composite": true,
+
+    "paths": {
+      "@src/*": ["src/*"],
+      "@store/*": ["src/store/*"],
+      "@ui/*": ["src/components/*"],
+      "@gameUi/*": ["src/components/game/*"],
+      "@authUi/*": ["src/components/auth/*"],
+      "@api/*": ["src/api/*"],
+      "@images/*": ["../assets/images/*"],
+      "@sounds/*": ["../assets/sounds/*"],
+      "@css/*": ["public/*"]
+    }
   },
 
   "references": [{ "path": "../game-engine" }]
