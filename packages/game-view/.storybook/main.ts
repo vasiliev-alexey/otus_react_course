@@ -8,9 +8,10 @@ const custCfg = customConfig(
 module.exports = {
   stories: ['../src/components/**/*.stories.@(tsx)'],
   addons: [
-    // '@storybook/addon-links',
-    // '@storybook/addon-essentials',
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
     '@storybook/preset-scss',
+    '@storybook/addons',
   ],
   core: {
     builder: 'webpack5',
