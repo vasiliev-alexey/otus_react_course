@@ -6,10 +6,7 @@ const custCfg = customConfig(
 );
 
 module.exports = {
-  stories: [
-    '../src/components/game/GameView.stories.tsx', // default page
-    '../src/components/**/*.stories.@(tsx)',
-  ],
+  stories: ['../src/components/**/*.stories.@(tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -20,8 +17,6 @@ module.exports = {
   },
 
   webpackFinal: async (config) => {
-    custCfg.plugins.forEach((_) => console.log('s', JSON.stringify(_)));
-
     const plugins = custCfg.plugins.filter(
       (_) =>
         _['userOptions'] && _['userOptions'].pluginId !== 'HtmlWebpackPlugin'

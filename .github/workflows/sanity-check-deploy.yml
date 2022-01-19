@@ -76,8 +76,6 @@ jobs:
         id: loki_test
         working-directory: ./packages/game-view
         run: |
-          pwd
-          ls -a ./dist 
           npm run loki-test
 
       - name: Archive storybook artifacts
@@ -132,6 +130,10 @@ jobs:
       - name: build  dependencies project 🔨➡️🔨➡️🔨
         run: |
           tsc --build tsconfig.build.json
+
+      - name: build story book for test
+        working-directory: ./packages/game-view
+        run: npm run build-storybook
 
       - name: webpack  build
         id: Build
