@@ -20,10 +20,17 @@ module.exports = {
   },
 
   webpackFinal: async (config) => {
+    custCfg.plugins.forEach((_) => console.log('s', JSON.stringify(_)));
+
+    const plugins = custCfg.plugins.filter(
+      (_) =>
+        _['userOptions'] && _['userOptions'].pluginId !== 'HtmlWebpackPlugin'
+    );
+
     let cgf = {
       ...config,
       resolve: custCfg.resolve,
-      plugins: [...config.plugins, ...custCfg.plugins],
+      plugins: [...config.plugins, ...plugins],
       module: {
         ...config.module,
         rules: custCfg.module.rules,
