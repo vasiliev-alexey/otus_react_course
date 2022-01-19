@@ -124,8 +124,8 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: 1
         run: |
-          npm install --legacy-peer-deps
-          npm install --legacy-peer-deps --workspaces
+          npm install --legacy-peer-deps --ignore-scripts
+          npm install --ignore-scripts  --legacy-peer-deps --workspaces
 
       - name: build  dependencies project 🔨➡️🔨➡️🔨
         run: |
