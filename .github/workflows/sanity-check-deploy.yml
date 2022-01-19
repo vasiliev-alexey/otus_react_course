@@ -54,6 +54,16 @@ jobs:
           npm install --legacy-peer-deps
           npm install --legacy-peer-deps --workspaces
 
+      - name: build story book for test
+        working-directory: ./packages/game-view
+        run: npm run build-storybook
+
+      - name: run loki test
+        id: loki_test
+        working-directory: ./packages/game-view
+        run: |
+          npm run loki-test
+
       - name: build  dependencies project 🔨➡️🔨➡️🔨
         run: |
           tsc --build tsconfig.build.json
@@ -67,16 +77,6 @@ jobs:
         id: Jest-Test
         run: |
           npm run test --coverage
-
-      - name: build story book for test
-        working-directory: ./packages/game-view
-        run: npm run build-storybook
-
-      - name: run loki test
-        id: loki_test
-        working-directory: ./packages/game-view
-        run: |
-          npm run loki-test
 
       - name: Archive storybook artifacts
         uses: actions/upload-artifact@v2

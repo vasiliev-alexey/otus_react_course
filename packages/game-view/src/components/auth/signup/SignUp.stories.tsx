@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
-import { AUTH_ROOT } from '@ui/storyStructure';
-import { ProviderDecorator, RouterDecorator } from '@ui/utils/testUtils';
+import { AUTH_ROOT } from '../../storyStructure';
+import { ProviderDecorator, RouterDecorator } from '../../utils/testUtils';
 import React from 'react';
 
 import SignUp from './SignUp';
