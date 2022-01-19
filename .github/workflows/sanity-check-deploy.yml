@@ -54,6 +54,10 @@ jobs:
           npm install --legacy-peer-deps
           npm install --legacy-peer-deps --workspaces
 
+      - name: build  dependencies project 🔨➡️🔨➡️🔨
+        run: |
+          tsc --build tsconfig.build.json
+
       - name: build story book for test
         working-directory: ./packages/game-view
         run: npm run build-storybook
@@ -63,10 +67,6 @@ jobs:
         working-directory: ./packages/game-view
         run: |
           npm run loki-test
-
-      - name: build  dependencies project 🔨➡️🔨➡️🔨
-        run: |
-          tsc --build tsconfig.build.json
 
       - name: Lint check
         id: LinterS
