@@ -17,7 +17,7 @@ module.exports = {
   },
 
   webpackFinal: async (config) => {
-    const plugins = custCfg.plugins.filter(
+    const custPlugins = custCfg.plugins.filter(
       (_) =>
         _['userOptions'] && _['userOptions'].pluginId !== 'HtmlWebpackPlugin'
     );
@@ -25,7 +25,7 @@ module.exports = {
     let cgf = {
       ...config,
       resolve: custCfg.resolve,
-      plugins: [...config.plugins],
+      plugins: [...custPlugins, ...config.plugins],
       module: {
         ...config.module,
         rules: custCfg.module.rules,
