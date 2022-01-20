@@ -25,7 +25,7 @@ module.exports = {
     let cgf = {
       ...config,
       resolve: custCfg.resolve,
-      plugins: [...config.plugins, ...custCfg.plugins],
+      plugins: [...config.plugins],
       module: {
         ...config.module,
         rules: custCfg.module.rules,
