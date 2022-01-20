@@ -35,16 +35,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            **/node_modules
-
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install Packages 📗📘📙 ➡️ 📗📘📙  ➡️ 📗📘📙  ➡️📗📘📙
         id: Npm-install
@@ -58,16 +50,6 @@ jobs:
         run: |
           tsc --build tsconfig.build.json
 
-      - name: build story book for test
-        working-directory: ./packages/game-view
-        run: npm run build-storybook
-
-      - name: run loki test
-        id: loki_test
-        working-directory: ./packages/game-view
-        run: |
-          npm run loki-test
-
       - name: Lint check
         id: LinterS
         run: |
@@ -77,6 +59,16 @@ jobs:
         id: Jest-Test
         run: |
           npm run test --coverage
+
+      - name: build story book for test
+        working-directory: ./packages/game-view
+        run: npm run build-storybook
+
+      - name: run loki test
+        id: loki_test
+        working-directory: ./packages/game-view
+        run: |
+          npm run loki-test
 
       - name: Archive storybook artifacts
         uses: actions/upload-artifact@v2

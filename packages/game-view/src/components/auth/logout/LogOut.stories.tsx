@@ -2,9 +2,9 @@ import { Middleware } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { Story } from '@storybook/react';
 import { AUTH_ROOT } from '@ui/storyStructure';
-import { ProviderDecorator, RouterDecorator } from '@ui/utils/testUtils';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
 import configureStore from 'redux-mock-store';
 
 import LogOut from './LogOut';
@@ -17,7 +17,6 @@ const storyTitle = 'Страница выхода';
 export default {
   component: LogOut,
   title: `${AUTH_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator, ProviderDecorator],
 };
 
 const initialState: Partial<RootState> = {
@@ -28,6 +27,8 @@ const initialState: Partial<RootState> = {
 const store = mockStore(initialState);
 export const LogOutForm: Story = (args) => (
   <Provider store={store}>
-    <LogOut {...args} />
+    <MemoryRouter>
+      <LogOut {...args} />
+    </MemoryRouter>
   </Provider>
 );

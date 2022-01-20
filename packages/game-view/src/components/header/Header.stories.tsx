@@ -1,19 +1,28 @@
 import { Story } from '@storybook/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 
 import { SITE_ROOT } from '../storyStructure';
-import { ProviderDecorator, RouterDecorator } from '../utils/testUtils';
+const mockStore = configureStore([]);
+import { store } from '@store/store';
+import { MemoryRouter } from 'react-router';
+import configureStore from 'redux-mock-store';
+
 import Header from './Header';
 
 const storyTitle = 'Заголовок сайта';
 export default {
   component: Header,
   title: `${SITE_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator, ProviderDecorator],
 };
-
+const initialState = store.getState();
+const mockStoreLocal = mockStore(initialState);
 export const SiteHeader: Story = (args) => (
   <div style={{ margin: 0, padding: 0 }}>
-    <Header {...args} />
+    <Provider store={mockStoreLocal}>
+      <MemoryRouter>
+        <Header {...args} />
+      </MemoryRouter>
+    </Provider>
   </div>
 );
