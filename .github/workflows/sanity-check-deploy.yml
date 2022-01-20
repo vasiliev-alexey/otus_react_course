@@ -77,7 +77,7 @@ jobs:
           name: dist-storybook
           path: |
             ./packages/game-view/dist
-            ./packages/game-view/.loki/differene
+            ./packages/game-view/.loki/difference
           retention-days: 2
 
       - name: 'Send telegram notification'
