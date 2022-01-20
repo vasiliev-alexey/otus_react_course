@@ -11,7 +11,6 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-scss',
-    '@storybook/addons',
   ],
   core: {
     builder: 'webpack5',
@@ -26,7 +25,7 @@ module.exports = {
     let cgf = {
       ...config,
       resolve: custCfg.resolve,
-      plugins: [...config.plugins, ...plugins],
+      plugins: [...config.plugins, ...custCfg.plugins],
       module: {
         ...config.module,
         rules: custCfg.module.rules,
