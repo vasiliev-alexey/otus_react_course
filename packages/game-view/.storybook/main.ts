@@ -25,12 +25,13 @@ module.exports = {
     let cgf = {
       ...config,
       resolve: custCfg.resolve,
-      plugins: [...custPlugins, ...config.plugins],
+
       module: {
         ...config.module,
         rules: custCfg.module.rules,
       },
     };
+
     return cgf;
   },
 
