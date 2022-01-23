@@ -3,24 +3,20 @@ import { db } from './firebase';
 const GAMERS = 'gamers';
 
 export const getTopGamerList = async (limitSize = 10): Promise<Gamer[]> => {
-  try {
-    const data = await db
-      .collection(GAMERS)
-      .orderBy('topScore', 'desc')
-      .limit(limitSize)
-      .get();
+  const data = await db
+    .collection(GAMERS)
+    .orderBy('topScore', 'desc')
+    .limit(limitSize)
+    .get();
 
-    return data.docs.map((d) => {
-      return {
-        userName: d.get('userName'),
-        pictUrl: d.get('pictUrl'),
-        uid: d.get('uid'),
-        topScore: d.get('topScore'),
-      };
-    });
-  } catch (e) {
-    console.error(e); // eslint-disable-line no-console
-  }
+  return data.docs.map((d) => {
+    return {
+      userName: d.get('userName'),
+      pictUrl: d.get('pictUrl'),
+      uid: d.get('uid'),
+      topScore: d.get('topScore'),
+    };
+  });
 };
 
 export const saveUserResult = async (user: Gamer): Promise<boolean> => {

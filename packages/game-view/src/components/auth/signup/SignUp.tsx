@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { registerUser } from '@api/auth';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { actions } from '@store/authSlice';
+
+import { Navigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUserWithNameAndPass } from '@store/authSlice';
+import { RootState } from '@store/store';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({
@@ -10,10 +11,7 @@ const SignUp: React.FC = () => {
     password: '',
   });
 
-  const [error, setError] = useState('');
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const inputLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputField({ ...inputField, login: e.target.value });
   };
@@ -23,63 +21,63 @@ const SignUp: React.FC = () => {
 
   const submitHandler = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-
-    try {
-      const data = await registerUser(inputField.login, inputField.password);
-
-      if (data.operationType === 'signIn') {
-        dispatch(
-          actions.setUserName({
-            userName: data.user.email,
-            pictUrl: '',
-            uid: data.user.uid,
-            topScore: 0,
-          })
-        );
-      }
-      navigate('/');
-    } catch (e) {
-      setError(e);
-    }
+    dispatch(
+      registerUserWithNameAndPass({
+        login: inputField.login,
+        password: inputField.password,
+      })
+    );
   };
 
+  const isAuth = useSelector<RootState>((state) => {
+    return state.auth.isAuth;
+  });
+
+  const error = useSelector<RootState>((state) => {
+    return state.auth.errorMessage;
+  });
+
   return (
-    <div className="login-center" data-testid="signup-form-test-id">
-      <form id="login-form">
-        <input
-          onChange={inputLoginHandler}
-          type="text"
-          name="username"
-          id="username-field"
-          className="login-form-field"
-          placeholder="Логин"
-          data-testid="login-input-test-id"
-        />
-        <input
-          type="password"
-          name="password"
-          id="password-field"
-          className="login-form-field"
-          placeholder="Пароль"
-          onChange={inputPasswordHandler}
-        />
-        {error && <div className="login-form-error"> {error.toString()}</div>}
-        <div className="action-input">
+    <>
+      {isAuth && <Navigate to="/" />}
+
+      <div className="login-center" data-testid="signup-form-test-id">
+        <form id="login-form">
           <input
-            type="submit"
-            value="Регистрация"
-            className="login-form-button"
-            onClick={submitHandler}
+            onChange={inputLoginHandler}
+            type="text"
+            name="username"
+            id="username-field"
+            className="login-form-field"
+            placeholder="Логин"
+            data-testid="login-input-test-id"
           />
           <input
-            type="reset"
-            value="Отмена"
-            className="login-form-button"
-            id="login-form-reset"
+            type="password"
+            name="password"
+            id="password-field"
+            className="login-form-field"
+            placeholder="Пароль"
+            onChange={inputPasswordHandler}
           />
-        </div>
-      </form>
-    </div>
+          {error && <div className="login-form-error"> {error.toString()}</div>}
+          <div className="action-input">
+            <input
+              type="submit"
+              value="Регистрация"
+              className="login-form-button"
+              onClick={submitHandler}
+            />
+            <input
+              type="reset"
+              value="Отмена"
+              className="login-form-button"
+              id="login-form-reset"
+            />
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

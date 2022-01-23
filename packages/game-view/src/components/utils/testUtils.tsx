@@ -32,3 +32,9 @@ export const ProviderDecorator = (CustomStory: Story): JSX.Element => {
     </Provider>
   );
 };
+
+export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+export const expectFn = <F,>(fn: F) => {
+  expect(fn).toBeInstanceOf(Function);
+};

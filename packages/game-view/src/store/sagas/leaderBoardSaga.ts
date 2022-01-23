@@ -8,12 +8,15 @@ import {
   takeLeading,
 } from 'redux-saga/effects';
 import { Gamer, getTopGamerList, saveUserResult } from '@api/db';
-import { actions, fetchData, setUserScore } from '../leaderBoardSlice';
+import { actions, fetchData, setUserScore } from '@store/leaderBoardSlice';
 
-function* fetchLeaderBoardData(): Generator<
+export function* fetchLeaderBoardData(): Generator<
   | CallEffect<Awaited<ReturnType<typeof getTopGamerList>>>
-  | PutEffect<ReturnType<typeof actions.leaderBoardData>>
-  | PutEffect<ReturnType<typeof actions.errorLeaderBoardData>>
+  | PutEffect<
+      ReturnType<
+        typeof actions.leaderBoardData | typeof actions.errorLeaderBoardData
+      >
+    >
 > {
   try {
     const userPosts = (yield call(getTopGamerList, 10)) as Awaited<
@@ -25,11 +28,12 @@ function* fetchLeaderBoardData(): Generator<
   }
 }
 
-function* setUserScoreWorker(
+export function* setUserScoreWorker(
   action: PayloadAction<Gamer>
-):
-  | Generator<CallEffect<Awaited<ReturnType<typeof saveUserResult>>>>
-  | PutEffect<ReturnType<typeof actions.errorLeaderBoardData>> {
+): Generator<
+  | CallEffect<Awaited<ReturnType<typeof saveUserResult>>>
+  | PutEffect<ReturnType<typeof actions.errorLeaderBoardData>>
+> {
   try {
     yield call(saveUserResult, action.payload);
   } catch (e) {

@@ -4,9 +4,9 @@ import google from '@images/google.svg';
 import { Navigate, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  loginWithEmailAndPassword,
   loginWithGitHubAuth,
   loginWithGoogleAuth,
+  loginWithNameAndPass,
 } from '@store/authSlice';
 import { RootState } from '@store/store';
 
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
   });
   const navigate = useNavigate();
 
-  const dispatchRedux = useDispatch();
+  const dispatch = useDispatch();
 
   const [error, setError] = useState('');
 
@@ -49,14 +49,14 @@ const Login: React.FC = () => {
     async (event) => {
       try {
         if (event.target.id === gitHubLoginId) {
-          dispatchRedux(loginWithGitHubAuth());
+          dispatch(loginWithGitHubAuth());
         } else if (event.target.id === googleSignId) {
-          dispatchRedux(loginWithGoogleAuth());
+          dispatch(loginWithGoogleAuth());
         } else {
           event.preventDefault();
-          dispatchRedux(
-            loginWithEmailAndPassword({
-              username: inputField.login,
+          dispatch(
+            loginWithNameAndPass({
+              login: inputField.login,
               password: inputField.password,
             })
           );
@@ -68,7 +68,12 @@ const Login: React.FC = () => {
     [inputField]
   );
 
-  const isAuth = useSelector<RootState>((state) => state.auth.isAuth);
+  const isAuth = useSelector<RootState>((state) => {
+    return state.auth.isAuth;
+  });
+  const authError = useSelector<RootState>((state) => {
+    return state.auth.errorMessage;
+  });
 
   return (
     <>
@@ -93,7 +98,11 @@ const Login: React.FC = () => {
             placeholder="Password"
             onChange={inputPasswordHandler}
           />
-          {error && <div className="login-form-error"> {error}</div>}
+          {(error || authError) && (
+            <div className="login-form-error">
+              {error.toString() + authError}
+            </div>
+          )}
           <div className="action-input">
             <input
               type="submit"

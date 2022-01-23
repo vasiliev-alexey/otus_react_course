@@ -1,23 +1,24 @@
 import {
   CaseReducer,
-  createAsyncThunk,
+  createAction,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import {
-  doSignInWithEmailAndPassword,
-  doSignOut,
-  registerUser,
-  signInWithGithub,
-  signInWithGoogle,
-  User,
-} from '@api/auth';
-import { Gamer } from '@api/db';
 
-interface userCred {
+export interface UserProfile {
   uid: string;
   userName: string;
   errorMessage?: string;
+  photoUrl?: string;
+}
+
+export interface Identity {
+  password: string;
+  login: string;
+}
+
+export interface ErrorData {
+  errorMessage: string;
 }
 
 export interface AuthStateType {
@@ -32,154 +33,57 @@ const initialState = {
   isAuth: false,
 } as Readonly<AuthStateType>;
 
-export const loginWithEmailAndPassword = createAsyncThunk<
-  userCred,
-  { username: string; password: string }
->(
-  'auth/login',
+const rootActionName = 'auth';
 
-  async ({ username, password }, thunkApi) => {
-    try {
-      const data = await doSignInWithEmailAndPassword(username, password);
-      return {
-        uid: data.user.uid,
-        userName: data.user.email,
-        isAuth: true,
-      };
-    } catch (e) {
-      return thunkApi.rejectWithValue({ errorMessage: e.message });
-    }
-  }
-);
-export const doRegisterUser = createAsyncThunk<
-  userCred,
-  { username: string; password: string }
->(
-  'auth/register',
-
-  async ({ username, password }, thunkApi) => {
-    try {
-      const data = await registerUser(username, password);
-      return {
-        uid: data.user.uid,
-        userName: data.user.email,
-        isAuth: true,
-      };
-    } catch (e) {
-      return thunkApi.rejectWithValue({ errorMessage: e.message });
-    }
-  }
-);
-export const doLogOut = createAsyncThunk<userCred>(
-  'auth/logout',
-
-  async (_, thunkApi) => {
-    try {
-      await doSignOut();
-    } catch (e) {
-      return thunkApi.rejectWithValue({ errorMessage: e.message });
-    }
-  }
+export const loginWithNameAndPass = createAction<Identity>(
+  `${rootActionName}/loginWithNameAndPass`
 );
 
-export const loginWithGoogleAuth = createAsyncThunk<User>(
-  'auth/google',
+export const logout = createAction<Identity>(`${rootActionName}/logout`);
 
-  async (_, thunkApi) => {
-    try {
-      const data = await signInWithGoogle();
-      return data;
-    } catch (e) {
-      return thunkApi.rejectWithValue({ errorMessage: e.message });
-    }
-  }
+export const registerUserWithNameAndPass = createAction<Identity>(
+  `${rootActionName}/registerUserWithNameAndPass`
+);
+export const loginWithGitHubAuth = createAction<Identity>(
+  `${rootActionName}/loginWithGitHubAuth`
+);
+export const loginWithGoogleAuth = createAction<Identity>(
+  `${rootActionName}/google`
 );
 
-export const loginWithGitHubAuth = createAsyncThunk<User>(
-  'auth/github',
+export const authRejected: CaseReducer<
+  AuthStateType,
+  PayloadAction<ErrorData>
+> = (state, action) => {
+  state.isAuth = false;
+  state.errorMessage = action.payload.errorMessage;
+  state.userName = null;
+  state.uid = null;
+  state.userPict = null;
+};
+export const doLogout: CaseReducer = (state) => {
+  state.isAuth = false;
+  state.userName = null;
+  state.uid = null;
+  state.userPict = null;
+};
 
-  async (_, thunkApi) => {
-    try {
-      const data = await signInWithGithub();
-      return data;
-    } catch (e) {
-      return thunkApi.rejectWithValue({ errorMessage: e.message });
-    }
-  }
-);
-
-const setUserName: CaseReducer<AuthStateType, PayloadAction<Gamer>> = (
+const setAuthData: CaseReducer<AuthStateType, PayloadAction<UserProfile>> = (
   state,
   action
 ) => {
+  state.isAuth = true;
   state.userName = action.payload.userName;
   state.uid = action.payload.uid;
-  state.userPict = action.payload.pictUrl;
-  state.isAuth = true;
+  state.userPict = action.payload.photoUrl;
 };
-
 const authSlice = createSlice({
-  name: 'auth',
+  name: rootActionName,
   initialState,
   reducers: {
-    setUserName,
-  },
-  extraReducers: (builder) => {
-    builder.addCase(loginWithEmailAndPassword.pending, (state) => {
-      state.isAuth = false;
-    });
-    builder.addCase(loginWithEmailAndPassword.fulfilled, (state, action) => {
-      state.isAuth = true;
-      state.userName = action.payload.userName;
-      state.uid = action.payload.uid;
-    });
-
-    builder.addCase(loginWithEmailAndPassword.rejected, (state, action) => {
-      state.isAuth = false;
-      state.errorMessage = (action.payload as userCred).errorMessage;
-    });
-
-    builder.addCase(loginWithGoogleAuth.pending, (state) => {
-      state.isAuth = false;
-    });
-    builder.addCase(loginWithGoogleAuth.fulfilled, (state, action) => {
-      state.isAuth = true;
-      state.userName = action.payload.displayName;
-      state.uid = action.payload.uid;
-      state.userPict = action.payload.photoUrl;
-    });
-
-    builder.addCase(loginWithGoogleAuth.rejected, (state, action) => {
-      state.isAuth = false;
-      state.errorMessage = (action.payload as userCred).errorMessage;
-    });
-
-    builder.addCase(loginWithGitHubAuth.pending, (state) => {
-      state.isAuth = false;
-    });
-    builder.addCase(loginWithGitHubAuth.fulfilled, (state, action) => {
-      state.isAuth = true;
-      state.userName = action.payload.displayName;
-      state.uid = action.payload.uid;
-      state.userPict = action.payload.photoUrl;
-    });
-
-    builder.addCase(loginWithGitHubAuth.rejected, (state, action) => {
-      state.isAuth = false;
-      state.errorMessage = (action.payload as userCred).errorMessage;
-    });
-
-    builder.addCase(doLogOut.fulfilled, (state) => {
-      state.isAuth = false;
-      state.userName = null;
-      state.uid = null;
-      state.userPict = null;
-    });
-
-    builder.addCase(doLogOut.rejected, (state, action) => {
-      state.isAuth = false;
-      state.errorMessage = (action.payload as userCred).errorMessage;
-    });
+    setAuthData,
+    authRejected,
+    doLogout,
   },
 });
 

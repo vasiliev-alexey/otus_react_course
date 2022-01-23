@@ -5,11 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import Login from './Login';
 import { MemoryRouter } from 'react-router';
-import {
-  doSignInWithEmailAndPassword,
-  signInWithGithub,
-  signInWithGoogle,
-} from '@api/auth';
+
 import { act } from 'react-dom/test-utils';
 import { Middleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';
@@ -17,7 +13,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 const middlewares: Middleware[] = [thunk];
-
 const mockStore = configureStore(middlewares);
 
 jest.mock('../../../api/auth', () => ({
@@ -29,34 +24,18 @@ jest.mock('../../../api/auth', () => ({
       },
     };
   }),
-  signInWithGithub: jest.fn(() => {
-    return {
-      user: {
-        uud: 'a',
-        email: '1',
-      },
-    };
-  }),
-  signInWithGoogle: jest.fn(() => {
-    return {
-      user: {
-        uud: 'a',
-        email: '1',
-      },
-    };
-  }),
 }));
 
+const initialState = {
+  auth: {
+    userName: 'userName',
+    isAuthenticated: true,
+  },
+};
+
+const store = mockStore(initialState);
+
 const renderPage = (): void => {
-  const initialState = {
-    auth: {
-      userName: 'userName',
-      isAuthenticated: true,
-    },
-  };
-
-  const store = mockStore(initialState);
-
   render(
     <MemoryRouter>
       <Provider store={store}>
@@ -107,6 +86,7 @@ describe('login  behaviour', () => {
 
   beforeEach(() => {
     renderPage();
+    store.clearActions();
   });
 
   test('login call siginin', async () => {
@@ -124,20 +104,28 @@ describe('login  behaviour', () => {
       userEvent.click(btn);
     });
 
-    expect(doSignInWithEmailAndPassword).nthCalledWith(1, 'ddd', '');
+    const expectedActions = store.getActions();
+    expect(expectedActions).toHaveLength(1);
+    expect(expectedActions[0].type).toBe('auth/loginWithNameAndPass');
+    expect(expectedActions[0].payload).toEqual({ login: 'ddd', password: '' });
   });
 
   test('login call siginin with GitHub', async () => {
     const btn = screen.getByTestId('gitHubLoginId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);
-    expect(signInWithGithub).nthCalledWith(1);
+    const expectedActions = store.getActions();
+    expect(expectedActions).toHaveLength(1);
+    expect(expectedActions[0].type).toBe('auth/loginWithGitHubAuth');
   });
 
   test('login call siginin with Google', async () => {
     const btn = screen.getByTestId('googleSignId');
     expect(btn).toBeInTheDocument();
     userEvent.click(btn);
-    expect(signInWithGoogle).nthCalledWith(1);
+
+    const expectedActions = store.getActions();
+    expect(expectedActions).toHaveLength(1);
+    expect(expectedActions[0].type).toBe('auth/google');
   });
 });
