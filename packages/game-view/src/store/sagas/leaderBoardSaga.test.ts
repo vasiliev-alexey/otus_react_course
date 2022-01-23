@@ -11,10 +11,11 @@ import { nanoid } from '@reduxjs/toolkit';
 import { call } from 'redux-saga/effects';
 import { throwError } from 'redux-saga-test-plan/providers';
 import faker from 'faker';
+import { expectFn } from '@ui/utils/testUtils';
 
 describe('test fetchLeaderBoardData', () => {
   test('test fetchLeaderBoardData is a Function', () => {
-    expect(fetchLeaderBoardData).toBeInstanceOf(Function);
+    expectFn(fetchLeaderBoardData);
   });
 
   test('exact order with redux-saga-test-plan', () => {

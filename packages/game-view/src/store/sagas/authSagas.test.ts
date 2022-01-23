@@ -30,6 +30,7 @@ import { loginWithNameAndPass } from '@store/authSlice';
 import faker from 'faker';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
+import { expectFn } from '@ui/utils/testUtils';
 
 const generateRandomUser = (): {
   uid: string;
@@ -47,7 +48,7 @@ const generateRandomUser = (): {
 
 describe('test loginWithNameAndPassword', () => {
   test('test loginWithNameAndPassword is a Function', () => {
-    expect(loginWithNameAndPassword).toBeInstanceOf(Function);
+    expectFn(loginWithNameAndPassword);
   });
 
   test('exact loginWithNameAndPassword order with redux-saga-test-plan', () => {

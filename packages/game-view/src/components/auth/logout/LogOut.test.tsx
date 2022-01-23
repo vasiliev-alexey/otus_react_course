@@ -14,9 +14,7 @@ import thunk from 'redux-thunk';
 import { Middleware, Store } from '@reduxjs/toolkit';
 
 jest.mock('../../../api/auth', () => ({
-  doSignOut: jest.fn(() => {
-    return;
-  }),
+  doSignOut: jest.fn(),
 }));
 
 const middlewares: Middleware[] = [thunk];
