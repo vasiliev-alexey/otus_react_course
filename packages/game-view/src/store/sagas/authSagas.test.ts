@@ -26,6 +26,7 @@ import {
   registerWithEmailAndPasswordWatcherSaga,
   RegisterWithNameAndPasswordWorker,
 } from '@store/sagas/authSagas';
+import { expectFn } from '@ui/utils/testUtils';
 import faker from 'faker';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
@@ -47,7 +48,7 @@ const generateRandomUser = (): {
 
 describe('test loginWithNameAndPassword', () => {
   test('test loginWithNameAndPassword is a Function', () => {
-    expect(loginWithNameAndPassword).toBeInstanceOf(Function);
+    expectFn(loginWithNameAndPassword);
   });
 
   test('exact loginWithNameAndPassword order with redux-saga-test-plan', () => {

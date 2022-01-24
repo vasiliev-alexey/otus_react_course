@@ -12,6 +12,7 @@ import {
   setUserScoreWorker,
 } from '@store/sagas/leaderBoardSaga';
 import { authSelector } from '@store/selectors/selectors';
+import { expectFn } from '@ui/utils/testUtils';
 import faker from 'faker';
 import { call } from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
@@ -19,7 +20,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 
 describe('test fetchLeaderBoardData', () => {
   test('test fetchLeaderBoardData is a Function', () => {
-    expect(fetchLeaderBoardData).toBeInstanceOf(Function);
+    expectFn(fetchLeaderBoardData);
   });
 
   test('exact order with redux-saga-test-plan', () => {
