@@ -11,7 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "loki-test": "loki --requireReference --reactUri file:./dist ",
     "loki-upd-ref": "loki update --requireReference --reactUri file:./dist ",
-    "build-storybook": "build-storybook -o ./dist --quiet",
+    "build-storybook": "build-storybook -o ./dist ",
     "lt": " npm run build-storybook  && npm run loki-test"
   },
   "dependencies": {

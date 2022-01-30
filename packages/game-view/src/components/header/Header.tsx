@@ -94,6 +94,7 @@ const Header: React.FC = () => {
         />
         <img
           alt="panda"
+          data-testid="btn-music-main"
           className="octoCatLogo"
           src={isAudioOn ? musicOn.toString() : musicOff.toString()}
           onClick={playAudio}
@@ -101,6 +102,7 @@ const Header: React.FC = () => {
         {!isAuth && (
           <img
             alt="octocat login"
+            data-testid="btn-login-form"
             className="octoCatLogo"
             src={gitHubLogin.toString()}
             onClick={login}
@@ -110,13 +112,16 @@ const Header: React.FC = () => {
           <span>
             <img
               alt="octocat login"
+              data-testid="btn-logout-form"
               className="octoCatLogo"
               src={userPict || avatar.toString()}
               onClick={showExit}
             />
             {showMenu && (
-              <ul className="profileMenu">
-                <li onClick={logout}>Выход</li>
+              <ul className="profileMenu" data-testid="ul-exit-link">
+                <li data-testid="li-exit-link" onClick={logout}>
+                  Выход
+                </li>
               </ul>
             )}
           </span>

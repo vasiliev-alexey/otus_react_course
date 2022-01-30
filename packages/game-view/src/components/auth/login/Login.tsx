@@ -25,18 +25,18 @@ const Login: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
 
   const inputLoginHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setError('');
+      // setError('');
       setInputField({ ...inputField, login: e.target.value });
     },
     []
   );
 
   const inputPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError('');
+    //  setError('');
     setInputField({ ...inputField, password: e.target.value });
   };
 
@@ -47,22 +47,18 @@ const Login: React.FC = () => {
 
   const onAuthLogin = useCallback(
     async (event) => {
-      try {
-        if (event.target.id === gitHubLoginId) {
-          dispatch(loginWithGitHubAuth());
-        } else if (event.target.id === googleSignId) {
-          dispatch(loginWithGoogleAuth());
-        } else {
-          event.preventDefault();
-          dispatch(
-            loginWithNameAndPass({
-              login: inputField.login,
-              password: inputField.password,
-            })
-          );
-        }
-      } catch (e) {
-        setError(e);
+      if (event.target.id === gitHubLoginId) {
+        dispatch(loginWithGitHubAuth());
+      } else if (event.target.id === googleSignId) {
+        dispatch(loginWithGoogleAuth());
+      } else {
+        event.preventDefault();
+        dispatch(
+          loginWithNameAndPass({
+            login: inputField.login,
+            password: inputField.password,
+          })
+        );
       }
     },
     [inputField]
@@ -92,17 +88,14 @@ const Login: React.FC = () => {
           />
           <input
             type="password"
+            data-testid="pass-input-test-id"
             name="password"
             id="password-field"
             className="login-form-field"
             placeholder="Password"
             onChange={inputPasswordHandler}
           />
-          {(error || authError) && (
-            <div className="login-form-error">
-              {error.toString() + authError}
-            </div>
-          )}
+          {authError && <div className="login-form-error">{authError}</div>}
           <div className="action-input">
             <input
               type="submit"

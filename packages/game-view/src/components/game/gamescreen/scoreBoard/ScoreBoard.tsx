@@ -47,19 +47,13 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
         </tbody>
       </table>
 
-      <p>score: {score}</p>
+      <p data-testid="score-data">score: {score}</p>
       <p>level: {level}</p>
       <p>lines: {lines}</p>
 
-      <p>sound: {true ? '🔇' : '🔊'}</p>
+      <p>sound: {'🔇'}</p>
     </div>
   );
 };
-
-// export default React.memo(
-//   ScoreBoard,
-//   ({ nextPieceBlock: prev }, { nextPieceBlock: next }) =>
-//     next.every((value, index) => (value + 0) === prev[index]))
-// );
 
 export default ScoreBoard;
