@@ -8,5 +8,6 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-transform-runtime',
     '@emotion/babel-plugin',
+    'jest',
   ],
 };

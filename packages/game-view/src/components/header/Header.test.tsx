@@ -65,7 +65,7 @@ describe('Test header component', () => {
   });
 });
 
-describe('Test header component', () => {
+describe('Test header component - click to game', () => {
   const history = createMemoryHistory({
     initialEntries: ['/aaa'],
     initialIndex: 0,
