@@ -1,5 +1,5 @@
-import React from 'react';
 import rotation from '@images/rotate-option-svgrepo-com.svg';
+import React from 'react';
 export interface RotationPanelProps {
   rotate: () => void;
 }

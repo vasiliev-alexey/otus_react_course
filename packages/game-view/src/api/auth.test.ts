@@ -1,6 +1,7 @@
-import { doSignInWithEmailAndPassword } from './auth';
 import { config } from 'dotenv';
 import firebase from 'firebase';
+
+import { doSignInWithEmailAndPassword } from './auth';
 
 describe('test auth', () => {
   beforeAll(() => {

@@ -1,8 +1,9 @@
-import { loginWithGitHubAuth, loginWithGoogleAuth } from './authSlice';
 import { signInWithGithub, signInWithGoogle } from '@api/auth';
-import { store } from './store';
 import { sleep } from '@ui/utils/testUtils';
 import faker from 'faker';
+
+import { loginWithGitHubAuth, loginWithGoogleAuth } from './authSlice';
+import { store } from './store';
 
 jest.mock('../api/auth');
 

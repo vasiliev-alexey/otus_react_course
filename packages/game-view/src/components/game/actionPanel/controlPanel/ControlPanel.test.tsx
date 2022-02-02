@@ -1,8 +1,10 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ControlPanel from './ControlPanel';
+
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
+
+import ControlPanel from './ControlPanel';
 
 describe('Test ControlPanel component', () => {
   test('ControlPanel component is a function', () => {

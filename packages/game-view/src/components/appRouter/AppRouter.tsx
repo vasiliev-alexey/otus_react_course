@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route, Routes } from 'react-router';
+import Login from '@authUi/login/Login';
+import LogOut from '@authUi/logout/LogOut';
+import SignUp from '@authUi/signup/SignUp';
 import Game from '@ui/game/Game';
 import Help from '@ui/help/Help';
-import Login from '@authUi/login/Login';
-import SignUp from '@authUi/signup/SignUp';
-import LogOut from '@authUi/logout/LogOut';
 import LeaderBoard from '@ui/leaderBoard/LeaderBoard';
+import React from 'react';
+import { Route, Routes } from 'react-router';
 
 const AppRouter: React.FC = () => {
   return (

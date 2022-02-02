@@ -1,6 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import ErrorBoundary from '@ui/utils/ErrorBoundary';
+import React from 'react';
 
 const renderProviders = (ui: React.ReactElement) => render(ui, {});
 

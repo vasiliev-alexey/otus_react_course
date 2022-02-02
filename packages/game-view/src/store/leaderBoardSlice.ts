@@ -1,15 +1,15 @@
+import { Gamer } from '@api/db';
 import {
   CaseReducer,
   createAction,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { Gamer } from '@api/db';
 
 const rootActionName = 'score/leaderboard';
 
 export const fetchData = createAction(`${rootActionName}/fetch`);
-export const setUserScore = createAction<Gamer>(
+export const setUserScore = createAction<number>(
   `${rootActionName}/setUserScore`
 );
 
@@ -45,6 +45,5 @@ const leaderBoardSlice = createSlice({
   reducers: { leaderBoardData: setLeaderBoardData, errorLeaderBoardData },
 });
 
-export const { reducer, actions } = leaderBoardSlice;
-
-export default reducer;
+export const { reducer: LeaderBoardReducer, actions: LeaderBoardActions } =
+  leaderBoardSlice;

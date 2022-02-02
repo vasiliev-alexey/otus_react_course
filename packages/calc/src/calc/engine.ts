@@ -1,10 +1,10 @@
-import { ParsedLineType } from './parser';
 import { isNumber } from './helpers';
 import {
   mathOperators,
-  mathPriorities,
   mathOperatorsPriorities,
+  mathPriorities,
 } from './mathOperators';
+import { ParsedLineType } from './parser';
 
 const [UNARY, FIRST, SECOND] = mathPriorities;
 

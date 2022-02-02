@@ -141,6 +141,7 @@ const webpackConfig = (
       ),
     }),
     new HtmlWebpackPlugin({
+      pluginId: 'HtmlWebpackPlugin',
       template: './public/index.html',
       favicon: '../assets/images/tetris.svg',
     }),

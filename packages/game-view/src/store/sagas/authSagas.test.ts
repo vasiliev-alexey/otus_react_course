@@ -1,4 +1,20 @@
 import {
+  doSignInWithEmailAndPassword,
+  doSignOut,
+  registerUser,
+  signInWithGithub,
+  signInWithGoogle,
+} from '@api/auth';
+import {
+  actions,
+  loginWithGitHubAuth,
+  loginWithGoogleAuth,
+  logout,
+  reducer,
+  registerUserWithNameAndPass,
+} from '@store/authSlice';
+import { loginWithNameAndPass } from '@store/authSlice';
+import {
   doLogoutWatcherSaga,
   loginWithEmailAndPasswordWatcherSaga,
   loginWithGitHubAuthWatcherSaga,
@@ -10,27 +26,11 @@ import {
   registerWithEmailAndPasswordWatcherSaga,
   RegisterWithNameAndPasswordWorker,
 } from '@store/sagas/authSagas';
-import {
-  actions,
-  loginWithGitHubAuth,
-  loginWithGoogleAuth,
-  logout,
-  reducer,
-  registerUserWithNameAndPass,
-} from '@store/authSlice';
-import { expectSaga, testSaga } from 'redux-saga-test-plan';
-import {
-  doSignInWithEmailAndPassword,
-  doSignOut,
-  registerUser,
-  signInWithGithub,
-  signInWithGoogle,
-} from '@api/auth';
-import { loginWithNameAndPass } from '@store/authSlice';
+import { expectFn } from '@ui/utils/testUtils';
 import faker from 'faker';
+import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
-import { expectFn } from '@ui/utils/testUtils';
 
 const generateRandomUser = (): {
   uid: string;

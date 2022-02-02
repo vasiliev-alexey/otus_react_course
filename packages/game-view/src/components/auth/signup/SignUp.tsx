@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-
-import { Navigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 import { registerUserWithNameAndPass } from '@store/authSlice';
 import { RootState } from '@store/store';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router';
 
 const SignUp: React.FC = () => {
   const [inputField, setInputField] = useState({

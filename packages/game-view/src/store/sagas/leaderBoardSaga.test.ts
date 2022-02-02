@@ -1,17 +1,22 @@
+import { getTopGamerList, saveUserResult } from '@api/db';
+import { nanoid } from '@reduxjs/toolkit';
+import {
+  fetchData,
+  LeaderBoardActions,
+  setUserScore,
+} from '@store/leaderBoardSlice';
 import {
   fetchLeaderBoardData,
   leaderBoardFetchRequestedWatcherSaga,
   setUserScoreWatcherSaga,
   setUserScoreWorker,
 } from '@store/sagas/leaderBoardSaga';
-import { expectSaga, testSaga } from 'redux-saga-test-plan';
-import { getTopGamerList, saveUserResult } from '@api/db';
-import { actions, fetchData, setUserScore } from '@store/leaderBoardSlice';
-import { nanoid } from '@reduxjs/toolkit';
-import { call } from 'redux-saga/effects';
-import { throwError } from 'redux-saga-test-plan/providers';
-import faker from 'faker';
+import { authSelector } from '@store/selectors/selectors';
 import { expectFn } from '@ui/utils/testUtils';
+import faker from 'faker';
+import { call } from 'redux-saga/effects';
+import { expectSaga, testSaga } from 'redux-saga-test-plan';
+import { throwError } from 'redux-saga-test-plan/providers';
 
 describe('test fetchLeaderBoardData', () => {
   test('test fetchLeaderBoardData is a Function', () => {
@@ -35,7 +40,7 @@ describe('test fetchLeaderBoardData', () => {
         .next()
         .call(getTopGamerList, 10)
         .next(rndGamers)
-        .put(actions.leaderBoardData(rndGamers))
+        .put(LeaderBoardActions.leaderBoardData(rndGamers))
         .next()
         .isDone()
     ).toBeTruthy();
@@ -49,7 +54,7 @@ describe('test fetchLeaderBoardData', () => {
         ],
       ])
       .put(
-        actions.errorLeaderBoardData({
+        LeaderBoardActions.errorLeaderBoardData({
           errorMessage: "You're not authorized to do something",
         })
       )
@@ -63,36 +68,59 @@ describe('test setUserScoreWorker', () => {
   });
 
   test('exact order for setUserScoreWorker with redux-saga-test-plan', () => {
+    const topScore = Math.floor(Math.random() * 100);
     const gamer = {
       userName: faker.name.firstName(),
       uid: faker.datatype.string(12),
       pictUrl: faker.image.imageUrl(),
-      topScore: Math.floor(Math.random() * 100),
     };
 
-    testSaga(setUserScoreWorker, setUserScore(gamer))
+    const { userName, uid, pictUrl: userPict } = gamer;
+
+    testSaga(setUserScoreWorker, setUserScore(topScore))
       .next()
-      .call(saveUserResult, gamer)
+      .select(authSelector)
+      .next({ userName, uid, userPict, isAuth: true })
+      .call(saveUserResult, { ...gamer, topScore })
+      .next()
+      .isDone();
+
+    testSaga(setUserScoreWorker, setUserScore(topScore))
+      .next()
+      .select(authSelector)
+      .next({ userName, uid, userPict: '', isAuth: true })
+      .call(saveUserResult, { ...gamer, pictUrl: '', topScore })
       .next()
       .isDone();
   });
   test('exact error for setUserScoreWorker flow with redux-saga-test-plan', async () => {
+    const topScore = Math.floor(Math.random() * 100);
+    const error = faker.hacker.phrase();
     const gamer = {
       userName: faker.name.firstName(),
-      uid: nanoid(),
-      pictUrl: '',
-      topScore: Math.floor(Math.random() * 100),
+      uid: faker.datatype.string(12),
+      pictUrl: faker.image.imageUrl(),
     };
-    await expectSaga(setUserScoreWorker, setUserScore(gamer))
+
+    const { userName, uid, pictUrl: userPict } = gamer;
+
+    await expectSaga(setUserScoreWorker, setUserScore(topScore))
       .provide([
+        {
+          select() {
+            return { isAuth: true, userName, uid, userPict };
+          },
+        },
+
         [
-          call(saveUserResult, gamer),
-          throwError(new Error("You're not authorized to do something")),
+          call(saveUserResult, { ...gamer, topScore }),
+          throwError(new Error(error)),
         ],
       ])
+      .select(authSelector)
       .put(
-        actions.errorLeaderBoardData({
-          errorMessage: "You're not authorized to do something",
+        LeaderBoardActions.errorLeaderBoardData({
+          errorMessage: error,
         })
       )
       .run();

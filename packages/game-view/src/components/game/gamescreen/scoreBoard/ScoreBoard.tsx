@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
+
 import { getColor } from '../utils';
-import audio from '@sounds/clear.mp3';
 
 type ScoreBoardProps = {
   nextPieceBlock: number[][];
   lines: number;
   score: number;
   level: number;
+  isBlur?: boolean;
 };
 
 const ScoreBoard: React.FC<ScoreBoardProps> = ({
@@ -14,20 +15,8 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   lines,
   score,
   level,
+  isBlur = false,
 }) => {
-  const audioWork = useMemo(() => {
-    return new Audio(audio);
-  }, []);
-
-  const [linesState, setLinesState] = useState(0);
-
-  useEffect(() => {
-    if (linesState !== (lines | 0)) {
-      setLinesState(lines);
-      audioWork.play();
-    }
-  }, [lines]);
-
   const initTrs = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
@@ -43,7 +32,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
 
   return (
     <div>
-      <table className="next-piece-table">
+      <table className={'next-piece-table ' + (isBlur && 'blur')}>
         <tbody>
           {initTrs.map((row, rInd) => (
             <tr key={rInd}>
@@ -67,8 +56,10 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({
   );
 };
 
-export default React.memo(
-  ScoreBoard,
-  ({ nextPieceBlock: prev }, { nextPieceBlock: next }) =>
-    next.every((value, index) => value === prev[index])
-);
+// export default React.memo(
+//   ScoreBoard,
+//   ({ nextPieceBlock: prev }, { nextPieceBlock: next }) =>
+//     next.every((value, index) => (value + 0) === prev[index]))
+// );
+
+export default ScoreBoard;

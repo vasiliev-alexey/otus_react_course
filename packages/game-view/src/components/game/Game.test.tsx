@@ -1,12 +1,20 @@
-import React from 'react';
-import Game from './Game';
-import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Provider } from 'react-redux';
-import { Middleware } from '@reduxjs/toolkit';
-import configureStore from 'redux-mock-store';
 
+import { Middleware } from '@reduxjs/toolkit';
+import {
+  movePieceDown,
+  movePieceLeft,
+  movePieceRight,
+  rotatePiece,
+  togglePause,
+} from '@store/gameSlice';
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+
+import Game from './Game';
 
 const middlewares: Middleware[] = [thunk];
 
@@ -38,6 +46,11 @@ describe('Test Frame component', () => {
         userName: 'userName',
         isAuthenticated: true,
       },
+      game: {
+        isPause: true,
+        playfield: [] as number[][],
+        nextPiece: [] as number[][],
+      },
     };
 
     const store = mockStore(initialState);
@@ -48,11 +61,102 @@ describe('Test Frame component', () => {
     );
 
     const pauseBtn = screen.getByTestId('GamePanel-pause-btb');
-    const pauseLbl = screen.queryAllByTestId('Pause-Label');
-    expect(pauseLbl.length).toEqual(0);
     expect(pauseBtn).toBeInTheDocument();
-    fireEvent.click(pauseBtn);
-    fireEvent.click(pauseBtn);
     expect(screen.getByTestId('Pause-Label')).toBeInTheDocument();
+  });
+
+  test('Game must listen keyboard Events', () => {
+    const initialState = {
+      auth: {
+        userName: 'userName',
+        isAuthenticated: true,
+      },
+      game: {
+        isPause: false,
+        playfield: [] as number[][],
+        nextPiece: [] as number[][],
+      },
+    };
+
+    const store = mockStore(initialState);
+
+    const container = render(
+      <Provider store={store}>
+        <Game />
+      </Provider>
+    );
+
+    [
+      'Enter',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowDown',
+      'Space',
+      'Pause',
+      'x',
+    ].map((e) => {
+      fireEvent.keyDown(container.container, {
+        key: e,
+        code: e,
+        keyCode: 27,
+        charCode: 27,
+      });
+    });
+
+    [
+      movePieceDown,
+      movePieceLeft,
+      movePieceRight,
+      rotatePiece,
+      movePieceDown,
+    ].map((el) => {
+      expect(
+        store.getActions().findIndex((e) => e.type === el.type)
+      ).toBeGreaterThanOrEqual(0);
+    });
+  });
+
+  test('Game must no  listen keyboard Events in pause mode', () => {
+    const initialState = {
+      auth: {
+        userName: 'userName',
+        isAuthenticated: true,
+      },
+      game: {
+        isPause: true,
+        playfield: [] as number[][],
+        nextPiece: [] as number[][],
+      },
+    };
+
+    const store = mockStore(initialState);
+
+    const container = render(
+      <Provider store={store}>
+        <Game />
+      </Provider>
+    );
+
+    [
+      'Enter',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowDown',
+      'Space',
+      'Pause',
+      'x',
+    ].map((e) => {
+      fireEvent.keyDown(container.container, {
+        key: e,
+        code: e,
+        keyCode: 27,
+        charCode: 27,
+      });
+    });
+
+    expect(store.getActions()).toHaveLength(1);
+    expect(
+      store.getActions().findIndex((e) => e.type === togglePause.type)
+    ).toBeGreaterThanOrEqual(0);
   });
 });

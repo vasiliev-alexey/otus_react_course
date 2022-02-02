@@ -1,8 +1,8 @@
+import { Story } from '@storybook/react';
+import { GAME_ROOT } from '@ui/storyStructure';
 import React from 'react';
 
-import { Story } from '@storybook/react';
 import ScoreBoard from './ScoreBoard';
-import { GAME_ROOT } from '@ui/storyStructure';
 
 const storyTitle = 'Счет с игрой';
 

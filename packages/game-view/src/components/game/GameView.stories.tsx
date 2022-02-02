@@ -1,9 +1,9 @@
+import { Story } from '@storybook/react';
 import React from 'react';
 
 import { GAME_ROOT } from '../storyStructure';
-import { Story } from '@storybook/react';
-import GameView from './GameView';
 import { dummyFunc } from '../utils/testUtils';
+import GameView from './GameView';
 
 const storyTitle = 'Игра основной экран';
 export default {

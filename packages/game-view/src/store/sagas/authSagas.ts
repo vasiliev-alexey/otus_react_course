@@ -1,22 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import {
-  CallEffect,
-  PutEffect,
-  call,
-  put,
-  ForkEffect,
-  takeLeading,
-} from 'redux-saga/effects';
-
-import {
-  Identity,
-  loginWithNameAndPass,
-  actions as AuthActions,
-  loginWithGitHubAuth,
-  loginWithGoogleAuth,
-  registerUserWithNameAndPass,
-  logout,
-} from '@store/authSlice';
 import {
   doSignInWithEmailAndPassword,
   doSignOut,
@@ -25,6 +6,24 @@ import {
   signInWithGoogle,
 } from '@api/auth';
 import firebase from '@api/firebase';
+import { PayloadAction } from '@reduxjs/toolkit';
+import {
+  actions as AuthActions,
+  Identity,
+  loginWithGitHubAuth,
+  loginWithGoogleAuth,
+  loginWithNameAndPass,
+  logout,
+  registerUserWithNameAndPass,
+} from '@store/authSlice';
+import {
+  call,
+  CallEffect,
+  ForkEffect,
+  put,
+  PutEffect,
+  takeLeading,
+} from 'redux-saga/effects';
 
 export function* loginWithNameAndPassword(
   action: PayloadAction<Identity>
@@ -38,13 +37,16 @@ export function* loginWithNameAndPassword(
 > {
   try {
     const { login, password } = action.payload;
-    const {
-      user: { uid, email: userName },
-    } = (yield call(
+
+    const dataResult = (yield call(
       doSignInWithEmailAndPassword,
       login,
       password
     )) as firebase.auth.UserCredential;
+
+    const {
+      user: { uid, email: userName },
+    } = dataResult;
 
     yield put(
       AuthActions.setAuthData({

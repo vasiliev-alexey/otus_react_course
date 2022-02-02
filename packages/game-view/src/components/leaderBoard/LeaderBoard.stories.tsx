@@ -1,16 +1,14 @@
-import React from 'react';
-
+import { Middleware, nanoid } from '@reduxjs/toolkit';
+import { LeaderList } from '@store/leaderBoardSlice';
+import { RootState } from '@store/store';
 import { Story } from '@storybook/react';
-
-import LeaderBoard from './LeaderBoard';
-import { SITE_ROOT } from '../storyStructure';
-import { RouterDecorator } from '../utils/testUtils';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
 import configureStore from 'redux-mock-store';
 
-import { Middleware, nanoid } from '@reduxjs/toolkit';
-import { RootState } from '@store/store';
-import { LeaderList } from '@store/leaderBoardSlice';
-import { Provider } from 'react-redux';
+import { SITE_ROOT } from '../storyStructure';
+import LeaderBoard from './LeaderBoard';
 
 const middlewares: Middleware[] = [];
 
@@ -20,7 +18,6 @@ const storyTitle = 'LeaderBoard';
 export default {
   component: LeaderBoard,
   title: `${SITE_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator],
 };
 
 const rndGamers = Array.from({
@@ -48,7 +45,9 @@ const store = mockStore(initialState);
 export const ScoreBoardPage: Story = (args) => {
   return (
     <Provider store={store}>
-      <LeaderBoard {...args} />
+      <MemoryRouter>
+        <LeaderBoard {...args} />
+      </MemoryRouter>
     </Provider>
   );
 };

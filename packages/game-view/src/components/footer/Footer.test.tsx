@@ -1,10 +1,12 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Footer from './Footer';
-import { MemoryRouter, Router } from 'react-router';
-import { createMemoryHistory } from 'history';
+
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import React from 'react';
+import { MemoryRouter, Router } from 'react-router';
+
+import Footer from './Footer';
 
 describe('Test Footer component', () => {
   const history = createMemoryHistory({

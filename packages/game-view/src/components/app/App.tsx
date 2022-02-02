@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { HashRouter as Router } from 'react-router-dom';
-import Header from '@ui/header/Header';
-import Footer from '@ui/footer/Footer';
-
 import '@css/index.scss';
-import AppRouter from '../appRouter/AppRouter';
 
 import { store } from '@store/store';
+import Footer from '@ui/footer/Footer';
+import Header from '@ui/header/Header';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { HashRouter as Router } from 'react-router-dom';
+
+import AppRouter from '../appRouter/AppRouter';
 
 class App extends Component {
   render(): React.ReactElement {

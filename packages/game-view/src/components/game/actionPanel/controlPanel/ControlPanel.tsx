@@ -1,6 +1,5 @@
-import React from 'react';
-
 import upArrow from '@images/move-up-svgrepo-com.svg';
+import React from 'react';
 
 export interface ControlPanelProps {
   left: () => void;

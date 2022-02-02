@@ -1,16 +1,16 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import LeaderBoard from './LeaderBoard';
 
 import { Middleware, nanoid } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { RootState } from '@store/store';
 import { LeaderList } from '@store/leaderBoardSlice';
-
+import { RootState } from '@store/store';
+import { render, screen } from '@testing-library/react';
 import faker from 'faker';
+import React from 'react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
+import LeaderBoard from './LeaderBoard';
 
 const renderPage = (
   leaderBoardState: LeaderList = {

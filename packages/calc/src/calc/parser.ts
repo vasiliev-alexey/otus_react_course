@@ -1,8 +1,8 @@
 import { isNumber } from './helpers';
 import {
   mathOperators,
-  mathPriorities,
   mathOperatorsPriorities,
+  mathPriorities,
 } from './mathOperators';
 
 const [UNARY] = mathPriorities;

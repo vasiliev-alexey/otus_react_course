@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Terminal from 'terminal-in-react';
+
 import { runner } from './calc/runner';
 
 class App extends Component {

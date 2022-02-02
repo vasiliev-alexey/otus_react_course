@@ -1,30 +1,16 @@
-import React from 'react';
-
-import { Game as GameEngine } from '@tetris/game-engine';
-
-import pause from '@sounds/pause.mp3';
-import rotate from '@sounds/blockRotate.mp3';
-import gamover from '@sounds/gameover.mp3';
-import fall from '@sounds/fall.mp3';
 import GameView from '@gameUi/GameView';
+import {
+  gameReset,
+  movePieceDown,
+  movePieceLeft,
+  movePieceRight,
+  rotatePiece,
+  togglePause,
+} from '@store/gameSlice';
+import { AppDispatch, RootState } from '@store/store';
 import { PlayFieldType } from '@tetris/game-engine';
-import { RootState } from '@store/store';
+import React from 'react';
 import { connect } from 'react-redux';
-import { setUserScore } from '@store/leaderBoardSlice';
-import { ThunkAction, Action } from '@reduxjs/toolkit';
-
-type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown, // or some ThunkExtraArgument interface
-  Action<string>
->;
-
-export type ThunkProps<
-  T extends { [K in keyof T]: (...a: unknown[]) => AppThunk<void> }
-> = {
-  [K in keyof T]: (...args: Parameters<T[K]>) => void;
-};
 
 interface GameState {
   isPause?: boolean;
@@ -37,158 +23,75 @@ interface GameState {
 }
 
 type GameProps = ReturnType<typeof mapStateToProps> &
-  typeof mapDispatchThunkToProps;
+  ReturnType<typeof mapDispatchToProps>;
 
 class Game extends React.Component<GameProps, GameState> {
-  #gameEngine: GameEngine = new GameEngine();
-  #rotateAudio: HTMLAudioElement;
-  #rotateError: HTMLAudioElement;
-  #pause: HTMLAudioElement;
-  #gamOver: HTMLAudioElement;
-
-  private intervalHolder: number;
-
   private handleKeyPress = (event: KeyboardEvent) => {
     if (
-      (event.key !== 'Pause' && this.state.isPause) ||
-      this.state.isGameOver
+      (event.key !== 'Pause' && this.props.game.isPause) ||
+      this.props.game.isGameOver
     ) {
       return;
     } else if (event.key === 'Enter') {
-      this.#down();
+      this.props.down();
     } else if (event.key === 'ArrowRight') {
-      this.#right();
+      this.props.right();
     } else if (event.key === 'ArrowLeft') {
-      this.#left();
+      this.props.left();
     } else if (event.code === 'Space') {
-      this.#rotate();
+      this.props.rotate();
     } else if (event.key === 'ArrowDown') {
-      this.#down();
+      this.props.down();
     } else if (event.key === 'Pause') {
-      this.#togglePause();
+      this.props.togglePause();
     } else {
       return;
     }
   };
 
-  state: GameState = {
-    playfield: [],
-    nextPiece: [],
-  };
-
-  #syncEngineAndView = (isInit = false): void => {
-    const { playfield, nextPiece, lines, score, level, isGameOver } =
-      this.#gameEngine.getState(isInit);
-    this.setState({
-      playfield,
-      nextPiece: nextPiece.blocks,
-      lines,
-
-      score,
-      level,
-      isGameOver,
-    });
-  };
-
-  #gameTick = (): void => {
-    this.#gameEngine.movePieceDown();
-    this.#syncEngineAndView();
-    if (this.state.isGameOver) {
-      window.clearInterval(this.intervalHolder);
-      this.#gamOver.play();
-
-      if (this.props.auth.isAuth) {
-        const { userName, uid, userPict: pictUrl } = this.props.auth;
-        this.props.saveUserResult({
-          uid,
-          pictUrl: pictUrl || '',
-          userName,
-          topScore: this.state.score,
-        });
-      }
-    }
-  };
-
   componentDidMount(): void {
-    this.#rotateAudio = new Audio(rotate);
-    this.#pause = new Audio(pause);
-    this.#gamOver = new Audio(gamover);
-    this.#rotateError = new Audio(fall);
-
-    this.#syncEngineAndView(true);
     window.addEventListener('keydown', this.handleKeyPress);
   }
 
   componentWillUnmount = (): void => {
     window.removeEventListener('keydown', this.handleKeyPress);
-    if (this.intervalHolder) {
-      window.clearInterval(this.intervalHolder);
-    }
+    this.props.reset();
   };
-
-  #reset = (): void => {
-    this.#gameEngine.reset();
-    this.setState({ isPause: false, isGameOver: false });
-    this.#gameTick();
-  };
-
-  #togglePause = (): void => {
-    if (this.state.isPause != undefined && !this.state.isPause) {
-      window.clearInterval(this.intervalHolder);
-      this.#pause.play();
-      this.setState({ isPause: true });
-    } else {
-      this.setState({ isPause: false });
-      this.#gameTick();
-      this.intervalHolder = window.setInterval(() => {
-        this.#gameTick();
-      }, 1000);
-    }
-  };
-
-  #click = (action: () => void): void => {
-    if (
-      this.state.isPause === undefined ||
-      this.state.isPause ||
-      this.state.isGameOver
-    ) {
-      return;
-    }
-    action();
-    const { playfield, isRotateError } = this.#gameEngine.getState();
-    this.setState({ playfield });
-    isRotateError ? this.#rotateError.play() : this.#rotateAudio.play();
-  };
-
-  #left = (): void => this.#click(this.#gameEngine.movePieceLeft);
-  #right = (): void => this.#click(this.#gameEngine.movePieceRight);
-  #down = (): void => this.#click(this.#gameEngine.movePieceDown);
-  #rotate = (): void => this.#click(this.#gameEngine.rotatePiece);
 
   render(): JSX.Element {
     return (
       <GameView
-        isPause={this.state.isPause}
-        playfield={this.state.playfield}
-        nextPiece={this.state.nextPiece}
-        togglePause={this.#togglePause}
-        reset={this.#reset}
-        left={this.#left}
-        right={this.#right}
-        down={this.#down}
-        rotate={this.#rotate}
-        level={this.state.level}
-        score={this.state.score}
-        isGameOver={this.state.isGameOver}
-        lines={this.state.lines}
+        data-testid={'game-view-main'}
+        isPause={this.props.game.isPause}
+        playfield={this.props.game.playfield}
+        nextPiece={this.props.game.nextPiece}
+        togglePause={this.props.togglePause}
+        reset={this.props.reset}
+        left={this.props.left}
+        right={this.props.right}
+        down={this.props.down}
+        rotate={this.props.rotate}
+        level={this.props.game.level}
+        score={this.props.game.score}
+        isGameOver={this.props.game.isGameOver}
+        lines={this.props.game.lines}
       />
     );
   }
 }
 
-const mapDispatchThunkToProps = { saveUserResult: setUserScore };
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    reset: () => dispatch(gameReset()),
+    left: () => dispatch(movePieceLeft()),
+    right: () => dispatch(movePieceRight()),
+    down: () => dispatch(movePieceDown()),
+    rotate: () => dispatch(rotatePiece()),
+    togglePause: () => dispatch(togglePause()),
+  };
+};
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.auth,
+  game: state.game,
 });
-export default connect(mapStateToProps, { ...mapDispatchThunkToProps })(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

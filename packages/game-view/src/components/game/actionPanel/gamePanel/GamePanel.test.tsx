@@ -1,8 +1,10 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import GamePanel from './GamePanel';
+
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
+
+import GamePanel from './GamePanel';
 
 describe('Test GamePanel component', () => {
   test('GamePanel component is a function', () => {

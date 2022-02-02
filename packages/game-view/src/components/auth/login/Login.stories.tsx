@@ -1,13 +1,12 @@
-import React from 'react';
-
+import { Middleware } from '@reduxjs/toolkit';
 import { Story } from '@storybook/react';
+import { AUTH_ROOT } from '@ui/storyStructure';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
+import configureStore from 'redux-mock-store';
 
 import Login from './Login';
-import { AUTH_ROOT } from '@ui/storyStructure';
-import { RouterDecorator } from '@ui/utils/testUtils';
-import configureStore from 'redux-mock-store';
-import { Middleware } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
 
 const middlewares: Middleware[] = [];
 
@@ -33,17 +32,20 @@ const storyTitle = 'Страница входа';
 export default {
   component: Login,
   title: `${AUTH_ROOT}/${storyTitle}`,
-  decorators: [RouterDecorator],
 };
 
 export const LoginForm: Story = (args) => (
   <Provider store={storeWithOutError}>
-    <Login {...args} />
+    <MemoryRouter>
+      <Login {...args} />
+    </MemoryRouter>
   </Provider>
 );
 
 export const LoginFormError: Story = (args) => (
   <Provider store={storeWithError}>
-    <Login {...args} />
+    <MemoryRouter>
+      <Login {...args} />
+    </MemoryRouter>
   </Provider>
 );
