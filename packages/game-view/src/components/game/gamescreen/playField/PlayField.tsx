@@ -15,7 +15,7 @@ const PlayField: React.FC<ScoreBoardProps> = ({
     <table className={'playground-table ' + (isBlur && 'blur')}>
       <tbody>
         {playField.map((row, rInd) => (
-          <tr key={rInd}>
+          <tr data-testid={`play-row-${rInd}`} key={rInd}>
             {row.map((col, i) => (
               <td className={'cell ' + getColor(col)} key={rInd * 10 + i}></td>
             ))}

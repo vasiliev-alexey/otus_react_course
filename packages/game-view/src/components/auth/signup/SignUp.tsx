@@ -54,6 +54,7 @@ const SignUp: React.FC = () => {
           <input
             type="password"
             name="password"
+            data-testid="login-pass-test-id"
             id="password-field"
             className="login-form-field"
             placeholder="Пароль"

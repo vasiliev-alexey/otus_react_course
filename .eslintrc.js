@@ -55,5 +55,11 @@ module.exports = {
     ],
     'import/no-unresolved': 'off', // https://github.com/typescript-eslint/typescript-eslint/issues/1624
     'import/extensions': ['warn', 'never', { json: 'off' }], // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/extensions.md
+
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
   },
 };

@@ -79,7 +79,7 @@ describe('Down click test suit ', () => {
   );
 });
 
-describe('Down click test suit ', () => {
+describe('Move click test suit ', () => {
   test(' test reset action', () => {
     game.movePieceDown();
     game.movePieceLeft();

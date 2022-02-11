@@ -6,7 +6,7 @@ describe('test selectors', () => {
     expect(authSelector).toBeInstanceOf(Function);
   });
 
-  test('test selectors is a Function', () => {
+  test('test selectors return auth from state', () => {
     const state = store.getState();
 
     const auth = authSelector(state);
